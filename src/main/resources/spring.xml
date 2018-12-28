@@ -30,6 +30,11 @@
             </list>
         </property>
     </bean>
+
+    <!--装配JDBC事务管理-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>  
+    </bean>
     <import resource="spring-mybatis.xml"/>
 
 </beans>

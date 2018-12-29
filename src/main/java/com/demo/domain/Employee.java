@@ -1,6 +1,10 @@
 package com.demo.domain;
 
+import com.demo.domain.Department;
+import com.demo.domain.Evaluation;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author wwx
@@ -23,6 +27,10 @@ public class Employee {
     private String remark;
 
     private Department department;
+
+    private List<Evaluation> evaluationList;
+
+
 
     public Department getDepartment() {
         return department;
@@ -142,5 +150,13 @@ public class Employee {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public List<Evaluation> getEvaluationList() {
+        return evaluationList;
+    }
+
+    public void setEvaluationList(List<Evaluation> evaluationList) {
+        this.evaluationList = evaluationList;
     }
 }

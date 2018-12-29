@@ -28,4 +28,42 @@
 
     </select>
 
+
+    <!--根据部门id查询该部门员工信息-->
+    <!--存在问题：查询出的员工姓名被覆盖-->
+    <resultMap id="resultDepartmentEmployee" type="DepartmentAndEmployee">
+        <result property="departmentName" column="name"></result>
+        <collection property="employeeList" ofType="com.demo.domain.Employee" column="department_id">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="sex" column="sex"/>
+            <result property="phone" column="phone"/>
+        </collection>
+    </resultMap>
+
+    <select id="getDepartmentEmployee" resultMap="resultDepartmentEmployee" parameterType="int">
+        select d.name,e.id,e.name,e.sex,e.phone from employee e,department d
+        where d.id=e.department_id and d.id=#{id}
+
+    </select>
+
+
+    <!--根据员工Id查询能力评估信息-->
+    <resultMap id="resultEmployeeEvaluation" type="EmployAndDepartment">
+        <result property="name" column="name"></result>
+        <collection property="evaluationList" ofType="com.demo.domain.Evaluation" column="employee_id">
+            <id property="id" column="id"></id>
+            <result property="evaluationContent" column="evaluation_content"></result>
+            <result property="evaluationTime" column="evaluation_time"></result>
+            <result property="evaluationLevel" column="evaluation_level"></result>
+            <result property="certificate" column="certificate"></result>
+            <result property="remark" column="remark"></result>
+        </collection>
+
+    </resultMap>
+    <select id="getEmployeeEvaluation" resultMap="resultEmployeeEvaluation" parameterType="int">
+        
+        select u.name,e.* from employee u,evaluation e where e.employee_id=#{id}
+
+    </select>
 </mapper>

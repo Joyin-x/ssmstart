@@ -1,7 +1,16 @@
 package com.demo.Controller;
 
+import com.demo.domain.Department;
+import com.demo.domain.department.DepartmentAndEmployee;
+import com.demo.service.AllService;
+import com.demo.util.ServerResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * @author wwx
@@ -9,7 +18,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
  **/
 
 @Controller
-@RequestMapping("/departmentController")
+@RequestMapping("/department")
 public class DepartmentController {
 
+    @Autowired
+    private AllService service;
+
+    /**
+     * 返回企业所有部门信息
+     * */
+    @RequestMapping("/list")
+    @ResponseBody
+    public ServerResponse<List<Department>> findAllDepartment(){
+        List<Department> Department=service.queryAllDepartment();
+        if(Department.size()>0){
+            return ServerResponse.createBySuccess("查询成功",Department);
+        }
+        else{
+            return ServerResponse.createByError("无部门信息");
+        }
+    }
+
+    /**
+     * 返回企业部门所有员工信息
+     * */
+    @RequestMapping(value="/getDepartmentEmployee",method= RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse<List<DepartmentAndEmployee>> getDepartmentEmployee(int id){
+        List<DepartmentAndEmployee> DepartmentAndEmployeeList=service.getDepartmentEmployee(id);
+        if(DepartmentAndEmployeeList.size()>0){
+            return ServerResponse.createBySuccess("查询成功",DepartmentAndEmployeeList);
+        }
+        else{
+            return ServerResponse.createByError("无部门信息");
+        }
+    }
 }

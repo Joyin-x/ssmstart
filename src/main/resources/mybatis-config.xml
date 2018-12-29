@@ -8,8 +8,8 @@
     <settings>
         <!-- 使用jdbc的getGeneratedKeys获取数据库自增主键值 -->
         <setting name="useGeneratedKeys" value="true"/>
-
-
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="callSettersOnNulls" value="true"/>
         <!-- 开启驼峰命名转换:从经典数据库列名A_COLUMN到经典Java属性名aColumn的类似映射-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>

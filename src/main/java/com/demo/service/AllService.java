@@ -3,6 +3,8 @@ package com.demo.service;
 import com.demo.dao.AllMapper;
 import com.demo.domain.Department;
 import com.demo.domain.Employee;
+import com.demo.domain.Evaluation;
+import com.demo.domain.department.DepartmentAndEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +36,21 @@ public class AllService {
      * */
     public List<Department> queryAllDepartment(){
         return allMapper.queryAllDepartment();
+    }
+
+
+    /**
+     * 根据id查询员工能力评估信息
+     * */
+    public List<Evaluation> getEmployeeEvaluation(int id){
+        return allMapper.getEmployeeEvaluation(id);
+
+    }
+
+    /**
+     * 根据部门id查询部门所有员工信息
+     * */
+    public List<DepartmentAndEmployee> getDepartmentEmployee(int id){
+        return allMapper.getDepartmentEmployee(id);
     }
 }

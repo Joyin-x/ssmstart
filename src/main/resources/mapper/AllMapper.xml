@@ -5,47 +5,7 @@
 
 <!--namespace 这里不是实体类名称，而是映射接口的全路径！！！-->
 <mapper namespace="com.demo.dao.AllMapper">
-    <resultMap id="RoleResult" type="com.demo.domain.Role">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-    </resultMap>
 
-    <select id="queryAll" resultMap="RoleResult">
-        SELECT id,name from user
-    </select>
-
-    <resultMap id="UserOrderResult" type="com.demo.domain.User">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="name" property="name"/>
-        <result column="password" property="password"/>
-        <result column="company" property="company"/>
-        <result column="age" property="age"/>
-        <result column="sex" property="sex"/>
-        <collection property="orders" ofType="com.demo.domain.Order">
-            <id property="orderCard" column="order_card"/>
-            <result property="number" column="number"/>
-            <result property="createTime" column="createTime"/>
-            <result property="note" column="note"/>
-        </collection>
-    </resultMap>
-
-    <select id="queryAllOrder" resultMap="UserOrderResult">
-        SELECT
-        user.id,
-        user.name,
-        user.password,
-        user.company,
-        user.age,
-        user.sex,
-        order.order_card,
-        order.number,
-        order.createTime,
-        order.note
-        FROM
-        `user`,
-        `order`
-       where user.id=order.id
-    </select>
 
     <!--查询所有员工信息-->
     <select id="findAllEmployee" resultType="Employee">

@@ -1,11 +1,14 @@
 package com.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.Date;
 
 /**
  * @author wwx
  * @date 2018/12/28 10:52
  **/
+@JsonInclude(value= JsonInclude.Include.NON_NULL)
 public class Evaluation {
     private int id;
     private int employeeId;
@@ -14,7 +17,6 @@ public class Evaluation {
     private String evaluationLevel;
     private String certificate;
     private String remark;
-
 
     public int getId() {
         return id;

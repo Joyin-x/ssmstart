@@ -22,6 +22,24 @@ public class EmployeeController {
 
     @Autowired
     private AllService service;
+
+
+
+    /**
+     * 返回图片姓名和能力等级信息（图片暂时没返回）
+     *
+     * */
+    @RequestMapping(value="/employeeLevel")
+    @ResponseBody
+    public ServerResponse<List<Employee>> findEmployeeLevel(){
+        List<Employee> employeesLevel=service.findEmployeeLevel();
+        if(employeesLevel.size()>0){
+            return ServerResponse.createBySuccess("查询成功",employeesLevel);
+        }
+        else{
+            return ServerResponse.createByError("记录为空");
+        }
+    }
     /**
      * 返回企业所有员工信息
      * */
@@ -50,6 +68,22 @@ public class EmployeeController {
         }
         else {
             return ServerResponse.createByError("没有该员工");
+        }
+    }
+
+    /**
+     *根据员工id返回某员工的所有信息（部门，能力评估）
+     * */
+    @RequestMapping(value="/findEED",method= RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse<List<Employee>> findEED(int id){
+        System.out.print(id);
+        List<Employee> employees=service.findEED(id);
+        if(employees.size()>0){
+            return ServerResponse.createBySuccess("查询成功",employees);
+        }
+        else {
+            return ServerResponse.createByError("没有该员工信息");
         }
     }
 }

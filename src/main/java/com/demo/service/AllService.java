@@ -18,11 +18,17 @@ public class AllService {
 
 
     /**
-     * 调用dao层方法，返回查询所有员工信息
+     * 返回查询所有员工信息
      */
     public List<Employee> findAllEmployee() {
         return allMapper.findAllEmployee();
     }
+
+    /**
+     * 返回员工姓名，图片，能力等级信息
+     * */
+
+    public List<Employee> findEmployeeLevel(){return allMapper.findEmployeeLevel();}
 
     /**
      * 查询具体员工信息
@@ -53,4 +59,10 @@ public class AllService {
     public List<DepartmentAndEmployee> getDepartmentEmployee(int id){
         return allMapper.getDepartmentEmployee(id);
     }
+
+    /**
+     * 返回某员工的所有信息（部门，能力评估）
+     * */
+
+    public List<Employee> findEED(int id){return allMapper.findEED(id);}
 }

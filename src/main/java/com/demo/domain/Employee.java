@@ -1,7 +1,6 @@
 package com.demo.domain;
 
-import com.demo.domain.Department;
-import com.demo.domain.Evaluation;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Date;
 import java.util.List;
@@ -10,6 +9,8 @@ import java.util.List;
  * @author wwx
  * @date 2018/12/28 10:47
  **/
+
+@JsonInclude(value= JsonInclude.Include.NON_NULL)
 public class Employee {
     private int id;
     private String name;

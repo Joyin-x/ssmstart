@@ -1,9 +1,13 @@
 package com.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * @author wwx
  * @date 2018/12/28 10:58
  **/
+
+@JsonInclude(value= JsonInclude.Include.NON_NULL)
 public class Department {
 
     private int id;

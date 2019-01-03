@@ -16,6 +16,10 @@ public interface AllMapper {
      * */
     List<Employee> findAllEmployee();
 
+    /**
+     * 查询指定页数的五条员工信息
+     * */
+    List<Employee> findAnyEmployee(int page);
 
     /**
      * 根据id查询员工信息

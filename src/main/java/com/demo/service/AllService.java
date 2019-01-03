@@ -25,6 +25,13 @@ public class AllService {
     }
 
     /**
+     * 返回指定页数的5条员工信息
+     */
+    public List<Employee> findAnyEmployee(int page) {
+        return allMapper.findAnyEmployee(page);
+    }
+
+    /**
      * 返回员工姓名，图片，能力等级信息
      * */
 

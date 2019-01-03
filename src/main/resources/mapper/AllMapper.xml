@@ -101,7 +101,7 @@
             <result property="evaluationTime" column="evaluation_time"></result>
             <result property="evaluationLevel" column="evaluation_level"></result>
             <result property="certificate" column="certificate"></result>
-            <result property="remark" column="remark"></result>
+            <result property="departmentLevel" column="department_level"></result>
         </collection>
     </resultMap>
     <select id="findEED" resultMap="resultEED" parameterType="int">

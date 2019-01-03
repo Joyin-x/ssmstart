@@ -16,7 +16,7 @@ public class Evaluation {
     private Date evaluationTime;
     private String evaluationLevel;
     private String certificate;
-    private String remark;
+    private String departmentLevel;
 
     public int getId() {
         return id;
@@ -66,11 +66,11 @@ public class Evaluation {
         this.certificate = certificate;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getDepartmentLevel() {
+        return departmentLevel;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setDepartmentLevel(String departmentLevel) {
+        this.departmentLevel = departmentLevel;
     }
 }

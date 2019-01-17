@@ -45,7 +45,7 @@ public interface AllMapper {
     /**
      * 根据部门id查询部门所有员工信息*/
     List<DepartmentAndEmployee> getDepartmentEmployee(int id);
-
+    List<DepartmentAndEmployee> getDepartmentEmployeeAll();
     /**
      * 返回某员工的所有信息（部门，能力评估）
      * */

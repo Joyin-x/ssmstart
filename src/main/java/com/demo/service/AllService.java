@@ -66,7 +66,9 @@ public class AllService {
     public List<DepartmentAndEmployee> getDepartmentEmployee(int id){
         return allMapper.getDepartmentEmployee(id);
     }
-
+    public List<DepartmentAndEmployee> getDepartmentEmployeeAll(){
+        return allMapper.getDepartmentEmployeeAll();
+    }
     /**
      * 返回某员工的所有信息（部门，能力评估）
      * */

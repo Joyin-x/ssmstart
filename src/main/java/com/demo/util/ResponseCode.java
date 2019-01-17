@@ -9,10 +9,11 @@ package com.demo.util;
  * 定义响应的状态码
  */
 public enum ResponseCode {
-    SUCCESS(200, "SUCCESS"),
-    ERROR(404, "ERROR"),
-    NEED_LOG(1, "NEED_LOG"),
-    SERVER_ERROR(500,"服务器出错");
+    SUCCESS(200, "成功"),
+    ERROR(420, "失败"),
+    NOT_FOUND(404, "请求不存在"),
+    NEED_LOG(410,"请先登录"),
+    SERVER_ERROR(500,"请求出错");
 
 
 

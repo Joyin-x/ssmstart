@@ -9,6 +9,7 @@ import java.util.List;
  * @date 2018/12/29 14:52
  **/
 public class DepartmentAndEmployee {
+
     private String departmentName;
     private List<Employee> employeeList;
 

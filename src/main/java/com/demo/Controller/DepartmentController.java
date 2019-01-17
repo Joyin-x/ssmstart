@@ -40,17 +40,23 @@ public class DepartmentController {
     }
 
     /**
-     * 返回企业部门所有员工信息
+     * 根据id返回企业部门所有员工信息
      * */
-    @RequestMapping(value="/getDepartmentEmployee",method= RequestMethod.POST)
+    @RequestMapping(value="/getDepartmentEmployee",method=RequestMethod.POST)
     @ResponseBody
     public ServerResponse<List<DepartmentAndEmployee>> getDepartmentEmployee(int id){
-        List<DepartmentAndEmployee> DepartmentAndEmployeeList=service.getDepartmentEmployee(id);
+        System.out.println(id);
+        List<DepartmentAndEmployee> DepartmentAndEmployeeList;
+        if(id==0){
+            DepartmentAndEmployeeList=service.getDepartmentEmployeeAll();
+        }else{
+            DepartmentAndEmployeeList=service.getDepartmentEmployee(id);
+        }
         if(DepartmentAndEmployeeList.size()>0){
             return ServerResponse.createBySuccess("查询成功",DepartmentAndEmployeeList);
         }
         else{
-            return ServerResponse.createByError("无部门信息");
+            return ServerResponse.createByError("无部门员工信息");
         }
     }
 }

@@ -37,7 +37,6 @@
 
 
     <!--根据部门id查询该部门员工信息-->
-    <!--存在问题：查询出的员工姓名被覆盖-->
     <resultMap id="resultDepartmentEmployee" type="DepartmentAndEmployee">
         <result property="departmentName" column="department_name"></result>
         <collection property="employeeList" ofType="com.demo.domain.Employee" column="department_id">
@@ -48,8 +47,11 @@
         </collection>
     </resultMap>
     <select id="getDepartmentEmployee" resultMap="resultDepartmentEmployee" parameterType="int">
-        select d.name,e.id,e.name,e.sex,e.phone from employee e,department d
-        where d.id=e.department_id and d.id=#{id}
+        select d.department_name,e.id,e.name,e.sex,e.phone from employee e,department d where d.id=e.department_id and d.id=#{id}
+
+    </select>
+    <select id="getDepartmentEmployeeAll" resultMap="resultDepartmentEmployee">
+        select d.department_name,e.id,e.name,e.sex,e.phone from employee e,department d where d.id=e.department_id
 
     </select>
 

@@ -24,11 +24,17 @@ public class AllService {
         return allMapper.findAllEmployee();
     }
 
+
+    /**
+     * 获取总页数*/
+    public int pageCount(){
+        return allMapper.pageCount();
+    }
     /**
      * 返回指定页数的5条员工信息
      */
-    public List<Employee> findAnyEmployee(int page) {
-        return allMapper.findAnyEmployee(page);
+    public List<Employee> findAnyEmployee(int index) {
+        return allMapper.findAnyEmployee(index);
     }
 
     /**

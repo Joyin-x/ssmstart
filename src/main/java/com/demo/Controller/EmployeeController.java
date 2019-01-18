@@ -1,6 +1,7 @@
 package com.demo.Controller;
 
 import com.demo.domain.Employee;
+import com.demo.domain.PageUtil;
 import com.demo.service.AllService;
 import com.demo.util.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -62,14 +64,29 @@ public class EmployeeController {
      * */
     @RequestMapping(value="/anyList",method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<List<Employee>> findAnyEmployee(int page){
-        System.out.println(page);
-        List<Employee> employees=service.findAnyEmployee(page);
-        if(employees.size()>0){
-            return ServerResponse.createBySuccess("查询成功",employees);
+    public ServerResponse<List<Employee>> findAnyEmployee(int index){
+        System.out.println(index);
+        int pageIndex=1;//初始当前页
+        int pageSize=4;
+        int number=(int)service.pageCount();//每页显示条数
+        PageUtil<Employee> pageUtil=new PageUtil<Employee>();
+        List<Employee> list=new ArrayList<Employee>();
+        if(index>0){
+            pageIndex=index;
+        }
+        List<Employee> employees=service.findAnyEmployee(index);
+        pageUtil.setPageIndex(pageIndex);
+        pageUtil.setPageNumber(number);
+        pageUtil.setPageSize(pageSize);//13/4=3...1
+        pageUtil.setPageCount((int)Math.ceil((double) (pageUtil.getPageNumber()/pageUtil.getPageSize()))+1);
+        index=(pageIndex-1)*pageSize;
+        list=service.findAnyEmployee(index);
+        pageUtil.setList(list);
+        if(list.size()>0){
+            return ServerResponse.createBySuccess("查询成功",list);
         }
         else{
-            return ServerResponse.createByError("没有该员工");
+            return ServerResponse.createByError("所有数据查询完成");
         }
     }
     /**
@@ -107,11 +124,18 @@ public class EmployeeController {
     /**
      * 增加员工（目前测试员工照片上传）
      * */
-    @RequestMapping("/addEmployee")
+    @RequestMapping("/addEmployeeImage")
     public void uploadPicture(HttpServletRequest request, HttpServletResponse response)throws Exception{
-
 
 
     }
 
+    /**
+     * 增加员工
+     * */
+    @RequestMapping("addEmployee")
+    public void addEmployee(HttpServletRequest request, HttpServletResponse response)throws Exception{
+
+
+    }
 }

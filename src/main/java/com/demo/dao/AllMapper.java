@@ -19,7 +19,10 @@ public interface AllMapper {
     /**
      * 查询指定页数的五条员工信息
      * */
-    List<Employee> findAnyEmployee(int page);
+    List<Employee> findAnyEmployee(int index);
+    /**
+     * 获取总页数*/
+    int pageCount();
 
     /**
      * 根据id查询员工信息

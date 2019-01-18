@@ -80,4 +80,8 @@ public class AllService {
      * */
 
     public List<Employee> findEED(int id){return allMapper.findEED(id);}
+
+    public Boolean addEmployee(){
+        return allMapper.addEmployee();
+    }
 }

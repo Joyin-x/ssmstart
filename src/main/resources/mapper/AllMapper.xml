@@ -14,7 +14,7 @@
 
     </select>
     <!--增加新员工信息-->
-    <insert id="indertEmployee" parameterType="Employee">
+    <insert id="insertEmployee" parameterType="Employee">
         insert into employee(name,sex,birthday,native_place,address,phone,department_id,education,school,email,professional,remark)
         values(#{sex},#{birthday},#{native_place},#{address},#{phone},#{department_id},#{education},#{school},#{email},#{professional},{remark})
 
@@ -124,4 +124,7 @@
     <select id="findEED" resultMap="resultEED" parameterType="int">
         select * from employee u,department d,evaluation e where u.department_id=d.id and u.id=e.employee_id and u.id=#{id}
     </select>
+
+
+
 </mapper>

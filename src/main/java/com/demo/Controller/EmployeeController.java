@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,11 +132,12 @@ public class EmployeeController {
     }
 
     /**
-     * 增加员工
+     * 增加员工信息
      * */
-    @RequestMapping("addEmployee")
-    public void addEmployee(HttpServletRequest request, HttpServletResponse response)throws Exception{
-
-
+    @RequestMapping(value="/addEmployee",method=RequestMethod.POST)
+    @ResponseBody
+    public void addEmployee(HttpServletRequest request)throws Exception{
+        System.out.print(request.getParameter("name"));
+        System.out.print(request.getParameter("sex"));
     }
 }

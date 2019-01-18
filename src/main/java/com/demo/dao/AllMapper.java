@@ -54,4 +54,9 @@ public interface AllMapper {
      * */
 
     List<Employee> findEED(int id);
+
+    /**
+     * 增加新员工，返回信息
+     * */
+    Boolean addEmployee();
 }

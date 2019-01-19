@@ -14,7 +14,7 @@
 
     </select>
     <!--增加新员工信息-->
-    <insert id="insertEmployee" parameterType="Employee">
+    <insert id="insertEmployee" parameterType="com.demo.domain.employee.EmployeeVo">
         insert into employee(name,sex,birthday,native_place,address,phone,department_id,education,school,email,professional,remark)
         values(#{sex},#{birthday},#{native_place},#{address},#{phone},#{department_id},#{education},#{school},#{email},#{professional},{remark})
 

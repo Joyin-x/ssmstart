@@ -1,14 +1,14 @@
 package com.demo.Controller;
 
+import com.alibaba.druid.util.StringUtils;
 import com.demo.domain.Employee;
 import com.demo.domain.PageUtil;
+import com.demo.domain.employee.EmployeeVo;
 import com.demo.service.AllService;
 import com.demo.util.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -136,8 +136,34 @@ public class EmployeeController {
      * */
     @RequestMapping(value="/addEmployee",method=RequestMethod.POST)
     @ResponseBody
-    public void addEmployee(HttpServletRequest request)throws Exception{
-        System.out.print(request.getParameter("name"));
-        System.out.print(request.getParameter("sex"));
+    public ServerResponse addEmployee(@RequestParam(value="name")String name,
+                            @RequestParam(value="sex")int sex,
+                            @RequestParam(value="birthday")String birthday,
+                            @RequestParam(value="nativePlace")String nativePlace,
+                            @RequestParam(value="address")String address,
+                            @RequestParam(value="phone")String phone,
+                            @RequestParam(value="departmentId")int departmentId,
+                            @RequestParam(value="education") String education,
+                            @RequestParam(value="school") String school,
+                            @RequestParam(value="email") String email,
+                            @RequestParam(value="picture",required = false) String picture,
+                            @RequestParam(value="professional") String professional,
+                            @RequestParam(value="remark") String remark){
+        System.out.println(name+sex+birthday+nativePlace+address+phone+departmentId+education+school+email+remark+professional);
+        if(StringUtils.isEmpty(name)){
+            return ServerResponse.createByError("员工姓名不能为空！");
+        }
+        if(StringUtils.isEmpty(address)){
+            return ServerResponse.createByError("居住地址不能为空!");
+        }
+        if(StringUtils.isEmpty(phone)) {
+            return ServerResponse.createByError("电话号码不能为空！");
+        }else{
+            
+        }
+        if(StringUtils.isEmpty(professional)){
+            return ServerResponse.createByError("职称不能为空!");
+        }
+        return ServerResponse.createByError("没有该员工信息");
     }
 }

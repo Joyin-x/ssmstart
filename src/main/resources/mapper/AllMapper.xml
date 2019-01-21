@@ -14,9 +14,9 @@
 
     </select>
     <!--增加新员工信息-->
-    <insert id="insertEmployee" parameterType="com.demo.domain.employee.EmployeeVo">
+    <insert id="insertEmployee"  parameterType="EmployeeVo">
         insert into employee(name,sex,birthday,native_place,address,phone,department_id,education,school,email,professional,remark)
-        values(#{sex},#{birthday},#{native_place},#{address},#{phone},#{department_id},#{education},#{school},#{email},#{professional},{remark})
+        values(#{name},#{sex},#{birthday},#{native_place},#{address},#{phone},#{department_id},#{education},#{school},#{email},#{professional},#{remark})
 
     </insert>
     <!--查询指定页数的5条员工信息  0到4   5到9  10到14 -->
@@ -118,7 +118,7 @@
             <result property="evaluationTime" column="evaluation_time"></result>
             <result property="evaluationLevel" column="evaluation_level"></result>
             <result property="certificate" column="certificate"></result>
-            <result property="departmentLevel" column="department_level"></result>
+            <result property="departmentLevel" column="department_level_remark"></result>
         </collection>
     </resultMap>
     <select id="findEED" resultMap="resultEED" parameterType="int">

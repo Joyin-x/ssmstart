@@ -77,6 +77,9 @@ public class ServerResponse<T> {
     public static <T> ServerResponse<T> createBySuccess(String msg, T data){
         return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(),data,msg);
     }
+    public static <T> ServerResponse<T> createBySuccess(String msg){
+        return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(),msg);
+    }
 
 
     /**

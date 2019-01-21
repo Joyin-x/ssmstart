@@ -4,6 +4,7 @@ import com.demo.domain.Department;
 import com.demo.domain.Employee;
 import com.demo.domain.Evaluation;
 import com.demo.domain.department.DepartmentAndEmployee;
+import com.demo.domain.employee.EmployeeVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -58,5 +59,5 @@ public interface AllMapper {
     /**
      * 增加新员工，返回信息
      * */
-    Boolean addEmployee();
+    int insertEmployee(EmployeeVo employee);
 }

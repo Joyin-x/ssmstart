@@ -5,6 +5,7 @@ import com.demo.domain.Department;
 import com.demo.domain.Employee;
 import com.demo.domain.Evaluation;
 import com.demo.domain.department.DepartmentAndEmployee;
+import com.demo.domain.employee.EmployeeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,14 @@ public class AllService {
     /**
      * 返回员工姓名，图片，能力等级信息
      * */
+
+    /**
+     * 增加新员工，返回信息
+     * */
+    public int insertEmployee(EmployeeVo employee){
+        int result=allMapper.insertEmployee(employee);
+        return result;
+    }
 
     public List<Employee> findEmployeeLevel(){return allMapper.findEmployeeLevel();}
 
@@ -81,7 +90,4 @@ public class AllService {
 
     public List<Employee> findEED(int id){return allMapper.findEED(id);}
 
-    public Boolean addEmployee(){
-        return allMapper.addEmployee();
-    }
 }

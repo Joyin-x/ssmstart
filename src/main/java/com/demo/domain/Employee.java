@@ -26,12 +26,8 @@ public class Employee {
     private String picture;
     private String professional;
     private String remark;
-
     private Department department;
-
     private List<Evaluation> evaluationList;
-
-
 
     public Department getDepartment() {
         return department;

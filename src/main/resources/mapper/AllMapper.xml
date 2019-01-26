@@ -124,7 +124,4 @@
     <select id="findEED" resultMap="resultEED" parameterType="int">
         select * from employee u,department d,evaluation e where u.department_id=d.id and u.id=e.employee_id and u.id=#{id}
     </select>
-
-
-
 </mapper>

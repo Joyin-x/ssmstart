@@ -10,7 +10,7 @@
     <!--查询所有员工信息-->
     <select id="findAllEmployee" resultType="Employee">
 
-        select * from employee();
+        select * from employee;
 
     </select>
     <!--增加新员工信息-->

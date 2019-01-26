@@ -9,7 +9,7 @@
     <!--查询发布的所有公告信息-->
     <select id="getNoticeList" resultType="Notice">
 
-        select header,content,notice_time from notice;
+        select n.id,n.employee_id,n.header,n.content,n.notice_time from notice n;
 
     </select>
 

@@ -10,9 +10,27 @@ import java.util.Date;
  **/
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class Notice {
+    private int id;
+    private int employeeId;
     private String header;
     private String content;
-    private Date notice_time;
+    private Date noticeTime;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
 
     public String getHeader() {
         return header;
@@ -30,11 +48,11 @@ public class Notice {
         this.content = content;
     }
 
-    public Date getNotice_time() {
-        return notice_time;
+    public Date getNoticeTime() {
+        return noticeTime;
     }
 
-    public void setNotice_time(Date notice_time) {
-        this.notice_time = notice_time;
+    public void setNoticeTime(Date noticeTime) {
+        this.noticeTime = noticeTime;
     }
 }

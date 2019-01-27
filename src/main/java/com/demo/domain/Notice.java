@@ -11,7 +11,7 @@ import java.util.Date;
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class Notice {
     private int id;
-    private int employeeId;
+    private String name;
     private String header;
     private String content;
     private Date noticeTime;
@@ -24,12 +24,12 @@ public class Notice {
         this.id = id;
     }
 
-    public int getEmployeeId() {
-        return employeeId;
+    public String getName() {
+        return name;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getHeader() {

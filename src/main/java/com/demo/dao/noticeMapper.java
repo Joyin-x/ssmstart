@@ -1,5 +1,6 @@
 package com.demo.dao;
 
+import com.demo.domain.Image;
 import com.demo.domain.Notice;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,4 +16,14 @@ public interface noticeMapper {
      * 查询发布所有的公告信息
      * */
     List<Notice> getNoticeList();
+
+    /**
+     * 根据id查询公告消息
+     * */
+    Notice getNoticeDetail(int id);
+
+    /**
+     * 测试图片上传
+     * */
+    void addImage(Image image);
 }

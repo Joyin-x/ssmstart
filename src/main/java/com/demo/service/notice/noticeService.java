@@ -1,6 +1,7 @@
 package com.demo.service.notice;
 
 import com.demo.dao.noticeMapper;
+import com.demo.domain.Image;
 import com.demo.domain.Notice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,4 +24,14 @@ public class noticeService {
     public List<Notice> getNoticeList(){
         return mapper.getNoticeList();
     }
+
+    /**
+     * 根据id返回对应的公告消息
+     * */
+    public Notice getNoticeDetail(int id){return mapper.getNoticeDetail(id);}
+
+    /**
+     * 测试图片上传
+     * */
+    public void addImage(Image image){mapper.addImage(image);}
 }

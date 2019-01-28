@@ -114,13 +114,6 @@ public class EmployeeController {
         }
     }
 
-    /**
-     * 增加员工（目前测试员工照片上传）
-     */
-    @RequestMapping("/addEmployeeImage")
-    public void uploadPicture(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-    }
 
     /**
      * 增加员工信息

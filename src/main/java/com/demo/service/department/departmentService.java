@@ -26,4 +26,8 @@ public class departmentService {
      * 修改部门信息*/
     public int modifyDepartment(Department department){return mapper.modifyDepartment(department);}
 
+    /**
+     * 删除部门信息*/
+    public int deleteDepartment(int id){return mapper.deleteDepartment(id);}
+
 }

@@ -17,4 +17,9 @@ public interface departmentMapper {
      * 修改部门信息
      * */
     public int modifyDepartment(Department department);
+
+    /**
+     * 刪除部門信息
+     * */
+    public int deleteDepartment(int id);
 }

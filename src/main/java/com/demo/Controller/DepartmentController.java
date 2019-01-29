@@ -44,10 +44,10 @@ public class DepartmentController {
     /**
      * 修改部门信息
      * */
-    @RequestMapping("/modifyDepartment")
+    @RequestMapping(value = "/modifyDepartment",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<Department> modifyDepartment(@RequestBody Department department){
-        System.out.println(department.getDepartmentName()+":"+department.getPrincipal());
+        System.out.println(department.getId()+":"+department.getDepartmentName()+":"+department.getPrincipal());
         int result=departmentService.modifyDepartment(department);
         if(result==1){
             return ServerResponse.createBySuccess("成功修改");
@@ -58,9 +58,16 @@ public class DepartmentController {
     /**
      * 删除部门信息
      * */
-
-
-
+    @RequestMapping(value = "/deleteDepartment",method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse<Department> deleteDepartment(int id){
+        System.out.println(id);
+        int result=departmentService.deleteDepartment(id);
+        if(result==1){
+            return ServerResponse.createBySuccess("删除成功");
+        }
+        return ServerResponse.createByError("失败");
+    }
 
     /**
      * 返回企业所有部门信息

@@ -7,20 +7,22 @@
 <mapper namespace="com.demo.dao.departmentMapper">
 
     <!--增加部门-->
-    <insert id="addDepartment"  parameterType="department">
+    <insert id="addDepartment"  parameterType="Department">
         insert into department(department_name,principal)
         values(#{departmentName},#{principal})
     </insert>
-
     <!--修改部门-->
-    <update id="modifyDepartment" parameterType="department">
+    <update id="modifyDepartment" parameterType="Department">
         update department
-          department_name = #{departmentName},principal=#{principal}
         <set>
-            <if test="departmentName != null">department_name=#{departmentName},</if>
-            <if test="principal != null">principal=#{principal}</if>
+            <if test="departmentName!= null and departmentName!=''">department_name=#{departmentName},</if>
+            <if test="principal!= null and principal!=''">principal=#{principal}</if>
         </set>
         where id=#{id}
     </update>
 
+    <!--删除部门-->
+    <delete id="deleteDepartment" parameterType="int">
+        delete from department where id=#{id}
+    </delete>
 </mapper>

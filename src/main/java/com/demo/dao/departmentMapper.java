@@ -10,7 +10,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface departmentMapper {
     /**
-     * 增加部门信息*/
+     * 增加部门信息
+     * */
     public int addDepartment(Department department);
 
     /**
@@ -22,4 +23,6 @@ public interface departmentMapper {
      * 刪除部門信息
      * */
     public int deleteDepartment(int id);
+
+
 }

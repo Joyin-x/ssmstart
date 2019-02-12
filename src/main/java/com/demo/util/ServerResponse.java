@@ -45,6 +45,14 @@ public class ServerResponse<T> {
     *   @param msg
     * */
 
+    public void setStatus(ResponseCode response){
+        this.code=response.getCode();
+        this.msg=response.getMsg();
+    }
+    public ServerResponse(){
+        this.code= ResponseCode.ERROR.getCode();
+        this.msg=ResponseCode.ERROR.getMsg();
+    }
     public ServerResponse(int code, T data, String msg) {
         this.code = code;
         this.data = data;
@@ -97,6 +105,6 @@ public class ServerResponse<T> {
     }
 
     public static <T> ServerResponse<T> createByServerError(){
-        return new ServerResponse<T>(ResponseCode.SERVER_ERROR.getCode(),ResponseCode.SERVER_ERROR.getDesc());
+        return new ServerResponse<T>(ResponseCode.SERVER_ERROR.getCode(),ResponseCode.SERVER_ERROR.getMsg());
     }
 }

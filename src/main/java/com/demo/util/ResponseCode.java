@@ -18,26 +18,18 @@ public enum ResponseCode {
 
 
     private int code;
-    private String desc;
+    private String msg;
 
     public int getCode() {
         return code;
     }
+    public String getMsg() {
+        return msg;
+    }
 
-    public void setCode(int code) {
+
+    ResponseCode(int code, String msg) {
         this.code = code;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    ResponseCode(int code, String desc) {
-        this.code = code;
-        this.desc = desc;
+        this.msg = msg;
     }
 }

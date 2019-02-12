@@ -1,17 +1,16 @@
 package com.demo.Controller;
 
 import com.demo.domain.Notice;
+import com.demo.domain.notice.noticeVo;
 import com.demo.service.notice.noticeService;
+import com.demo.util.ResponseCode;
 import com.demo.util.ServerResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +31,8 @@ public class NoticeController {
     @Autowired
     private noticeService service;
 
-
+    /**
+     * 查询所有公告信息*/
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<List<Notice>> getNoticeList() {
@@ -46,6 +46,8 @@ public class NoticeController {
         }
     }
 
+    /**
+     * 查询某个公告的详细内容*/
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<Notice> getNoticeDetail(int id) {
@@ -56,6 +58,20 @@ public class NoticeController {
             return ServerResponse.createByError("查询失败");
         }
     }
+    /**
+     * 新增公告信息
+     * */
+    @RequestMapping(value = "/addNotice",method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse getNoticeDetail(@RequestBody noticeVo notice) {
+        ServerResponse response=new ServerResponse();
+        int result=service.addNotice(notice);
+        if(result==1){
+            response.setStatus(ResponseCode.SUCCESS);
+        }
+        return response;
+    }
+
 
     @RequestMapping(value = "/addImage",method = RequestMethod.POST)
     @ResponseBody

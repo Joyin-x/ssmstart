@@ -3,6 +3,7 @@ package com.demo.service.notice;
 import com.demo.dao.noticeMapper;
 import com.demo.domain.Image;
 import com.demo.domain.Notice;
+import com.demo.domain.notice.noticeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,4 +35,8 @@ public class noticeService {
      * 测试图片上传
      * */
     public void addImage(Image image){mapper.addImage(image);}
+
+    /**
+     * 员工发布新公告*/
+    public int addNotice(noticeVo notice){return mapper.addNotice(notice);}
 }

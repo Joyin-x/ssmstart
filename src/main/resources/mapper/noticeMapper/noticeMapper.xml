@@ -22,4 +22,9 @@
     <insert id="addImage" parameterType="com.demo.domain.Image">
         insert into image(img) values(#{img})
     </insert>
+
+    <!--员工发布新公告-->
+    <insert id="addNotice" parameterType="NoticeVo">
+        insert into notice(employee_id,header,content,notice_time) values(#{id},#{header},#{content},#{noticeTime})
+    </insert>
 </mapper>

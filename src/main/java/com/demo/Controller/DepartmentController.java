@@ -1,9 +1,12 @@
 package com.demo.Controller;
 
 import com.demo.domain.Department;
+import com.demo.domain.Mobilize;
 import com.demo.domain.department.DepartmentAndEmployee;
+import com.demo.domain.department.DepartmentAndId;
 import com.demo.service.AllService;
 import com.demo.service.department.departmentService;
+import com.demo.util.ResponseCode;
 import com.demo.util.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -102,5 +105,75 @@ public class DepartmentController {
         else{
             return ServerResponse.createByError("无部门员工信息");
         }
+    }
+
+
+    /**
+     * 根据搜索框传过来的文字进行搜索，返回模糊查询的数据
+     * */
+    @RequestMapping(value="/searchDepartment",method=RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse<List<DepartmentAndEmployee>> searchDepartment(String text){
+        ServerResponse response=new ServerResponse();
+        List<DepartmentAndEmployee> result;
+        /**员工姓名搜索*/
+        result=departmentService.searchDepartmentByName(text);
+        if(result.size()>0){
+            response.setStatus(ResponseCode.SUCCESS);
+            response.setData(result);
+            return response;
+        }else{
+            /**部门名搜索*/
+            result=departmentService.searchDepartmentByDname(text);
+            if(result.size()>0){
+                response.setStatus(ResponseCode.SUCCESS);
+                response.setData(result);
+                return response;
+            }else{
+                /**职务名搜索*/
+                result=departmentService.searchDepartmentByPosition(text);
+                if(result.size()>0){
+                    response.setStatus(ResponseCode.SUCCESS);
+                    response.setData(result);
+                    return response;
+                }
+            }
+        }
+        return response;
+    }
+
+    /**
+     *返回已有的部门和其id
+     * */
+    @RequestMapping(value="/getDepartmentAndId")
+    @ResponseBody
+    public ServerResponse<List<DepartmentAndId>> searchDepartment(){
+        ServerResponse response=new ServerResponse();
+        List<DepartmentAndId> result;
+        result=departmentService.getDepartmentAndId();
+        if(result.size()>0){
+            response.setData(result);
+            response.setStatus(ResponseCode.SUCCESS);
+            return response;
+        }
+        return response;
+    }
+
+    /**
+     * 修改员工所在的部门和职务
+     * 新增工作调动记录
+     * */
+    @RequestMapping(value="/addMobilize",method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse addMobilize(@RequestBody Mobilize mobilize){
+        ServerResponse response=new ServerResponse();
+        System.out.println(mobilize.getNowPosition());
+        int updateResult=departmentService.updateEmployee(mobilize);
+        int addResult=departmentService.addMobilze(mobilize);
+        if(updateResult>0&&addResult>0){
+            response.setStatus(ResponseCode.SUCCESS);
+            return response;
+        }
+        return response;
     }
 }

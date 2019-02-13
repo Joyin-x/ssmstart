@@ -19,6 +19,7 @@ public class Employee {
     private String native_place;
     private String address;
     private String phone;
+    private String position;
     private int department_id;
     private String education;
     private String school;
@@ -28,6 +29,14 @@ public class Employee {
     private String remark;
     private Department department;
     private List<Evaluation> evaluationList;
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
 
     public Department getDepartment() {
         return department;

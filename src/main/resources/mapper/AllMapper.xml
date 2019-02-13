@@ -52,15 +52,15 @@
             <result property="name" column="name"/>
             <result property="sex" column="sex"/>
             <result property="phone" column="phone"/>
+            <result property="position" column="position"/>
         </collection>
     </resultMap>
     <select id="getDepartmentEmployee" resultMap="resultDepartmentEmployee" parameterType="int">
-        select d.department_name,e.id,e.name,e.sex,e.phone from employee e,department d where d.id=e.department_id and d.id=#{id}
+        select d.department_name,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id and d.id=#{id}
 
     </select>
     <select id="getDepartmentEmployeeAll" resultMap="resultDepartmentEmployee">
-        select d.department_name,e.id,e.name,e.sex,e.phone from employee e,department d where d.id=e.department_id
-
+        select d.department_name,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id
     </select>
 
 

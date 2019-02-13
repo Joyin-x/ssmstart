@@ -25,4 +25,52 @@
     <delete id="deleteDepartment" parameterType="int">
         delete from department where id=#{id}
     </delete>
+
+    <!--查询员工部门和职务-->
+    <!--根据部门id查询该部门员工信息-->
+    <resultMap id="resultDepartmentEmployee" type="DepartmentAndEmployee">
+        <result property="departmentName" column="department_name"></result>
+        <collection property="employeeList" ofType="com.demo.domain.Employee" column="department_id">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="sex" column="sex"/>
+            <result property="phone" column="phone"/>
+            <result property="position" column="position"/>
+        </collection>
+    </resultMap>
+    <!--根据员工id查询-->
+    <select id="searchDepartmentByID" resultMap="resultDepartmentEmployee" parameterType="String">
+        select d.department_name,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id and e.id=#{text}
+    </select>
+    <!--根据员工姓名查询-->
+    <select id="searchDepartmentByName" resultMap="resultDepartmentEmployee" parameterType="String">
+        select d.department_name,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id and e.name=#{text}
+
+    </select>
+    <!--根据部门名字查询-->
+    <select id="searchDepartmentByDname" resultMap="resultDepartmentEmployee" parameterType="String">
+        select d.department_name,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id and d.department_name=#{text}
+
+    </select>
+    <!--根据员工职务查询-->
+    <select id="searchDepartmentByPosition" resultMap="resultDepartmentEmployee" parameterType="String">
+        select d.department_name,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id and e.position=#{text}
+    </select>
+
+    <!--返回已经存在的部门和其id-->
+    <select id="getDepartmentAndId" resultType="DepartmentAndId">
+        select d.id,d.department_name as departmentName from department d;
+    </select>
+
+    <!--修改员工所在部门和职务-->
+    <update id="updateEmployee" parameterType="Mobilize">
+        update employee set department_id=#{nowDepartmentId},position=#{nowPosition}
+        where id=#{employeeId}
+    </update>
+
+    <!--插入员工调动记录-->
+    <insert id="addMobilze"  parameterType="Mobilize">
+        insert into mobilize(employee_id,original_position,original_department_id,now_position,now_department_id,transfer_date,transfer_reason,approver,mobilize_remark)
+        values(#{employeeId},#{originalPosition},#{originalDepartmentId},#{nowPosition},#{nowDepartmentId},#{transferDate},#{transferReason},#{approver},#{mobilizeRemark})
+    </insert>
 </mapper>

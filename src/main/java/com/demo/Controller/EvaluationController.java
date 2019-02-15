@@ -24,15 +24,9 @@ public class EvaluationController {
     private AllService allService;
 
 
-    @RequestMapping(value="/list",method= RequestMethod.POST)
+    @RequestMapping(value="/getByMobile",method= RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<List<Evaluation>> getEmployeeEvaluation(int id){
-        List<Evaluation> evaluations=allService.getEmployeeEvaluation(id);
-        if(evaluations.size()>0){
-            return ServerResponse.createBySuccess("查询成功",evaluations);
-        }
-        else{
-            return ServerResponse.createByError("无评估信息");
-        }
+    public ServerResponse<List<Evaluation>> getByMobile(int id){
+
     }
 }

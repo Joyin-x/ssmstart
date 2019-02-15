@@ -95,33 +95,9 @@
         select u.id,u.name,e.evaluation_level from employee u,evaluation e where u.id=e.employee_id
     </select>
 
-    <!--返回员工，部门，能力评估所有信息-->
-    <resultMap id="resultEED" type="Employee">
-        <id property="id" column="id"></id>
-        <result property="name" column="name"/>
-        <result property="sex" column="sex"/>
-        <result property="birthday" column="birthday"/>
-        <result property="native_place" column="native_place"/>
-        <result property="address" column="address"/>
-        <result property="phone" column="phone"/>
-        <result property="education" column="education"/>
-        <result property="school" column="school"/>
-        <result property="email" column="email"/>
-        <result property="professional" column="professional"/>
-        <result property="remark" column="remark"/>
-        <association property="department" javaType="com.demo.domain.Department" column="department_id">
-            <result property="departmentName" column="department_name"/>
-            <result property="principal" column="principal"/>
-        </association>
-        <collection property="evaluationList" ofType="com.demo.domain.Evaluation" column="employee_id">
-            <result property="evaluationContent" column="evaluation_content"></result>
-            <result property="evaluationTime" column="evaluation_time"></result>
-            <result property="evaluationLevel" column="evaluation_level"></result>
-            <result property="certificate" column="certificate"></result>
-            <result property="departmentLevel" column="department_level_remark"></result>
-        </collection>
-    </resultMap>
-    <select id="findEED" resultMap="resultEED" parameterType="int">
-        select * from employee u,department d,evaluation e where u.department_id=d.id and u.id=e.employee_id and u.id=#{id}
+
+    <!--多重左连接，返回的是员工个人资料和考核信息-->
+    <select id="getEmployeeAndEvaluation" resultType="java.util.Map" parameterType="int">
+        select * from employee e left join evaluation e2 on e.id = e2.employee_id left join department d on e.department_id = d.id where e.id=#{id}
     </select>
 </mapper>

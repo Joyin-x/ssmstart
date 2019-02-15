@@ -6,10 +6,12 @@ import com.demo.domain.Employee;
 import com.demo.domain.Evaluation;
 import com.demo.domain.department.DepartmentAndEmployee;
 import com.demo.domain.employee.EmployeeVo;
+import com.demo.domain.evaluation.EmployeeAndEvaluation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AllService {
@@ -68,11 +70,10 @@ public class AllService {
 
 
     /**
-     * 根据id查询员工能力评估信息
+     * 根据id查询员工个人资料和能力评估信息
      * */
-    public List<Evaluation> getEmployeeEvaluation(int id){
-        return allMapper.getEmployeeEvaluation(id);
-
+    public Map<String,Object> getEmployeeAndEvaluation(int id){
+        return allMapper.getEmployeeAndEvaluation(id);
     }
 
     /**
@@ -84,10 +85,6 @@ public class AllService {
     public List<DepartmentAndEmployee> getDepartmentEmployeeAll(){
         return allMapper.getDepartmentEmployeeAll();
     }
-    /**
-     * 返回某员工的所有信息（部门，能力评估）
-     * */
 
-    public List<Employee> findEED(int id){return allMapper.findEED(id);}
 
 }

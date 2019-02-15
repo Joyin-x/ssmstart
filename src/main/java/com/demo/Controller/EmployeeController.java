@@ -4,16 +4,17 @@ import com.alibaba.druid.util.StringUtils;
 import com.demo.domain.Employee;
 import com.demo.domain.PageUtil;
 import com.demo.domain.employee.EmployeeVo;
+import com.demo.domain.evaluation.EmployeeAndEvaluation;
 import com.demo.service.AllService;
+import com.demo.util.ResponseCode;
 import com.demo.util.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -74,7 +75,7 @@ public class EmployeeController {
         List<Employee> employees = service.findAnyEmployee(index);
         pageUtil.setPageIndex(pageIndex);
         pageUtil.setPageNumber(number);
-        pageUtil.setPageSize(pageSize);//13/4=3...1
+        pageUtil.setPageSize(pageSize);
         pageUtil.setPageCount((int) Math.ceil((double) (pageUtil.getPageNumber() / pageUtil.getPageSize())) + 1);
         index = (pageIndex - 1) * pageSize;
         list = service.findAnyEmployee(index);
@@ -103,15 +104,14 @@ public class EmployeeController {
     /**
      * 根据员工id返回某员工的所有信息（部门，能力评估）
      */
-    @RequestMapping(value = "/findEED", method = RequestMethod.POST)
+    @RequestMapping(value = "/getEmployeeEvaluation", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<List<Employee>> findEED(int id) {
-        List<Employee> employees = service.findEED(id);
-        if (employees.size() > 0) {
-            return ServerResponse.createBySuccess("查询成功", employees);
-        } else {
-            return ServerResponse.createByError("没有该员工信息");
-        }
+    public ServerResponse<Map<String,Object>> getEmployeeAndEvaluation(int id) {
+        ServerResponse response = new ServerResponse();
+        Map<String,Object> employeeAndEvaluation = service.getEmployeeAndEvaluation(id);
+        response.setData(employeeAndEvaluation);
+        response.setStatus(ResponseCode.SUCCESS);
+        return response;
     }
 
 

@@ -5,9 +5,11 @@ import com.demo.domain.Employee;
 import com.demo.domain.Evaluation;
 import com.demo.domain.department.DepartmentAndEmployee;
 import com.demo.domain.employee.EmployeeVo;
+import com.demo.domain.evaluation.EmployeeAndEvaluation;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface AllMapper {
@@ -42,9 +44,9 @@ public interface AllMapper {
 
     /**
      *
-     * 根据员工id查询能力评估信息
+     * 查询某个员工的个人信息和能力评估信息
      * */
-    List<Evaluation> getEmployeeEvaluation(int id);
+    Map<String,Object> getEmployeeAndEvaluation(int id);
 
     /**
      * 根据部门id查询部门所有员工信息*/

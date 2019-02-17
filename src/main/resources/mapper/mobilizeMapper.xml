@@ -10,4 +10,17 @@
     <select id="getAllMobilize" resultType="MobilizeRecord">
         select e.name,m.* from employee e,mobilize m where e.id=m.employee_id ORDER BY m.transfer_date DESC
     </select>
+
+
+    <!--根据员工id返回工作调动记录-->
+    <select id="getMobilizeWithId" resultType="MobilizeRecord" parameterType="int">
+        select e.name,m.* from employee e,mobilize m where e.id=m.employee_id and m.employee_id=#{id} ORDER BY m.transfer_date DESC
+    </select>
+
+
+    <!--返回工作调动的记录数和员工姓名id-->
+    <select id="getMobilizeWithName" resultType="java.util.Map">
+        select e.name,m.employee_id,count(m.employee_id) as count from mobilize m left join employee e on m.employee_id=e.id
+        GROUP BY(m.employee_id) HAVING count(m.employee_id)>0
+    </select>
 </mapper>

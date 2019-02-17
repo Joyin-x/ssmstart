@@ -100,4 +100,5 @@
     <select id="getEmployeeAndEvaluation" resultType="java.util.Map" parameterType="int">
         select * from employee e left join evaluation e2 on e.id = e2.employee_id left join department d on e.department_id = d.id where e.id=#{id}
     </select>
+
 </mapper>

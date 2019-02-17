@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wwx
@@ -22,4 +23,12 @@ public class MobilizeService {
      * */
     public List<MobilizeRecord> getAllMobilize(){return mapper.getAllMobilize();}
 
+    /**
+     * 返回工作调动记录表中的员工岗位记录姓名和id
+     * */
+    public List<Map<String,Object>> getMobilizeWithName(){return mapper.getMobilizeWithName();}
+
+    /**
+     * 根据员工id返回该员工的工作变动记录*/
+    public List<Map<String,Object>> getMobilizeWithId(int id){return mapper.getMobilizeWithId(id);}
 }

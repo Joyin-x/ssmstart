@@ -2,10 +2,8 @@ package com.demo.dao;
 
 import com.demo.domain.Department;
 import com.demo.domain.Employee;
-import com.demo.domain.Evaluation;
 import com.demo.domain.department.DepartmentAndEmployee;
 import com.demo.domain.employee.EmployeeVo;
-import com.demo.domain.evaluation.EmployeeAndEvaluation;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

@@ -31,7 +31,7 @@
     </insert>
 
     <!--返回任务指派列表-->
-    <select id="getMobilizeWithName" resultType="java.util.Map">
+    <select id="getTaskList" resultType="java.util.Map">
         select  t.*,e.name from task t,employee e where e.id=t.employee_id
     </select>
 </mapper>

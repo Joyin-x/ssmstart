@@ -1,7 +1,9 @@
 package com.demo.service.mobilize;
 
 import com.demo.dao.mobilizeMapper;
+import com.demo.domain.Task;
 import com.demo.domain.mobilize.MobilizeRecord;
+import com.demo.util.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,4 +33,13 @@ public class MobilizeService {
     /**
      * 根据员工id返回该员工的工作变动记录*/
     public List<Map<String,Object>> getMobilizeWithId(int id){return mapper.getMobilizeWithId(id);}
+
+    /**
+     * 给员工指派任务*/
+    public int addTask(Task task){return mapper.addTask(task);}
+
+    /**
+     * 获取任务指派记录
+     * */
+    public List<Map<String,Object>> getTaskList(){return mapper.getTaskList();}
 }

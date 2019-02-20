@@ -23,4 +23,15 @@
         select e.name,m.employee_id,count(m.employee_id) as count from mobilize m left join employee e on m.employee_id=e.id
         GROUP BY(m.employee_id) HAVING count(m.employee_id)>0
     </select>
+
+    <!--为员工指派任务-->
+    <insert id="addTask" parameterType="Task">
+        insert into task(employee_id,work_content,status,start_time,end_time)
+        values(#{employeeId},#{workContent},#{status},#{startTime},#{endTime})
+    </insert>
+
+    <!--返回任务指派列表-->
+    <select id="getMobilizeWithName" resultType="java.util.Map">
+        select  t.*,e.name from task t,employee e where e.id=t.employee_id
+    </select>
 </mapper>

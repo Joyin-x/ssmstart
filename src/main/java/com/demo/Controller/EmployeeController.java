@@ -5,7 +5,6 @@ import com.demo.domain.Employee;
 import com.demo.domain.PageUtil;
 import com.demo.domain.UserLogin;
 import com.demo.domain.employee.EmployeeVo;
-import com.demo.domain.evaluation.EmployeeAndEvaluation;
 import com.demo.service.AllService;
 import com.demo.util.ResponseCode;
 import com.demo.util.ServerResponse;
@@ -25,6 +24,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/employee")
+@ResponseBody
 public class EmployeeController {
 
     @Autowired
@@ -35,7 +35,6 @@ public class EmployeeController {
      * 返回图片姓名和能力等级信息（图片暂时没返回）
      */
     @RequestMapping(value = "/employeeLevel")
-    @ResponseBody
     public ServerResponse<List<Employee>> findEmployeeLevel() {
         List<Employee> employeesLevel = service.findEmployeeLevel();
         if (employeesLevel.size() > 0) {
@@ -49,7 +48,6 @@ public class EmployeeController {
      * 返回企业所有员工信息
      */
     @RequestMapping("/list")
-    @ResponseBody
     public ServerResponse<List<Employee>> findAllEmployee() {
         List<Employee> employees = service.findAllEmployee();
         if (employees.size() > 0) {
@@ -63,7 +61,6 @@ public class EmployeeController {
      * 返回指定页数的五条员工信息
      */
     @RequestMapping(value = "/anyList", method = RequestMethod.POST)
-    @ResponseBody
     public ServerResponse<List<Employee>> findAnyEmployee(int index) {
         int pageIndex = 1;//初始当前页
         int pageSize = 4;
@@ -92,7 +89,6 @@ public class EmployeeController {
      * 根据Id查询员工信息
      */
     @RequestMapping(value = "/getOne", method = RequestMethod.POST)
-    @ResponseBody
     public ServerResponse<List<Employee>> getOne(int id) {
         List<Employee> employees = service.queryEmployee(id);
         if (employees.size() > 0) {
@@ -106,7 +102,6 @@ public class EmployeeController {
      * 根据员工id返回某员工的所有信息（部门，能力评估）
      */
     @RequestMapping(value = "/getEmployeeEvaluation", method = RequestMethod.POST)
-    @ResponseBody
     public ServerResponse<Map<String,Object>> getEmployeeAndEvaluation(int id) {
         ServerResponse response = new ServerResponse();
         Map<String,Object> employeeAndEvaluation = service.getEmployeeAndEvaluation(id);
@@ -120,7 +115,6 @@ public class EmployeeController {
      * 增加员工信息
      */
     @RequestMapping(value = "/addEmployee", method = RequestMethod.POST)
-    @ResponseBody
     public ServerResponse addEmployee(@RequestBody EmployeeVo employee) {
         if (StringUtils.isEmpty(employee.getName())) {
             return ServerResponse.createByError("员工姓名不能为空！");

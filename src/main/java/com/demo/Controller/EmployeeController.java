@@ -3,6 +3,7 @@ package com.demo.Controller;
 import com.alibaba.druid.util.StringUtils;
 import com.demo.domain.Employee;
 import com.demo.domain.PageUtil;
+import com.demo.domain.UserLogin;
 import com.demo.domain.employee.EmployeeVo;
 import com.demo.domain.evaluation.EmployeeAndEvaluation;
 import com.demo.service.AllService;
@@ -142,5 +143,12 @@ public class EmployeeController {
         } else {
             return ServerResponse.createByError("添加失败");
         }
+    }
+
+    @RequestMapping(value = "/public/user/login", method = RequestMethod.POST)
+    public ServerResponse userLogin(@RequestBody UserLogin userLogin) {
+        ServerResponse response=new ServerResponse();
+        System.out.println(userLogin.getPassword());
+        return response;
     }
 }

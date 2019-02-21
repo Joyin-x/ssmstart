@@ -935,50 +935,51 @@
     <table id="239" parent="8" name="mobilize"/>
     <table id="240" parent="8" name="notice"/>
     <table id="241" parent="8" name="rewards"/>
-    <table id="242" parent="8" name="wage"/>
-    <column id="243" parent="234" name="id">
+    <table id="242" parent="8" name="task"/>
+    <table id="243" parent="8" name="wage"/>
+    <column id="244" parent="234" name="id">
       <Position>1</Position>
       <Comment>考勤表ID</Comment>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="244" parent="234" name="employee_id">
+    <column id="245" parent="234" name="employee_id">
       <Position>2</Position>
       <Comment>员工ID</Comment>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="245" parent="234" name="office_time">
+    <column id="246" parent="234" name="office_time">
       <Position>3</Position>
       <Comment>上班考勤时间</Comment>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="246" parent="234" name="after_work">
+    <column id="247" parent="234" name="after_work">
       <Position>4</Position>
       <Comment>下班考勤时间</Comment>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="247" parent="234" name="foreign_attendance-employee">
+    <index id="248" parent="234" name="foreign_attendance-employee">
       <ColNames>employee_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="248" parent="234" name="PRIMARY">
+    <key id="249" parent="234" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="249" parent="234" name="foreign_attendance-employee">
+    <foreign-key id="250" parent="234" name="foreign_attendance-employee">
       <ColNames>employee_id</ColNames>
       <RefSchemaName>staff_management</RefSchemaName>
       <RefTableName>employee</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="250" parent="235" name="id">
+    <column id="251" parent="235" name="id">
       <Position>1</Position>
       <Comment>部门ID</Comment>
       <DataType>int(3)|0s</DataType>
@@ -986,38 +987,38 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="251" parent="235" name="department_name">
+    <column id="252" parent="235" name="department_name">
       <Position>2</Position>
       <Comment>部门名称</Comment>
       <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="252" parent="235" name="principal">
+    <column id="253" parent="235" name="principal">
       <Position>3</Position>
       <Comment>部门负责人</Comment>
       <DataType>varchar(8)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="253" parent="235" name="established_time">
+    <column id="254" parent="235" name="established_time">
       <Position>4</Position>
       <Comment>成立时间</Comment>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="254" parent="235" name="description">
+    <column id="255" parent="235" name="description">
       <Position>5</Position>
       <Comment>部门描述</Comment>
       <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="255" parent="235" name="PRIMARY">
+    <key id="256" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="256" parent="236" name="id">
+    <column id="257" parent="236" name="id">
       <Position>1</Position>
       <Comment>员工id</Comment>
       <DataType>int(3)|0s</DataType>
@@ -1025,178 +1026,159 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="257" parent="236" name="name">
+    <column id="258" parent="236" name="name">
       <Position>2</Position>
       <Comment>员工姓名</Comment>
       <DataType>varchar(6)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="258" parent="236" name="sex">
+    <column id="259" parent="236" name="sex">
       <Position>3</Position>
       <Comment>员工性别(0男1女 )</Comment>
       <DataType>int(1)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="259" parent="236" name="birthday">
+    <column id="260" parent="236" name="birthday">
       <Position>4</Position>
       <Comment>出生日期</Comment>
-      <DataType>datetime|0s</DataType>
+      <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="260" parent="236" name="native_place">
+    <column id="261" parent="236" name="native_place">
       <Position>5</Position>
       <Comment>籍贯</Comment>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="261" parent="236" name="address">
+    <column id="262" parent="236" name="address">
       <Position>6</Position>
       <Comment>地址</Comment>
       <DataType>varchar(30)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="262" parent="236" name="phone">
+    <column id="263" parent="236" name="phone">
       <Position>7</Position>
       <Comment>电话</Comment>
       <DataType>varchar(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="263" parent="236" name="department_id">
+    <column id="264" parent="236" name="department_id">
       <Position>8</Position>
       <Comment>所在部门编号</Comment>
       <DataType>int(3)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="264" parent="236" name="position">
+    <column id="265" parent="236" name="position">
       <Position>9</Position>
       <Comment>职务</Comment>
       <DataType>varchar(15)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="265" parent="236" name="education">
+    <column id="266" parent="236" name="education">
       <Position>10</Position>
       <Comment>学历</Comment>
       <DataType>varchar(4)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="266" parent="236" name="school">
+    <column id="267" parent="236" name="school">
       <Position>11</Position>
       <Comment>毕业学校</Comment>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="267" parent="236" name="email">
+    <column id="268" parent="236" name="email">
       <Position>12</Position>
       <Comment>邮箱</Comment>
-      <DataType>varchar(20)|0s</DataType>
+      <DataType>varchar(30)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="268" parent="236" name="picture">
+    <column id="269" parent="236" name="picture">
       <Position>13</Position>
       <Comment>照片</Comment>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="269" parent="236" name="professional">
+    <column id="270" parent="236" name="professional">
       <Position>14</Position>
       <Comment>职称</Comment>
       <DataType>varchar(10)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="270" parent="236" name="remark">
+    <column id="271" parent="236" name="remark">
       <Position>15</Position>
       <Comment>备注信息</Comment>
       <DataType>varchar(30)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="271" parent="236" name="foreign_department_id">
+    <index id="272" parent="236" name="foreign_department_id">
       <ColNames>department_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="272" parent="236" name="PRIMARY">
+    <key id="273" parent="236" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="273" parent="236" name="foreign_department_id">
+    <foreign-key id="274" parent="236" name="foreign_department_id">
       <ColNames>department_id</ColNames>
       <RefSchemaName>staff_management</RefSchemaName>
       <RefTableName>department</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="274" parent="237" name="id">
-      <Position>1</Position>
-      <Comment>评估编号</Comment>
-      <DataType>int(3)|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
     <column id="275" parent="237" name="employee_id">
-      <Position>2</Position>
+      <Position>1</Position>
       <Comment>员工ID</Comment>
       <DataType>int(3)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="276" parent="237" name="evaluation_content">
-      <Position>3</Position>
+      <Position>2</Position>
       <Comment>评估内容</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="277" parent="237" name="evaluation_time">
-      <Position>4</Position>
+      <Position>3</Position>
       <Comment>评估时间</Comment>
-      <DataType>datetime|0s</DataType>
+      <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="278" parent="237" name="evaluation_level">
-      <Position>5</Position>
+      <Position>4</Position>
       <Comment>能力评估等级</Comment>
       <DataType>varchar(10)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="279" parent="237" name=" certificate">
-      <Position>6</Position>
+      <Position>5</Position>
       <Comment>证书</Comment>
       <DataType>varchar(10)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="280" parent="237" name="remark">
-      <Position>7</Position>
-      <Comment>备注信息</Comment>
-      <DataType>varchar(30)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="281" parent="237" name="foreign_employee_id">
+    <index id="280" parent="237" name="foreign_employee_id">
       <ColNames>employee_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="282" parent="237" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="283" parent="237" name="foreign_employee_id">
+    <foreign-key id="281" parent="237" name="foreign_employee_id">
       <ColNames>employee_id</ColNames>
       <RefSchemaName>staff_management</RefSchemaName>
       <RefTableName>employee</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="284" parent="238" name="img">
+    <column id="282" parent="238" name="img">
       <Position>1</Position>
       <Comment>测试图片上传表</Comment>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="285" parent="239" name="id">
+    <column id="283" parent="239" name="id">
       <Position>1</Position>
       <Comment>职位表ID</Comment>
       <DataType>int(11)|0s</DataType>
@@ -1204,84 +1186,85 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="286" parent="239" name="employee_id">
+    <column id="284" parent="239" name="employee_id">
       <Position>2</Position>
+      <Comment>员工id</Comment>
       <DataType>int(3)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="287" parent="239" name="original_position">
+    <column id="285" parent="239" name="original_position">
       <Position>3</Position>
       <Comment>原职务</Comment>
       <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="288" parent="239" name="original_department_id">
+    <column id="286" parent="239" name="original_department_id">
       <Position>4</Position>
       <Comment>原部门id</Comment>
       <DataType>int(3)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="289" parent="239" name="now_position">
+    <column id="287" parent="239" name="now_position">
       <Position>5</Position>
       <Comment>现职务</Comment>
       <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="290" parent="239" name="now_department_id">
+    <column id="288" parent="239" name="now_department_id">
       <Position>6</Position>
       <Comment>现部门id</Comment>
       <DataType>int(3)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="291" parent="239" name="transfer_date">
+    <column id="289" parent="239" name="transfer_date">
       <Position>7</Position>
       <Comment>调动日期</Comment>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="292" parent="239" name="transfer_reason">
+    <column id="290" parent="239" name="transfer_reason">
       <Position>8</Position>
       <Comment>调动原因</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="293" parent="239" name="approver">
+    <column id="291" parent="239" name="approver">
       <Position>9</Position>
       <Comment>审批人</Comment>
       <DataType>varchar(6)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="294" parent="239" name="mobilize_remark">
+    <column id="292" parent="239" name="mobilize_remark">
       <Position>10</Position>
       <Comment>备注信息</Comment>
       <DataType>varchar(30)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="295" parent="239" name="foreignkey_employee_id">
+    <index id="293" parent="239" name="foreignkey_employee_id">
       <ColNames>employee_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="296" parent="239" name="foreignkey_depatement_id">
+    <index id="294" parent="239" name="foreignkey_depatement_id">
       <ColNames>original_department_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="297" parent="239" name="foreignkey_department_id1">
+    <index id="295" parent="239" name="foreignkey_department_id1">
       <ColNames>now_department_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="298" parent="239" name="PRIMARY">
+    <key id="296" parent="239" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="299" parent="239" name="foreignkey_employee_id">
+    <foreign-key id="297" parent="239" name="foreignkey_employee_id">
       <ColNames>employee_id</ColNames>
       <RefSchemaName>staff_management</RefSchemaName>
       <RefTableName>employee</RefTableName>
@@ -1289,19 +1272,19 @@
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="300" parent="239" name="foreignkey_depatement_id">
+    <foreign-key id="298" parent="239" name="foreignkey_depatement_id">
       <ColNames>original_department_id</ColNames>
       <RefSchemaName>staff_management</RefSchemaName>
       <RefTableName>department</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="301" parent="239" name="foreignkey_department_id1">
+    <foreign-key id="299" parent="239" name="foreignkey_department_id1">
       <ColNames>now_department_id</ColNames>
       <RefSchemaName>staff_management</RefSchemaName>
       <RefTableName>department</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="302" parent="240" name="id">
+    <column id="300" parent="240" name="id">
       <Position>1</Position>
       <Comment>公告表id</Comment>
       <DataType>int(11)|0s</DataType>
@@ -1309,171 +1292,205 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="303" parent="240" name="employee_id">
+    <column id="301" parent="240" name="employee_id">
       <Position>2</Position>
       <Comment>员工Id</Comment>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="304" parent="240" name="header">
+    <column id="302" parent="240" name="header">
       <Position>3</Position>
       <Comment>公告标题</Comment>
       <DataType>varchar(30)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="305" parent="240" name="content">
+    <column id="303" parent="240" name="content">
       <Position>4</Position>
       <Comment>公告内容</Comment>
       <DataType>text|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="306" parent="240" name="notice_time">
+    <column id="304" parent="240" name="notice_time">
       <Position>5</Position>
       <Comment>发布时间</Comment>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="307" parent="240" name="foreigen_employee">
+    <index id="305" parent="240" name="foreigen_employee">
       <ColNames>employee_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="308" parent="240" name="PRIMARY">
+    <key id="306" parent="240" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="309" parent="240" name="foreigen_employee">
+    <foreign-key id="307" parent="240" name="foreigen_employee">
       <ColNames>employee_id</ColNames>
       <RefSchemaName>staff_management</RefSchemaName>
       <RefTableName>employee</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="310" parent="241" name="id">
+    <column id="308" parent="241" name="id">
       <Position>1</Position>
       <Comment>奖惩表ID</Comment>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="311" parent="241" name="employee_id">
+    <column id="309" parent="241" name="employee_id">
       <Position>2</Position>
       <Comment>员工ID</Comment>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="312" parent="241" name="rewards_date">
+    <column id="310" parent="241" name="rewards_date">
       <Position>3</Position>
       <Comment>奖惩日期</Comment>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="313" parent="241" name="rewards_reason">
+    <column id="311" parent="241" name="rewards_reason">
       <Position>4</Position>
       <Comment>奖惩原因</Comment>
       <DataType>varchar(40)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="314" parent="241" name="remark">
+    <column id="312" parent="241" name="remark">
       <Position>5</Position>
       <Comment>备注信息</Comment>
       <DataType>varchar(40)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="315" parent="241" name="foreign_rewards_employee">
+    <index id="313" parent="241" name="foreign_rewards_employee">
       <ColNames>employee_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="316" parent="241" name="PRIMARY">
+    <key id="314" parent="241" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="317" parent="241" name="foreign_rewards_employee">
+    <foreign-key id="315" parent="241" name="foreign_rewards_employee">
       <ColNames>employee_id</ColNames>
       <RefSchemaName>staff_management</RefSchemaName>
       <RefTableName>employee</RefTableName>
       <RefColNames>id</RefColNames>
       <OnUpdate>cascade</OnUpdate>
     </foreign-key>
-    <column id="318" parent="242" name="id">
+    <column id="316" parent="242" name="employee_id">
       <Position>1</Position>
-      <Comment>工资表id</Comment>
-      <DataType>int(11)|0s</DataType>
+      <Comment>员工id</Comment>
+      <DataType>int(3)|0s</DataType>
       <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="319" parent="242" name="employee_id">
+    <column id="317" parent="242" name="work_content">
       <Position>2</Position>
+      <Comment>工作内容</Comment>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="318" parent="242" name="status">
+      <Position>3</Position>
+      <Comment>状态</Comment>
+      <DataType>varchar(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="319" parent="242" name="start_time">
+      <Position>4</Position>
+      <Comment>开始时间</Comment>
+      <DataType>date|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="320" parent="242" name="end_time">
+      <Position>5</Position>
+      <Comment>截止时间</Comment>
+      <DataType>date|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="321" parent="242" name="foreign_key_employee_id">
+      <ColNames>employee_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <foreign-key id="322" parent="242" name="foreign_key_employee_id">
+      <ColNames>employee_id</ColNames>
+      <RefSchemaName>staff_management</RefSchemaName>
+      <RefTableName>employee</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="323" parent="243" name="employee_id">
+      <Position>1</Position>
       <Comment>员工id</Comment>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="320" parent="242" name="basic_salary">
-      <Position>3</Position>
+    <column id="324" parent="243" name="basic_salary">
+      <Position>2</Position>
       <Comment>底薪</Comment>
       <DataType>float(10,2 digit)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="321" parent="242" name="bonus">
-      <Position>4</Position>
+    <column id="325" parent="243" name="bonus">
+      <Position>3</Position>
       <Comment>奖金</Comment>
       <DataType>float(10,2 digit)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="322" parent="242" name="fine">
-      <Position>5</Position>
+    <column id="326" parent="243" name="fine">
+      <Position>4</Position>
       <Comment>罚款</Comment>
       <DataType>float(10,2 digit)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="323" parent="242" name="overtime_pay">
-      <Position>6</Position>
+    <column id="327" parent="243" name="overtime_pay">
+      <Position>5</Position>
       <Comment>加班费</Comment>
       <DataType>float(10,2 digit)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="324" parent="242" name="net_payroll">
-      <Position>7</Position>
+    <column id="328" parent="243" name="net_payroll">
+      <Position>6</Position>
       <Comment>实发工资</Comment>
       <DataType>float|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="325" parent="242" name="start_time">
-      <Position>8</Position>
+    <column id="329" parent="243" name="start_time">
+      <Position>7</Position>
       <Comment>工资计算起止时间</Comment>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="326" parent="242" name="end_time">
-      <Position>9</Position>
+    <column id="330" parent="243" name="end_time">
+      <Position>8</Position>
       <Comment>工资计算截止时间</Comment>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="327" parent="242" name="pay_date">
-      <Position>10</Position>
+    <column id="331" parent="243" name="pay_date">
+      <Position>9</Position>
       <Comment>发薪水日期</Comment>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="328" parent="242" name="foreign_employeeId">
+    <index id="332" parent="243" name="foreign_employeeId">
       <ColNames>employee_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="329" parent="242" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="330" parent="242" name="foreign_employeeId">
+    <foreign-key id="333" parent="243" name="foreign_employeeId">
       <ColNames>employee_id</ColNames>
       <RefSchemaName>staff_management</RefSchemaName>
       <RefTableName>employee</RefTableName>

@@ -2,6 +2,7 @@ package com.demo.Controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +24,7 @@ public class imageController {
 
 
     @ResponseBody
-    @RequestMapping("/upload")
+    @PostMapping("/upload")
     public String upload(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
         System.out.println("执行upload"+file);
         request.setCharacterEncoding("UTF-8");

@@ -3,10 +3,9 @@ package com.demo.service;
 import com.demo.dao.AllMapper;
 import com.demo.domain.Department;
 import com.demo.domain.Employee;
-import com.demo.domain.Evaluation;
+import com.demo.domain.UserLogin;
 import com.demo.domain.department.DepartmentAndEmployee;
 import com.demo.domain.employee.EmployeeVo;
-import com.demo.domain.evaluation.EmployeeAndEvaluation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,8 +47,7 @@ public class AllService {
      * 增加新员工，返回信息
      * */
     public int insertEmployee(EmployeeVo employee){
-        int result=allMapper.insertEmployee(employee);
-        return result;
+        return allMapper.insertEmployee(employee);
     }
 
     public List<Employee> findEmployeeLevel(){return allMapper.findEmployeeLevel();}
@@ -86,5 +84,18 @@ public class AllService {
         return allMapper.getDepartmentEmployeeAll();
     }
 
+    /**
+     * 查找用户是本公司员工
+     * */
+    public EmployeeVo checkUser(String phone){return allMapper.checkUser(phone);}
 
+    /**
+     * 查找用户是否已注册
+     * */
+    public int checkRegister(int id){return allMapper.checkRegister(id);}
+
+    /**
+     * 用户注册
+     * */
+    public int addUser(UserLogin userLogin){return allMapper.addUser(userLogin);}
 }

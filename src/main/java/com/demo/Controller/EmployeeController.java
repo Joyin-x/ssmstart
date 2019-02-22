@@ -139,10 +139,17 @@ public class EmployeeController {
         }
     }
 
-    @RequestMapping(value = "/public/user/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ServerResponse userLogin(@RequestBody UserLogin userLogin) {
         ServerResponse response=new ServerResponse();
-        System.out.println(userLogin.getPassword());
+        if(userLogin.getPhone().isEmpty()){
+            response.setMsg("电话号码不能为空！");
+            return response;
+        }
+        //判断员工表中是否有该电话号码
+        List<EmployeeVo> list= (List<EmployeeVo>) service.checkUser(userLogin.getPhone());
+
+        System.out.println(list);
         return response;
     }
 }

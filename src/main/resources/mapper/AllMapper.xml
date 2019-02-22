@@ -100,4 +100,16 @@
         select * from employee e left join evaluation e2 on e.id = e2.employee_id left join department d on e.department_id = d.id where e.id=#{id}
     </select>
 
+    <!--查找用户是否是本公司员工-->
+    <select id="checkUser" resultType="EmployeeVo">
+        select * from employee where phone=#{phone}
+    </select>
+    <!--查找该用户是否已注册-->
+    <select id="checkRegister" resultType="int">
+        select userId from user where phone=#{pone}
+    </select>
+    <!--用户注册-->
+    <insert id="addUser">
+      insert into user(userId, phone, password) VALUES (#{userId},#{phone},#{password})
+    </insert>
 </mapper>

@@ -2,6 +2,7 @@ package com.demo.dao;
 
 import com.demo.domain.Department;
 import com.demo.domain.Employee;
+import com.demo.domain.UserLogin;
 import com.demo.domain.department.DepartmentAndEmployee;
 import com.demo.domain.employee.EmployeeVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -50,14 +51,24 @@ public interface AllMapper {
      * 根据部门id查询部门所有员工信息*/
     List<DepartmentAndEmployee> getDepartmentEmployee(int id);
     List<DepartmentAndEmployee> getDepartmentEmployeeAll();
-    /**
-     * 返回某员工的所有信息（部门，能力评估）
-     * */
-
-    List<Employee> findEED(int id);
 
     /**
      * 增加新员工，返回信息
      * */
     int insertEmployee(EmployeeVo employee);
+
+    /**
+     * 查找用户是否是本公司员工
+     * */
+    EmployeeVo checkUser(String phone);
+
+    /**
+     * 查找用户是否已注册
+     * */
+    int checkRegister(int id);
+
+    /**
+     * 用户注册
+     * */
+    int addUser(UserLogin userLogin);
 }

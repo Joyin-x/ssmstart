@@ -5,16 +5,24 @@ package com.demo.domain;
  * @date 2019/2/21 18:16
  **/
 public class UserLogin {
-    private String userId;
+    private int userId;
+    private String phone;
     private String password;
-    private String salt;
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getPassword() {
@@ -23,13 +31,5 @@ public class UserLogin {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
     }
 }

@@ -138,18 +138,64 @@ public class EmployeeController {
             return ServerResponse.createByError("添加失败");
         }
     }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ServerResponse userLogin(@RequestBody UserLogin userLogin) {
+    /**
+     * 用户注册
+    * */
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ServerResponse userRegister(@RequestBody UserLogin userLogin) {
         ServerResponse response=new ServerResponse();
         if(userLogin.getPhone().isEmpty()){
             response.setMsg("电话号码不能为空！");
             return response;
         }
         //判断员工表中是否有该电话号码
-        List<EmployeeVo> list= (List<EmployeeVo>) service.checkUser(userLogin.getPhone());
+        Integer checkUser=service.checkUser(userLogin.getPhone());
+        //为空则表明该员工不是本公司员工，不能让他注册
+        if(checkUser!=null){
+            //判断是否已经注册，避免重复注册
+            Integer checkRegister=service.checkRegister(userLogin.getPhone());
+            //为空则表示该号码还未注册
+            if(checkRegister!=null){
+                response.setMsg("该号码已注册，请直接登录！");
+                return response;
+            }else{
+                userLogin.setUserId(checkUser);
+                int result=service.addUser(userLogin);
+                System.out.println(result);
+                if(result>0){
+                    response.setStatus(ResponseCode.SUCCESS);
+                    response.setMsg("注册成功");
+                }
+                return response;
+            }
+        }
+        else{
+            response.setMsg("该用户不是本公司职工！");
+            return response;
+        }
+    }
 
-        System.out.println(list);
-        return response;
+    /**
+     * 用户登录
+     * */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ServerResponse userLogin(@RequestBody UserLogin userLogin) {
+        ServerResponse response=new ServerResponse();
+        Integer checkRegister=service.checkRegister(userLogin.getPhone());
+        //为空则表示该号码还未注册,不能登录
+        if(checkRegister==null){
+            response.setMsg("该号码未注册，请先注册！");
+            return response;
+        }else{
+            String password=service.getPassword(userLogin.getPhone());
+            if(password.equals(userLogin.getPassword())){
+                Map<String,Object> loginUser=service.getLoginInfo(checkRegister);
+                response.setData(loginUser);
+                response.setStatus(ResponseCode.SUCCESS);
+            }else{
+                response.setMsg("密码错误！");
+            }
+            return response;
+        }
     }
 }

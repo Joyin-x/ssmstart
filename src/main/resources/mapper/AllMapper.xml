@@ -101,15 +101,25 @@
     </select>
 
     <!--查找用户是否是本公司员工-->
-    <select id="checkUser" resultType="EmployeeVo">
-        select * from employee where phone=#{phone}
+    <select id="checkUser" resultType="Integer">
+        select id from employee where phone=#{phone}
     </select>
     <!--查找该用户是否已注册-->
-    <select id="checkRegister" resultType="int">
-        select userId from user where phone=#{pone}
+    <select id="checkRegister" resultType="Integer" >
+        select userId from user where phone=#{phone}
     </select>
     <!--用户注册-->
-    <insert id="addUser">
+    <insert id="addUser" parameterType="UserLogin">
       insert into user(userId, phone, password) VALUES (#{userId},#{phone},#{password})
     </insert>
+
+    <!--验证用户登录-->
+    <select id="getPassword" resultType="String">
+        select password from user where phone=#{phone}
+    </select>
+
+    <!--登录成功后返回该员工个人信息（id,姓名，电话）-->
+    <select id="getLoginInfo" resultType="java.util.Map" parameterType="int">
+        select e.id,e.name,e.phone from employee e where e.id=#{id}
+    </select>
 </mapper>

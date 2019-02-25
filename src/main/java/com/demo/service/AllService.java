@@ -87,15 +87,26 @@ public class AllService {
     /**
      * 查找用户是本公司员工
      * */
-    public EmployeeVo checkUser(String phone){return allMapper.checkUser(phone);}
+    public Integer checkUser(String phone){return allMapper.checkUser(phone);}
 
     /**
      * 查找用户是否已注册
      * */
-    public int checkRegister(int id){return allMapper.checkRegister(id);}
+    public Integer checkRegister(String phone){return allMapper.checkRegister(phone);}
 
     /**
      * 用户注册
      * */
     public int addUser(UserLogin userLogin){return allMapper.addUser(userLogin);}
+
+
+    /**
+     * 验证用户登录
+     * */
+    public String getPassword(String phone){return allMapper.getPassword(phone);}
+
+    /**
+     * 登录成功后返回员工个人信息（id,姓名,电话号码)
+     * */
+    public Map<String,Object> getLoginInfo(int id){return allMapper.getLoginInfo(id);}
 }

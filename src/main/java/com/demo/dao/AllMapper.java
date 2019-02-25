@@ -60,15 +60,25 @@ public interface AllMapper {
     /**
      * 查找用户是否是本公司员工
      * */
-    EmployeeVo checkUser(String phone);
+    Integer checkUser(String phone);
 
     /**
      * 查找用户是否已注册
      * */
-    int checkRegister(int id);
+    Integer checkRegister(String phone);
 
     /**
      * 用户注册
      * */
     int addUser(UserLogin userLogin);
+
+    /**
+     * 验证用户登录
+     * */
+    String getPassword(String phone);
+
+    /**
+     * 登录成功后返回员工个人信息（id,姓名,电话号码)
+     * */
+    Map<String,Object> getLoginInfo(int id);
 }

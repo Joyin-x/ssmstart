@@ -1,10 +1,10 @@
 package com.demo.Controller;
 
-import com.demo.domain.Department;
-import com.demo.domain.Mobilize;
+import com.demo.domain.department.Department;
+import com.demo.domain.mobilize.Mobilize;
 import com.demo.domain.department.DepartmentAndEmployee;
 import com.demo.domain.department.DepartmentAndId;
-import com.demo.service.AllService;
+import com.demo.service.employee.AllService;
 import com.demo.service.department.departmentService;
 import com.demo.util.ResponseCode;
 import com.demo.util.ServerResponse;

@@ -1,7 +1,7 @@
 package com.demo.dao;
 
-import com.demo.domain.Department;
-import com.demo.domain.Mobilize;
+import com.demo.domain.department.Department;
+import com.demo.domain.mobilize.Mobilize;
 import com.demo.domain.department.DepartmentAndEmployee;
 import com.demo.domain.department.DepartmentAndId;
 import org.apache.ibatis.annotations.Mapper;

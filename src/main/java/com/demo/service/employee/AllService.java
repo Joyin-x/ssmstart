@@ -1,9 +1,9 @@
-package com.demo.service;
+package com.demo.service.employee;
 
 import com.demo.dao.AllMapper;
-import com.demo.domain.Department;
-import com.demo.domain.Employee;
-import com.demo.domain.UserLogin;
+import com.demo.domain.department.Department;
+import com.demo.domain.employee.Employee;
+import com.demo.domain.employee.UserLogin;
 import com.demo.domain.department.DepartmentAndEmployee;
 import com.demo.domain.employee.EmployeeVo;
 import org.springframework.beans.factory.annotation.Autowired;

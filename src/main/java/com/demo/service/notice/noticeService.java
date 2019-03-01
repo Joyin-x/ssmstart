@@ -2,7 +2,7 @@ package com.demo.service.notice;
 
 import com.demo.dao.noticeMapper;
 import com.demo.domain.Image;
-import com.demo.domain.Notice;
+import com.demo.domain.notice.Notice;
 import com.demo.domain.notice.noticeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

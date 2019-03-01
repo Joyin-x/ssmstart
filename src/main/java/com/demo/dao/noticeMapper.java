@@ -1,7 +1,7 @@
 package com.demo.dao;
 
 import com.demo.domain.Image;
-import com.demo.domain.Notice;
+import com.demo.domain.notice.Notice;
 import com.demo.domain.notice.noticeVo;
 import org.apache.ibatis.annotations.Mapper;
 

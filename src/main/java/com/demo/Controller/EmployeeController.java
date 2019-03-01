@@ -1,11 +1,11 @@
 package com.demo.Controller;
 
 import com.alibaba.druid.util.StringUtils;
-import com.demo.domain.Employee;
+import com.demo.domain.employee.Employee;
 import com.demo.domain.PageUtil;
-import com.demo.domain.UserLogin;
+import com.demo.domain.employee.UserLogin;
 import com.demo.domain.employee.EmployeeVo;
-import com.demo.service.AllService;
+import com.demo.service.employee.AllService;
 import com.demo.util.ResponseCode;
 import com.demo.util.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;

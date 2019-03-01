@@ -1,7 +1,7 @@
 package com.demo.service.mobilize;
 
 import com.demo.dao.mobilizeMapper;
-import com.demo.domain.Task;
+import com.demo.domain.task.Task;
 import com.demo.domain.mobilize.MobilizeRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

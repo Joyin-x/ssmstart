@@ -1,5 +1,7 @@
-package com.demo.domain;
+package com.demo.domain.employee;
 
+import com.demo.domain.evaluation.Evaluation;
+import com.demo.domain.department.Department;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Date;

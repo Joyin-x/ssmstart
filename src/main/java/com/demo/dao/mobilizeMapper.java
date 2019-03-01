@@ -1,8 +1,7 @@
 package com.demo.dao;
 
-import com.demo.domain.Task;
+import com.demo.domain.task.Task;
 import com.demo.domain.mobilize.MobilizeRecord;
-import com.demo.util.ServerResponse;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.demo.Controller;
 
-import com.demo.domain.Notice;
+import com.demo.domain.notice.Notice;
 import com.demo.domain.notice.noticeVo;
 import com.demo.service.notice.noticeService;
 import com.demo.util.ResponseCode;

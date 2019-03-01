@@ -1,8 +1,8 @@
 package com.demo.dao;
 
-import com.demo.domain.Department;
-import com.demo.domain.Employee;
-import com.demo.domain.UserLogin;
+import com.demo.domain.department.Department;
+import com.demo.domain.employee.Employee;
+import com.demo.domain.employee.UserLogin;
 import com.demo.domain.department.DepartmentAndEmployee;
 import com.demo.domain.employee.EmployeeVo;
 import org.apache.ibatis.annotations.Mapper;

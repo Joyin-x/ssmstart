@@ -1,6 +1,6 @@
 package com.demo.Controller;
 
-import com.demo.domain.Task;
+import com.demo.domain.task.Task;
 import com.demo.domain.mobilize.MobilizeRecord;
 import com.demo.service.mobilize.MobilizeService;
 import com.demo.util.ResponseCode;

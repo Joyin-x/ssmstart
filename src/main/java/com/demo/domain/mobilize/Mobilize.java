@@ -1,4 +1,4 @@
-package com.demo.domain;
+package com.demo.domain.mobilize;
 
 /**
  * @author wwx

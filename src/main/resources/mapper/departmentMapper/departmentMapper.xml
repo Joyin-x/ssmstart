@@ -30,7 +30,7 @@
     <!--根据部门id查询该部门员工信息-->
     <resultMap id="resultDepartmentEmployee" type="DepartmentAndEmployee">
         <result property="departmentName" column="department_name"></result>
-        <collection property="employeeList" ofType="com.demo.domain.Employee" column="department_id">
+        <collection property="employeeList" ofType="com.demo.domain.employee.Employee" column="department_id">
             <id property="id" column="id"/>
             <result property="name" column="name"/>
             <result property="sex" column="sex"/>

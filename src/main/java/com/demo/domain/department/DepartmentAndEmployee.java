@@ -1,6 +1,6 @@
 package com.demo.domain.department;
 
-import com.demo.domain.Employee;
+import com.demo.domain.employee.Employee;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 package com.demo.service.department;
 
 import com.demo.dao.departmentMapper;
-import com.demo.domain.Department;
-import com.demo.domain.Mobilize;
+import com.demo.domain.department.Department;
+import com.demo.domain.mobilize.Mobilize;
 import com.demo.domain.department.DepartmentAndEmployee;
 import com.demo.domain.department.DepartmentAndId;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="staff_management@localhost" uuid="e6e8fa8b-2146-4b2f-ba00-209ed2da0a6a">
-      <driver-ref>mysql</driver-ref>
+    <data-source source="LOCAL" name="staff_management@120.79.187.96" uuid="37a38388-1465-4398-8f9e-90a2ed1dad4d">
+      <driver-ref>mariadb</driver-ref>
       <synchronize>true</synchronize>
-      <remarks>员工管理数据库</remarks>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/staff_management</jdbc-url>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://120.79.187.96:3306/staff_management</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />

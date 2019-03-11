@@ -38,23 +38,23 @@
             <result property="position" column="position"/>
         </collection>
     </resultMap>
+    <!--搜序框查询-->
     <!--根据员工id查询-->
     <select id="searchDepartmentByID" resultMap="resultDepartmentEmployee" parameterType="String">
         select d.department_name,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id and e.id=#{text}
     </select>
     <!--根据员工姓名查询-->
     <select id="searchDepartmentByName" resultMap="resultDepartmentEmployee" parameterType="String">
-        select d.department_name,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id and e.name=#{text}
-
+        select d.department_name,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id and e.name like CONCAT(CONCAT('%', #{text}), '%')
     </select>
     <!--根据部门名字查询-->
     <select id="searchDepartmentByDname" resultMap="resultDepartmentEmployee" parameterType="String">
-        select d.department_name,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id and d.department_name=#{text}
+        select d.department_name,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id and d.department_name like CONCAT(CONCAT('%', #{text}), '%')
 
     </select>
     <!--根据员工职务查询-->
     <select id="searchDepartmentByPosition" resultMap="resultDepartmentEmployee" parameterType="String">
-        select d.department_name,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id and e.position=#{text}
+        select d.department_name,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id and e.position like CONCAT(CONCAT('%', #{text}), '%')
     </select>
 
     <!--返回已经存在的部门和其id-->

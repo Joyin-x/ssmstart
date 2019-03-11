@@ -24,10 +24,10 @@ public class MobilizeController {
     private MobilizeService service;
 
     /**
-     * 获取所有的工作调动记录
+     * 获取工作调动记录
      * */
     @RequestMapping("/list")
-    public ServerResponse<List<MobilizeRecord>> getAllMobilize(@RequestParam(name="id",required = false)Integer id){
+    public ServerResponse<List<MobilizeRecord>> getAllMobilize(@RequestParam(name="id",required = false,defaultValue ="0")Integer id){
         ServerResponse response=new ServerResponse();
         List<Map<String,Object>> list;
         List<MobilizeRecord> AllList;

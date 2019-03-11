@@ -58,6 +58,7 @@ public class NoticeController {
             return ServerResponse.createByError("查询失败");
         }
     }
+
     /**
      * 新增公告信息
      * */
@@ -99,16 +100,17 @@ public class NoticeController {
                     // 自定义保存的图片名称
                     String trueFileName = UUID.randomUUID() + fileName;
                     // 设置存放图片文件的路径
-                   //path = realPath + "/uploads/" + trueFileName;
-                    path="E:/image/"+trueFileName;
+                   path = realPath + "/images/" + trueFileName;
+                    //path="E:/image/"+trueFileName;
                     System.out.println("存放图片文件的路径:" + path);
                     file.transferTo(new File(path));
+                    return path;
                 }else {
                     System.out.println("不是我们想要的文件类型,请按要求重新上传");
                     return "error";
                 }
             }
         }
-        return "哈哈";
+        return "图片是空的啊，大兄弟";
     }
 }

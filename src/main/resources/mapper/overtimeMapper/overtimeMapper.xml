@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--namespace 这里不是实体类名称，而是映射接口的全路径！！！-->
+<mapper namespace="com.demo.dao.overTimeMapper">
+
+    <!--根据部门id查看加班记录-->
+    <select id="getOverTimeRecord" resultType="java.util.Map">
+        select * from task t where t.employee_id=#{id}
+    </select>
+
+
+</mapper>

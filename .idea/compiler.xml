@@ -9,8 +9,5 @@
         <module name="ssmstart" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="ssmstart" target="1.7" />
-    </bytecodeTargetLevel>
   </component>
 </project>

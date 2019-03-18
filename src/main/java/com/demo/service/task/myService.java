@@ -1,6 +1,7 @@
 package com.demo.service.task;
 
 import com.demo.dao.myMapper;
+import com.demo.domain.Image;
 import com.sun.javafx.collections.MappingChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,12 @@ public class myService {
     private myMapper mapper;
 
     //根据id获取我的任务清单
-    public List<MappingChange.Map<String,Object>> getTaskById(int id){
+    public List<MappingChange.Map<String, Object>> getTaskById(int id) {
         return mapper.getTaskById(id);
+    }
+
+    //存储头像
+    public int addImage(Image image) {
+        return mapper.addImage(image);
     }
 }

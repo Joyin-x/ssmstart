@@ -1,8 +1,10 @@
 package com.demo.Controller;
 
+import com.demo.domain.Image;
 import com.demo.domain.notice.Notice;
 import com.demo.domain.notice.noticeVo;
 import com.demo.service.notice.noticeService;
+import com.demo.service.task.myService;
 import com.demo.util.ResponseCode;
 import com.demo.util.ServerResponse;
 import org.slf4j.Logger;
@@ -30,6 +32,8 @@ public class NoticeController {
 
     @Autowired
     private noticeService service;
+    @Autowired
+    private myService myService;
 
     /**
      * 查询所有公告信息*/
@@ -79,32 +83,55 @@ public class NoticeController {
     @Transactional
     public String upload(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file)throws IOException{
         request.setCharacterEncoding("UTF-8");
-        String user = request.getParameter("user");
-        System.out.println("user:"+user);
-        System.out.println(file);
+        int userId = Integer.parseInt(request.getParameter("user"));
+        System.out.println(userId);
         if(!file.isEmpty()) {
             System.out.println("成功获取图片");
 
             //获取文件上传的原名
             String fileName=file.getOriginalFilename();
+            fileName=fileName.substring(fileName.lastIndexOf("."));
             //存放图片目录，上传图片类型
             String path=null;
             String type=null;
 
             type=fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()) : null;
-            System.out.println("图片初始名称为：" + fileName + " 类型为：" + type);
             if(type!=null){
                 if ("JPEG".equals(type.toUpperCase())||"PNG".equals(type.toUpperCase())||"JPG".equals(type.toUpperCase())) {
                     // 项目在服务器中实际发布运行的根路径
                     String realPath = request.getSession().getServletContext().getRealPath("/");
+                    int index=realPath.lastIndexOf("/");
+                    String str="/";//目录后面跟着的是斜杠还是反斜杠
+                    if(index==-1){
+                        index=realPath.lastIndexOf("\\");
+                        realPath=realPath.substring(0,index);
+                        index=realPath.lastIndexOf("\\");
+                        realPath=realPath.substring(0,index);
+                        str="\\image\\";
+                    }else{
+                        realPath=realPath.substring(0,index);
+                        index=realPath.lastIndexOf("/");
+                        realPath=realPath.substring(0,index);
+                        str="/image/";
+                    }
+                    System.out.println(realPath);
                     // 自定义保存的图片名称
-                    String trueFileName = UUID.randomUUID() + fileName;
+                    String trueFileName = UUID.randomUUID() +fileName;
                     // 设置存放图片文件的路径
-                   path = realPath + "/images/" + trueFileName;
-                    //path="E:/image/"+trueFileName;
+                   path = realPath + str + trueFileName;
                     System.out.println("存放图片文件的路径:" + path);
                     file.transferTo(new File(path));
-                    return path;
+                    Image image=new Image();
+                    image.setUserId(userId);
+                    image.setPicture("https://weixiong.info/image/"+trueFileName);
+                    System.out.println(image);
+                    int result=myService.addImage(image);
+                    System.out.println("result:"+result);
+                    if(result==1){
+                        return path;
+                    }else{
+                        return "图片存储失败";
+                    }
                 }else {
                     System.out.println("不是我们想要的文件类型,请按要求重新上传");
                     return "error";

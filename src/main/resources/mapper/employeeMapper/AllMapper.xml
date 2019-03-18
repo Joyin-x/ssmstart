@@ -120,6 +120,6 @@
 
     <!--登录成功后返回该员工个人信息（id,姓名，电话）-->
     <select id="getLoginInfo" resultType="java.util.Map" parameterType="int">
-        select e.id,e.name,e.phone from employee e where e.id=#{id}
+        select u.userId,e.name,u.phone,e.department_id,e.position,u.flag,u.picture from employee e,user u where u.userId=e.id and e.id=#{id}
     </select>
 </mapper>

@@ -8,9 +8,10 @@ import java.util.Date;
  **/
 public class Attendance {
     private int id;
-    private int employeeId;
-    private Date officeTime;
-    private Date afterWork;
+    private int employeeID;
+    private String officeTime;
+    private  String afterWork;
+    private String location;
 
     public int getId() {
         return id;
@@ -20,27 +21,46 @@ public class Attendance {
         this.id = id;
     }
 
-    public int getEmployeeId() {
-        return employeeId;
+    public int getEmployeeID() {
+        return employeeID;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
     }
 
-    public Date getOfficeTime() {
+    public String getOfficeTime() {
         return officeTime;
     }
 
-    public void setOfficeTime(Date officeTime) {
+    public void setOfficeTime(String officeTime) {
         this.officeTime = officeTime;
     }
 
-    public Date getAfterWork() {
+    public String getAfterWork() {
         return afterWork;
     }
 
-    public void setAfterWork(Date afterWork) {
+    public void setAfterWork(String afterWork) {
         this.afterWork = afterWork;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    @Override
+    public String toString() {
+        return "Attendance{" +
+                "id=" + id +
+                ", employeeID=" + employeeID +
+                ", officeTime='" + officeTime + '\'' +
+                ", afterWork='" + afterWork + '\'' +
+                ", location='" + location + '\'' +
+                '}';
     }
 }

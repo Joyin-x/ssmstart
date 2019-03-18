@@ -12,5 +12,43 @@
         select * from task t where t.employee_id=#{id}
     </select>
 
+    <!--增加加班记录-->
+    <insert id="addOverTimeRecord" parameterType="com.demo.domain.overtime.overTime">
+        insert into overtime(id,department_id,overtime_reason ,startTime,endTime) values(#{id},#{departmentId},#{overTimeReason},#{startTime},#{endTime})
+    </insert>
 
+    <!--按部门查询未审批的加班记录并返回-->
+    <select id="getNotApprove" resultType="java.util.Map" parameterType="int">
+        select o.*,d.department_name,e.name,e.position from overtime o,department d,employee e where approve="" and o.department_id=#{id} and o.id=e.id and d.id=o.department_id
+    </select>
+
+    <!--按部门查询加班记录并返回-->
+    <select id="getApprove" resultType="java.util.Map" parameterType="int">
+        select o.*,d.department_name,e.name,e.position from overtime o,department d,employee e where o.department_id=#{id} and o.id=e.id and d.id=o.department_id
+    </select>
+
+    <!--更新加班审批记录-->
+    <update id="approve" parameterType="com.demo.domain.overtime.updateApprove">
+        update overtime set approve=#{approve},status=#{status} where overtimeID=#{overtimeID}
+    </update>
+
+    <!--新增考勤记录-->
+    <insert id="addAttendance" parameterType="com.demo.domain.attendance.Attendance">
+        insert into attendance(employee_id,office_time,location) values(#{employeeID},#{officeTime},#{location})
+    </insert>
+
+    <!--查询当天的考勤记录-->
+    <select id="getAttendance" parameterType="int" resultType="int">
+        select id from attendance where DATE(office_time)=DATE(now()) and employee_id=#{id}
+    </select>
+
+    <!--更新当前的考勤记录-->
+    <update id="updateAttendance" parameterType="com.demo.domain.attendance.updateAttendance">
+        update attendance set after_work=#{afterWork} where id=#{id}
+    </update>
+
+    <!--查询当天早上是否已签到-->
+    <select id="isAttendance" resultType="int">
+        select count(*) from attendance where DATE(office_time)=DATE(now())
+    </select>
 </mapper>

@@ -1,26 +1,36 @@
 package com.demo.domain;
 
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author wwx
  * @date 2019/1/27 16:02
  **/
 public class Image {
-    private String img;
-    private MultipartFile file;
+    private String picture;
+    private int userId;
 
-    public MultipartFile getFile() {
-        return file;
-    }
-    public void setFile(MultipartFile file) {
-        this.file = file;
-    }
-    public String getImg() {
-        return img;
+
+    public String getPicture() {
+        return picture;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "Image{" +
+                "picture='" + picture + '\'' +
+                ", userId=" + userId +
+                '}';
     }
 }

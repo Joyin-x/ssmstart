@@ -12,5 +12,9 @@
         select * from task t where t.employee_id=#{id}
     </select>
 
+    <!--插入用户头像地址到数据库-->
+    <update id="addImage" parameterType="com.demo.domain.Image">
+        update user SET picture=#{picture} where userId=#{userId}
+    </update>
 
 </mapper>

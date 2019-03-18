@@ -13,7 +13,8 @@ public enum ResponseCode {
     ERROR(420, "失败"),
     NOT_FOUND(404, "请求不存在"),
     NEED_LOG(410,"请先登录"),
-    SERVER_ERROR(500,"请求出错");
+    SERVER_ERROR(500,"请求出错"),
+    notAttendance(411,"请勿重复打卡");
 
 
 

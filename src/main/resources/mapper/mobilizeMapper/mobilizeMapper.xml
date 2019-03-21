@@ -24,6 +24,7 @@
         GROUP BY(m.employee_id) HAVING count(m.employee_id)>0
     </select>
 
+    
     <!--为员工指派任务-->
     <insert id="addTask" parameterType="Task">
         insert into task(employee_id,work_content,status,start_time,end_time)

@@ -21,10 +21,4 @@ public class EvaluationController {
     @Autowired
     private AllService allService;
 
-
-//    @RequestMapping(value="/getByMobile",method= RequestMethod.POST)
-//    @ResponseBody
-//    public ServerResponse<List<Evaluation>> getByMobile(int id){
-//
-//    }
 }

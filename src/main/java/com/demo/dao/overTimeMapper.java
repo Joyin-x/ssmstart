@@ -53,4 +53,20 @@ public interface overTimeMapper {
      * 查询当天早上是否已签到
      * */
     int isAttendance();
+
+    /**
+     * 查询当天下午是否已签到
+     * */
+    int isAttendancePM();
+
+    /**
+     * 根据部门查询当前打卡记录
+     * */
+    List<Map<String,Object>> getAttendanceById(int id);
+
+    /**
+     * 查询打卡排行记录
+     * */
+    List<Map<String,Object>> getRankList();
+
 }

@@ -108,6 +108,7 @@
     <select id="checkRegister" resultType="Integer" >
         select userId from user where phone=#{phone}
     </select>
+
     <!--用户注册-->
     <insert id="addUser" parameterType="UserLogin">
       insert into user(userId, phone, password) VALUES (#{userId},#{phone},#{password})
@@ -120,6 +121,7 @@
 
     <!--登录成功后返回该员工个人信息（id,姓名，电话）-->
     <select id="getLoginInfo" resultType="java.util.Map" parameterType="int">
-        select u.userId,e.name,u.phone,e.department_id,e.position,u.flag,u.picture from employee e,user u where u.userId=e.id and e.id=#{id}
+        select e.*,u.userId,d.department_name,u.flag,u.picture from employee e,user u,department d where u.userId=e.id and d.id=e.department_id and e.id=#{id}
     </select>
+
 </mapper>

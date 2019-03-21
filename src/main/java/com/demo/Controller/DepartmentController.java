@@ -36,7 +36,6 @@ public class DepartmentController {
     @RequestMapping(value = "/addDepartment",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<Department> addDepartment(@RequestBody Department department){
-        System.out.println(department.getDepartmentName()+":"+department.getPrincipal());
         int result=departmentService.addDepartment(department);
         if(result==1){
             return ServerResponse.createBySuccess("新增部门成功");
@@ -50,7 +49,6 @@ public class DepartmentController {
     @RequestMapping(value = "/modifyDepartment",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<Department> modifyDepartment(@RequestBody Department department){
-        System.out.println(department.getId()+":"+department.getDepartmentName()+":"+department.getPrincipal());
         int result=departmentService.modifyDepartment(department);
         if(result==1){
             return ServerResponse.createBySuccess("成功修改");
@@ -64,7 +62,6 @@ public class DepartmentController {
     @RequestMapping(value = "/deleteDepartment",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<Department> deleteDepartment(int id){
-        System.out.println(id);
         int result=departmentService.deleteDepartment(id);
         if(result==1){
             return ServerResponse.createBySuccess("删除成功");
@@ -167,7 +164,6 @@ public class DepartmentController {
     @ResponseBody
     public ServerResponse addMobilize(@RequestBody Mobilize mobilize){
         ServerResponse response=new ServerResponse();
-        System.out.println(mobilize.getNowPosition());
         int updateResult=departmentService.updateEmployee(mobilize);
         int addResult=departmentService.addMobilze(mobilize);
         if(updateResult>0&&addResult>0){

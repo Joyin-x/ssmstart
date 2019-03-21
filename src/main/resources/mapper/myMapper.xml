@@ -17,4 +17,28 @@
         update user SET picture=#{picture} where userId=#{userId}
     </update>
 
+    <!--返回我的工作调动记录-->
+    <select id="getMyMobilizeList" resultType="java.util.Map" parameterType="int">
+         select * from mobilize where employee_id=#{id} ORDER BY transfer_date DESC
+    </select>
+
+    <!--返回我的加班申请-->
+    <select id="getMyOvertimeList" parameterType="int" resultType="java.util.Map">
+        select * from overtime where id=#{id} ORDER BY startTime DESC
+    </select>
+
+    <!--返回我的工资单记录-->
+    <select id="getMyMoneyList" parameterType="int" resultType="java.util.Map">
+        select * from wage where employee_id=#{id}
+    </select>
+
+    <!--根据id查找部门姓名-->
+    <select id="getDepartmentName" resultType="String" parameterType="int">
+        select department_name FROM department where id=#{id}
+    </select>
+
+    <!--根据id修改任务完成状态-->
+    <update id="updateTaskStatus" parameterType="int">
+        update task set status=1 where id=#{id}
+    </update>
 </mapper>

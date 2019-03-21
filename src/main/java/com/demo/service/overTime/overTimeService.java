@@ -59,4 +59,20 @@ public class overTimeService {
      * 查询当天早上是否已签到
      * */
     public int isAttendance(){return mapper.isAttendance();}
+
+
+    /**
+     * 查询当天下午是否已签到
+     * */
+    public int isAttendancePM(){return mapper.isAttendancePM();}
+
+    /**
+     * 根据部门查询当前打卡记录
+     * */
+    public List<Map<String,Object>> getAttendanceById(int id){return mapper.getAttendanceById(id);}
+
+    /**
+     * 查询打卡排行记录
+     * */
+    public List<Map<String,Object>> getRankList(){return mapper.getRankList();}
 }

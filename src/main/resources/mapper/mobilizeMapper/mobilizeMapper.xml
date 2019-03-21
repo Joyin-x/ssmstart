@@ -20,7 +20,7 @@
 
     <!--返回工作调动的记录数和员工姓名id-->
     <select id="getMobilizeWithName" resultType="java.util.Map">
-        select e.name,m.employee_id,count(m.employee_id) as count from mobilize m left join employee e on m.employee_id=e.id
+        select e.name,m.employee_id,e.position,e.department_id,count(m.employee_id) as count from mobilize m left join employee e on m.employee_id=e.id
         GROUP BY(m.employee_id) HAVING count(m.employee_id)>0
     </select>
 

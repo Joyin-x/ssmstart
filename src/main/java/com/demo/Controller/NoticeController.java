@@ -84,10 +84,8 @@ public class NoticeController {
     public String upload(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file)throws IOException{
         request.setCharacterEncoding("UTF-8");
         int userId = Integer.parseInt(request.getParameter("user"));
-        System.out.println(userId);
         if(!file.isEmpty()) {
             System.out.println("成功获取图片");
-
             //获取文件上传的原名
             String fileName=file.getOriginalFilename();
             fileName=fileName.substring(fileName.lastIndexOf("."));

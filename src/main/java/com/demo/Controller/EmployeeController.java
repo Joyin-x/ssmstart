@@ -104,7 +104,8 @@ public class EmployeeController {
     @RequestMapping(value = "/getEmployeeEvaluation", method = RequestMethod.POST)
     public ServerResponse<Map<String,Object>> getEmployeeAndEvaluation(int id) {
         ServerResponse response = new ServerResponse();
-        Map<String,Object> employeeAndEvaluation = service.getEmployeeAndEvaluation(id);
+        Map<String,Object> employeeAndEvaluation = service.getLoginInfo(id);
+        System.out.println(employeeAndEvaluation);
         response.setData(employeeAndEvaluation);
         response.setStatus(ResponseCode.SUCCESS);
         return response;

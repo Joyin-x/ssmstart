@@ -15,7 +15,7 @@
 
     <!--根据id查询对应的公告消息-->
     <select id="getNoticeDetail" resultType="Notice" parameterType="int">
-        select n.id,e.name,n.header,n.content,n.notice_time from notice n,employee e where n.employee_id=e.id and n.id=#{id};
+        select n.id,e.name,n.header,n.content,n.notice_time,n.like from notice n,employee e where n.employee_id=e.id and n.id=#{id};
     </select>
 
     <!--测试图片的插入-->
@@ -27,4 +27,14 @@
     <insert id="addNotice" parameterType="NoticeVo">
         insert into notice(employee_id,header,content,notice_time) values(#{id},#{header},#{content},#{noticeTime})
     </insert>
+
+    <!--添加用户评论信息-->
+    <insert id="addDiscuss" parameterType="com.demo.domain.notice.Discuss">
+        insert into discuss(id,employeeID,content,discussTime,employeeName) values(#{id},#{employeeID},#{content},#{discussTime},#{employeeName})
+    </insert>
+
+    <!--获取评论信息-->
+    <select id="getDiscuss" resultType="java.util.Map" parameterType="int">
+        select d.*,u.picture from discuss d,user u where id=#{id} and u.userId=d.employeeID
+    </select>
 </mapper>

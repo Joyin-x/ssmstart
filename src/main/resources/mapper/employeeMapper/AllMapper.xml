@@ -15,8 +15,8 @@
     </select>
     <!--增加新员工信息-->
     <insert id="insertEmployee"  parameterType="EmployeeVo">
-        insert into employee(name,sex,birthday,native_place,address,phone,department_id,education,school,email,professional,remark)
-        values(#{name},#{sex},#{birthday},#{native_place},#{address},#{phone},#{department_id},#{education},#{school},#{email},#{professional},#{remark})
+        insert into employee(name,sex,birthday,native_place,address,phone,department_id,position,education,school,email,professional,remark)
+        values(#{name},#{sex},#{birthday},#{native_place},#{address},#{phone},#{department_id},#{position},#{education},#{school},#{email},#{professional},#{remark})
     </insert>
     <!--查询指定页数的5条员工信息  0到4   5到9  10到14 -->
     <select id="findAnyEmployee" resultType="Employee" parameterType="int">
@@ -46,6 +46,7 @@
     <!--根据部门id查询该部门员工信息-->
     <resultMap id="resultDepartmentEmployee" type="DepartmentAndEmployee">
         <result property="departmentName" column="department_name"></result>
+        <result property="principal" column="principal"></result>
         <collection property="employeeList" ofType="com.demo.domain.employee.Employee" column="department_id">
             <id property="id" column="id"/>
             <result property="name" column="name"/>
@@ -55,7 +56,7 @@
         </collection>
     </resultMap>
     <select id="getDepartmentEmployee" resultMap="resultDepartmentEmployee" parameterType="int">
-        select d.department_name,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id and d.id=#{id}
+        select d.department_name,d.principal,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id and d.id=#{id}
 
     </select>
     <select id="getDepartmentEmployeeAll" resultMap="resultDepartmentEmployee">
@@ -111,7 +112,7 @@
 
     <!--用户注册-->
     <insert id="addUser" parameterType="UserLogin">
-      insert into user(userId, phone, password) VALUES (#{userId},#{phone},#{password})
+      insert into user(userId, phone, password,flag,picture) VALUES (#{userId},#{phone},#{password},#{flag},#{picture})
     </insert>
 
     <!--验证用户登录-->
@@ -121,7 +122,12 @@
 
     <!--登录成功后返回该员工个人信息（id,姓名，电话）-->
     <select id="getLoginInfo" resultType="java.util.Map" parameterType="int">
-        select e.*,u.userId,d.department_name,u.flag,u.picture from employee e,user u,department d where u.userId=e.id and d.id=e.department_id and e.id=#{id}
+        select e.*,u.userId,d.department_name,d.principal,u.flag,u.picture from employee e,user u,department d where u.userId=e.id and d.id=e.department_id and e.id=#{id}
+    </select>
+
+    <!--添加入职信息后查找默认分配的用户id-->
+    <select id="getUserID" parameterType="String" resultType="int">
+        select id from employee where phone=#{phone}
     </select>
 
 </mapper>

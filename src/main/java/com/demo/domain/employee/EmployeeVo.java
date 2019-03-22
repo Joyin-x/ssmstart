@@ -15,9 +15,10 @@ public class EmployeeVo {
     private String education;
     private String school;
     private String email;
-    private String picture;
     private String professional;
     private String remark;
+    private String position;
+    private int flag;
 
     public String getName() {
         return name;
@@ -41,6 +42,14 @@ public class EmployeeVo {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public String getNative_place() {
@@ -99,13 +108,6 @@ public class EmployeeVo {
         this.email = email;
     }
 
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
 
     public String getProfessional() {
         return professional;
@@ -121,5 +123,33 @@ public class EmployeeVo {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeVo{" +
+                "name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", native_place='" + native_place + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", department_id='" + department_id + '\'' +
+                ", education='" + education + '\'' +
+                ", school='" + school + '\'' +
+                ", email='" + email + '\'' +
+                ", professional='" + professional + '\'' +
+                ", remark='" + remark + '\'' +
+                ", position='" + position + '\'' +
+                ", flag=" + flag +
+                '}';
     }
 }

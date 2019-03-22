@@ -11,6 +11,7 @@ import java.util.List;
 public class DepartmentAndEmployee {
 
     private String departmentName;
+    private String principal;
     private List<Employee> employeeList;
 
     public String getDepartmentName() {
@@ -27,5 +28,13 @@ public class DepartmentAndEmployee {
 
     public void setEmployeeList(List<Employee> employeeList) {
         this.employeeList = employeeList;
+    }
+
+    public String getPrincipal() {
+        return principal;
+    }
+
+    public void setPrincipal(String principal) {
+        this.principal = principal;
     }
 }

@@ -26,7 +26,6 @@
         delete from department where id=#{id}
     </delete>
 
-    <!--查询员工部门和职务-->
     <!--根据部门id查询该部门员工信息-->
     <resultMap id="resultDepartmentEmployee" type="DepartmentAndEmployee">
         <result property="departmentName" column="department_name"></result>

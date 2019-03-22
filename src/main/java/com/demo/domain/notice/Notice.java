@@ -15,6 +15,7 @@ public class Notice {
     private String header;
     private String content;
     private Date noticeTime;
+    private int like;
 
     public int getId() {
         return id;
@@ -54,5 +55,13 @@ public class Notice {
 
     public void setNoticeTime(Date noticeTime) {
         this.noticeTime = noticeTime;
+    }
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
     }
 }

@@ -1,6 +1,7 @@
 package com.demo.Controller;
 
 import com.demo.domain.Image;
+import com.demo.domain.notice.Discuss;
 import com.demo.domain.notice.Notice;
 import com.demo.domain.notice.noticeVo;
 import com.demo.service.notice.noticeService;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -27,6 +29,7 @@ import java.util.UUID;
  **/
 @Controller
 @RequestMapping("/notice")
+@ResponseBody
 public class NoticeController {
     private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
 
@@ -38,7 +41,6 @@ public class NoticeController {
     /**
      * 查询所有公告信息*/
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    @ResponseBody
     public ServerResponse<List<Notice>> getNoticeList() {
         List<Notice> list = service.getNoticeList();
         if (list.size() > 0) {
@@ -53,7 +55,6 @@ public class NoticeController {
     /**
      * 查询某个公告的详细内容*/
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    @ResponseBody
     public ServerResponse<Notice> getNoticeDetail(int id) {
         Notice detail = service.getNoticeDetail(id);
         if (detail != null) {
@@ -67,7 +68,6 @@ public class NoticeController {
      * 新增公告信息
      * */
     @RequestMapping(value = "/addNotice",method = RequestMethod.POST)
-    @ResponseBody
     public ServerResponse getNoticeDetail(@RequestBody noticeVo notice) {
         ServerResponse response=new ServerResponse();
         int result=service.addNotice(notice);
@@ -79,7 +79,6 @@ public class NoticeController {
 
 
     @RequestMapping(value = "/addImage",method = RequestMethod.POST)
-    @ResponseBody
     @Transactional
     public String upload(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file)throws IOException{
         request.setCharacterEncoding("UTF-8");
@@ -137,5 +136,30 @@ public class NoticeController {
             }
         }
         return "图片是空的啊，大兄弟";
+    }
+
+    /**
+     * 添加评论信息
+     * */
+    @RequestMapping(value = "/addDiscuss",method = RequestMethod.POST)
+    public ServerResponse addDiscuss(@RequestBody Discuss discuss){
+        ServerResponse response=new ServerResponse();
+        int result=service.addDiscuss(discuss);
+        if(result==1){
+            response.setStatus(ResponseCode.SUCCESS);
+        }
+        return response;
+    }
+
+    @RequestMapping(value = "/getDiscuss")
+    public ServerResponse getDiscuss(int id){
+        System.out.println(id);
+        ServerResponse response=new ServerResponse();
+        List<Map<String,Object>> list=service.getDiscuss(id);
+        if(list.size()>0){
+            response.setData(list);
+            response.setStatus(ResponseCode.SUCCESS);
+        }
+        return response;
     }
 }

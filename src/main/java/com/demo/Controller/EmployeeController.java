@@ -5,9 +5,8 @@ import com.demo.domain.employee.Employee;
 import com.demo.domain.PageUtil;
 import com.demo.domain.employee.UserLogin;
 import com.demo.domain.employee.EmployeeVo;
+import com.demo.util.*;
 import com.demo.service.employee.AllService;
-import com.demo.util.ResponseCode;
-import com.demo.util.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -101,22 +100,36 @@ public class EmployeeController {
     /**
      * 根据员工id返回某员工的所有信息（部门，能力评估）
      */
-    @RequestMapping(value = "/getEmployeeEvaluation", method = RequestMethod.POST)
-    public ServerResponse<Map<String,Object>> getEmployeeAndEvaluation(int id) {
+    @RequestMapping(value = "/getEmployeeInfo", method = RequestMethod.GET)
+    public ServerResponse<Map<String, Object>> getEmployeeInfo(int id) {
+        System.out.println(id);
         ServerResponse response = new ServerResponse();
-        Map<String,Object> employeeAndEvaluation = service.getLoginInfo(id);
-        System.out.println(employeeAndEvaluation);
-        response.setData(employeeAndEvaluation);
-        response.setStatus(ResponseCode.SUCCESS);
+        Map<String, Object> employeeInfo = service.getLoginInfo(id);
+        System.out.println(employeeInfo);
+        if (employeeInfo != null) {
+            response.setData(employeeInfo);
+            response.setStatus(ResponseCode.SUCCESS);
+        }
         return response;
     }
 
+    @RequestMapping(value = "/md5")
+    public ServerResponse sendMail() {
+        ServerResponse response = new ServerResponse();
+        String context = MD5Util.getStrMD5("15017814621");
+        String a=MD5Util.getStrMD5("123456"+context);
+        System.out.println(a);
+        response.setData(a);
+        return response;
+    }
 
     /**
      * 增加员工信息
      */
     @RequestMapping(value = "/addEmployee", method = RequestMethod.POST)
     public ServerResponse addEmployee(@RequestBody EmployeeVo employee) {
+        System.out.println("前台传的员工信息:"+employee);
+        ServerResponse response = new ServerResponse();
         if (StringUtils.isEmpty(employee.getName())) {
             return ServerResponse.createByError("员工姓名不能为空！");
         }
@@ -130,47 +143,68 @@ public class EmployeeController {
             return ServerResponse.createByError("部门id不能为空！");
         }
         if (StringUtils.isEmpty(employee.getProfessional())) {
-            return ServerResponse.createByError("职称不能为空!");
+            return ServerResponse.createByError("所学专业不能为空!");
         }
         int result = service.insertEmployee(employee);
         if (result == 1) {
-            return ServerResponse.createBySuccess("成功增加新员工信息");
-        } else {
-            return ServerResponse.createByError("添加失败");
+            System.out.println("插入成功");
+            SendQQMailUtil sendMail = new SendQQMailUtil();
+            //生成默认密码
+            String password = UUIDTool.generatePassword();
+            System.out.println(password);
+            try {
+                sendMail.sendMail(employee.getEmail(), "恭喜你，你在我公司的入职信息已添加", "你的用户信息已被添加，默认登录密码为" + password + "，请尽快登录修改密码！");
+            } catch (Exception e) {
+                System.out.println(e);
+            } finally {
+                //查询到了刚才新增的用户id
+                int id = service.getUserID(employee.getPhone());
+                System.out.println("用户默认分配的id为："+id);
+                password = MD5Util.getStrMD5(password + MD5Util.getStrMD5(employee.getPhone()));
+                UserLogin user = new UserLogin(id, employee.getPhone(), password, employee.getFlag(), "https://weixiong.info/image/work.jpg");
+                System.out.println(user);
+                int insertResult = service.addUser(user);
+                System.out.println("新增结果："+insertResult);
+                if (insertResult == 1) {
+                    response.setStatus(ResponseCode.SUCCESS);
+                }
+            }
         }
+        return response;
+
     }
+
     /**
      * 用户注册
-    * */
+     */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ServerResponse userRegister(@RequestBody UserLogin userLogin) {
-        ServerResponse response=new ServerResponse();
-        if(userLogin.getPhone().isEmpty()){
+        ServerResponse response = new ServerResponse();
+        if (userLogin.getPhone().isEmpty()) {
             response.setMsg("电话号码不能为空！");
             return response;
         }
         //判断员工表中是否有该电话号码
-        Integer checkUser=service.checkUser(userLogin.getPhone());
+        Integer checkUser = service.checkUser(userLogin.getPhone());
         //为空则表明该员工不是本公司员工，不能让他注册
-        if(checkUser!=null){
+        if (checkUser != null) {
             //判断是否已经注册，避免重复注册
-            Integer checkRegister=service.checkRegister(userLogin.getPhone());
+            Integer checkRegister = service.checkRegister(userLogin.getPhone());
             //为空则表示该号码还未注册
-            if(checkRegister!=null){
+            if (checkRegister != null) {
                 response.setMsg("该号码已注册，请直接登录！");
                 return response;
-            }else{
+            } else {
                 userLogin.setUserId(checkUser);
-                int result=service.addUser(userLogin);
+                int result = service.addUser(userLogin);
                 System.out.println(result);
-                if(result>0){
+                if (result > 0) {
                     response.setStatus(ResponseCode.SUCCESS);
                     response.setMsg("注册成功");
                 }
                 return response;
             }
-        }
-        else{
+        } else {
             response.setMsg("该用户不是本公司职工！");
             return response;
         }
@@ -178,22 +212,22 @@ public class EmployeeController {
 
     /**
      * 用户登录
-     * */
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ServerResponse userLogin(@RequestBody UserLogin userLogin) {
-        ServerResponse response=new ServerResponse();
-        Integer checkRegister=service.checkRegister(userLogin.getPhone());
+        ServerResponse response = new ServerResponse();
+        Integer checkRegister = service.checkRegister(userLogin.getPhone());
         //为空则表示该号码还未注册,不能登录
-        if(checkRegister==null){
+        if (checkRegister == null) {
             response.setMsg("该号码未注册，请先注册！");
             return response;
-        }else{
-            String password=service.getPassword(userLogin.getPhone());
-            if(password.equals(userLogin.getPassword())){
-                Map<String,Object> loginUser=service.getLoginInfo(checkRegister);
+        } else {
+            String password = service.getPassword(userLogin.getPhone());
+            if (password.equals(userLogin.getPassword())) {
+                Map<String, Object> loginUser = service.getLoginInfo(checkRegister);
                 response.setData(loginUser);
                 response.setStatus(ResponseCode.SUCCESS);
-            }else{
+            } else {
                 response.setMsg("密码错误！");
             }
             return response;

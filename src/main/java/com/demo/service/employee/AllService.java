@@ -109,4 +109,8 @@ public class AllService {
      * 登录成功后返回员工个人信息（id,姓名,电话号码)
      * */
     public Map<String,Object> getLoginInfo(int id){return allMapper.getLoginInfo(id);}
+
+    /**
+     * 添加用户信息后查询默认分配的用户ID*/
+    public int getUserID(String email){return allMapper.getUserID(email);}
 }

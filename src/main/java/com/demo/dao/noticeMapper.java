@@ -1,11 +1,13 @@
 package com.demo.dao;
 
 import com.demo.domain.Image;
+import com.demo.domain.notice.Discuss;
 import com.demo.domain.notice.Notice;
 import com.demo.domain.notice.noticeVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wwx
@@ -30,7 +32,15 @@ public interface noticeMapper {
 
     /**
      * 员工发布新公告*/
-    public int addNotice(noticeVo notice);
+    int addNotice(noticeVo notice);
 
 
+    /**
+     * 添加评论
+     * */
+    int addDiscuss(Discuss discuss);
+
+    /**
+     * 获取评论*/
+    List<Map<String,Object>> getDiscuss(int id);
 }

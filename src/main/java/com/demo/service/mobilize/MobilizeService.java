@@ -42,4 +42,7 @@ public class MobilizeService {
      * */
     public List<Map<String,Object>> getTaskList(){return mapper.getTaskList();}
 
+    /**
+     * 删除员工调动记录*/
+    public int deleteMobilize(int id){return mapper.deleteMobilize(id);}
 }

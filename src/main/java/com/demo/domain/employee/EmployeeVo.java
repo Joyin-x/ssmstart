@@ -5,6 +5,7 @@ package com.demo.domain.employee;
  * @date 2019/1/19 15:40
  **/
 public class EmployeeVo {
+    private int id;
     private String name;
     private String sex;
     private String birthday;
@@ -19,6 +20,14 @@ public class EmployeeVo {
     private String remark;
     private String position;
     private int flag;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -136,7 +145,8 @@ public class EmployeeVo {
     @Override
     public String toString() {
         return "EmployeeVo{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", sex='" + sex + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", native_place='" + native_place + '\'' +

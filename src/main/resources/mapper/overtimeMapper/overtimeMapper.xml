@@ -48,12 +48,12 @@
     </update>
 
     <!--查询当天早上是否已签到-->
-    <select id="isAttendance" resultType="int">
-        select count(*) from attendance where DATE(office_time)=DATE(now())
+    <select id="isAttendance" resultType="int" parameterType="int">
+        select count(*) from attendance where DATE(office_time)=DATE(now()) and employee_id=#{employeeID}
     </select>
     <!--查询当天下午是否已签到-->
-    <select id="isAttendancePM" resultType="int">
-        select count(*) from attendance where DATE(after_work)=DATE(now())
+    <select id="isAttendancePM" resultType="int" parameterType="int">
+        select count(*) from attendance where DATE(after_work)=DATE(now()) and employee_id=#{id}
     </select>
 
     <!--根据部门查询当前打卡记录-->

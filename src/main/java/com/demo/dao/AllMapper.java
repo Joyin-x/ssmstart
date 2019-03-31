@@ -85,4 +85,17 @@ public interface AllMapper {
     /**
      * 添加用户信息后查询默认分配的用户ID*/
     int getUserID(String email);
+
+    /**
+     * 修改员工信息
+     * */
+    int updateEmployee(EmployeeVo employeeVo);
+
+    /**
+     * 修改员工等级权限*/
+    int updateUserFlag(EmployeeVo employeeVo);
+
+    /**
+     * 删除员工*/
+    int deleteEmployee(int id);
 }

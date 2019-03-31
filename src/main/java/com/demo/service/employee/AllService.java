@@ -113,4 +113,17 @@ public class AllService {
     /**
      * 添加用户信息后查询默认分配的用户ID*/
     public int getUserID(String email){return allMapper.getUserID(email);}
+
+    /**
+     * 修改员工信息
+     * */
+    public int updateEmployee(EmployeeVo employeeVo){return allMapper.updateEmployee(employeeVo);}
+
+    /**
+     * 修改员工等级权限*/
+    public int updateUserFlag(EmployeeVo employeeVo){return allMapper.updateUserFlag(employeeVo);}
+
+    /**
+     * 删除员工*/
+    public int deleteEmployee(int id){return allMapper.deleteEmployee(id);}
 }

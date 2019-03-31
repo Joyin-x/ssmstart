@@ -18,16 +18,8 @@
         insert into employee(name,sex,birthday,native_place,address,phone,department_id,position,education,school,email,professional,remark)
         values(#{name},#{sex},#{birthday},#{native_place},#{address},#{phone},#{department_id},#{position},#{education},#{school},#{email},#{professional},#{remark})
     </insert>
-    <!--查询指定页数的5条员工信息  0到4   5到9  10到14 -->
-    <select id="findAnyEmployee" resultType="Employee" parameterType="int">
 
-        select * from employee limit #{page},4;
 
-    </select>
-    <!--获取总页面数-->
-    <select id="pageCount" resultType="int">
-        select count(*) from employee
-    </select>
     <!--根据员工id查询某个员工信息-->
     <select id="queryEmployee" resultType="Employee" parameterType="int">
         
@@ -130,4 +122,59 @@
         select id from employee where phone=#{phone}
     </select>
 
+    <!--修改员工信息-->
+    <update id="updateEmployee" parameterType="com.demo.domain.employee.EmployeeVo">
+        update employee set
+        <if test="name!='' and name!=null" >
+            name=#{name},
+        </if>
+        <if test="sex!='' and sex!=null" >
+            sex=#{sex},
+        </if>
+        <if test="birthday!='' and birthday!=null" >
+            birthday=#{birthday},
+        </if>
+        <if test="native_place!='' and native_place!=null" >
+            native_place=#{native_place},
+        </if>
+        <if test="address!='' and address!=null" >
+            address=#{address},
+        </if>
+        <if test="phone!='' and phone!=null" >
+            phone=#{phone},
+        </if>
+        <if test="department_id!='' and department_id!=null" >
+            department_id=#{department_id},
+        </if>
+        <if test="position!='' and position!=null" >
+            position=#{position},
+        </if>
+        <if test="education!='' and education!=null" >
+            education=#{education},
+        </if>
+        <if test="school!='' and school!=null" >
+            school=#{school},
+        </if>
+        <if test="email!='' and email!=null" >
+            email=#{email},
+        </if>
+        <if test="professional!='' and professional!=null" >
+            professional=#{professional},
+        </if>
+        <if test="remark!='' and remark!=null" >
+            remark=#{remark}
+        </if>
+        where id=#{id}
+    </update>
+
+    <!--修改员工权限等级-->
+    <update id="updateUserFlag" parameterType="com.demo.domain.employee.EmployeeVo">
+        update user set flag=#{flag} where userId=#{id}
+    </update>
+
+    <!--删除员工信息-->
+    <delete id="deleteEmployee" parameterType="int">
+      delete from employee where id=#{id};
+      delete from user where userId=#{id}
+   </delete>
 </mapper>

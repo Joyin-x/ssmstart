@@ -7,7 +7,7 @@ package com.demo.domain.task;
 public class Task {
     private int employeeId;
     private String workContent;
-    private String status;
+    private int status;
     private String startTime;
     private String endTime;
 
@@ -27,11 +27,11 @@ public class Task {
         this.workContent = workContent;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

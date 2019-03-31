@@ -7,10 +7,17 @@
 <mapper namespace="com.demo.dao.departmentMapper">
 
     <!--增加部门-->
-    <insert id="addDepartment"  parameterType="Department">
-        insert into department(department_name,principal)
-        values(#{departmentName},#{principal})
+    <insert id="addDepartment" parameterType="Department">
+        insert into department(employee_id,department_name,principal,established_time,description)
+        values(#{employeeId},#{departmentName},#{principal},#{establishedTime},#{description})
     </insert>
+
+    <!--根据负责人id查找部门id-->
+    <select id="getDepartmentID" parameterType="int" resultType="int">
+        select id from department where employee_id=#{id}
+    </select>
+
+
     <!--修改部门-->
     <update id="modifyDepartment" parameterType="Department">
         update department
@@ -21,11 +28,46 @@
         where id=#{id}
     </update>
 
+    <!--查询要删除部门的所有员工id-->
+    <select id="getDeleteDepartmentEmployee" parameterType="int" resultType="java.lang.Integer">
+        select id from employee where department_id=#{id}
+    </select>
     <!--删除部门-->
     <delete id="deleteDepartment" parameterType="int">
-        delete from department where id=#{id}
+        delete from department where id=#{id};
+        delete from employee where department_id=#{id}
     </delete>
-
+    <!--删除部门时删除该部门所有员工-->
+    <delete id="deleteDepartmentAllEmployee" parameterType="java.util.List">
+        delete from user where userId in
+        <foreach collection="list" item="item" open="(" separator="," close=");">
+            #{item}
+        </foreach>
+        delete from attendance where employee_id in
+        <foreach collection="list" item="item" open="(" separator="," close=");">
+            #{item}
+        </foreach>
+        delete from discuss where employeeID in
+        <foreach collection="list" item="item" open="(" separator="," close=");">
+            #{item}
+        </foreach>
+        delete from mobilize where employee_id in
+        <foreach collection="list" item="item" open="(" separator="," close=");">
+            #{item}
+        </foreach>
+        delete from notice where employee_id in
+        <foreach collection="list" item="item" open="(" separator="," close=");">
+            #{item}
+        </foreach>
+        delete from overtime where id in
+        <foreach collection="list" item="item" open="(" separator="," close=");">
+            #{item}
+        </foreach>
+        delete from task where employee_id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
     <!--根据部门id查询该部门员工信息-->
     <resultMap id="resultDepartmentEmployee" type="DepartmentAndEmployee">
         <result property="departmentName" column="department_name"></result>
@@ -68,8 +110,13 @@
     </update>
 
     <!--插入员工调动记录-->
-    <insert id="addMobilze"  parameterType="Mobilize">
+    <insert id="addMobilze" parameterType="Mobilize">
         insert into mobilize(employee_id,original_position,original_department_id,now_position,now_department_id,transfer_date,transfer_reason,approver,mobilize_remark)
         values(#{employeeId},#{originalPosition},#{originalDepartmentId},#{nowPosition},#{nowDepartmentId},#{transferDate},#{transferReason},#{approver},#{mobilizeRemark})
     </insert>
+
+    <!--返回查询到的普通员工的id和姓名-->
+    <select id="getSimpleEmployee" resultType="java.util.Map">
+        select e.name,e.id from user u,employee e where u.flag=0 and u.userId=e.id
+    </select>
 </mapper>

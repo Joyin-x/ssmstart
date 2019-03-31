@@ -167,4 +167,28 @@ public class Employee {
     public void setEvaluationList(List<Evaluation> evaluationList) {
         this.evaluationList = evaluationList;
     }
+
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sex=" + sex +
+                ", birthday=" + birthday +
+                ", native_place='" + native_place + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", position='" + position + '\'' +
+                ", department_id=" + department_id +
+                ", education='" + education + '\'' +
+                ", school='" + school + '\'' +
+                ", email='" + email + '\'' +
+                ", picture='" + picture + '\'' +
+                ", professional='" + professional + '\'' +
+                ", remark='" + remark + '\'' +
+                ", department=" + department +
+                ", evaluationList=" + evaluationList +
+                '}';
+    }
 }

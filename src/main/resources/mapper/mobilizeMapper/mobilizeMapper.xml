@@ -35,4 +35,10 @@
     <select id="getTaskList" resultType="java.util.Map">
         select  t.*,e.name from task t,employee e where e.id=t.employee_id
     </select>
+
+    <!--删除员工调动记录-->
+    <delete id="deleteMobilize" parameterType="int">
+        delete from mobilize where id=#{id}
+    </delete>
+
 </mapper>

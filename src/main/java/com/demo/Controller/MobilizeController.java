@@ -88,4 +88,17 @@ public class MobilizeController {
         return response;
     }
 
+    /**
+     * 删除员工调动记录*/
+    @RequestMapping("/deleteMobilize")
+    public ServerResponse getTaskList(int id){
+        ServerResponse response=new ServerResponse();
+        int result=service.deleteMobilize(id);
+        if(result>0){
+            response.setMsg("删除成功");
+            response.setStatus(ResponseCode.SUCCESS);
+        }
+        return response;
+    }
+
 }

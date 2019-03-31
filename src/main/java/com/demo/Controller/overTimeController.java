@@ -32,6 +32,7 @@ public class overTimeController {
     @RequestMapping(value = "/addOverTimeRecord",method = RequestMethod.POST)
     public ServerResponse addOverTimeRecord(@RequestBody overTime overtime){
         ServerResponse response=new ServerResponse();
+        System.out.println(overtime);
         int result=overTimeService.addOverTimeRecord(overtime);
         if(result==1){
             response.setData("新增成功");
@@ -87,7 +88,7 @@ public class overTimeController {
     @RequestMapping(value = "/addAttendance",method = RequestMethod.POST)
     public ServerResponse addAttendance(@RequestBody Attendance attendance){
         ServerResponse response=new ServerResponse();
-        int isAttendance=overTimeService.isAttendance();
+        int isAttendance=overTimeService.isAttendance(attendance.getEmployeeID());
         //等于0表示今天还未签到，可以增加，否则返回请勿重复打卡
         if(isAttendance==0){
             int result=overTimeService.addAttendance(attendance);
@@ -106,13 +107,14 @@ public class overTimeController {
     @RequestMapping(value = "/updateAttendance",method = RequestMethod.POST)
     public ServerResponse addAttendance(@RequestBody updateAttendance attendance){
         ServerResponse response=new ServerResponse();
-        int  isAttendancePM=overTimeService.isAttendancePM();
+        int  isAttendancePM=overTimeService.isAttendancePM(attendance.getId());
         //表示当天下午已签到
         if(isAttendancePM==1){
             response.setStatus(ResponseCode.notAttendance);
         }
+        //当天下午没签到，可以签到
         else{
-            int isAttendance=overTimeService.isAttendance();
+            int isAttendance=overTimeService.isAttendance(attendance.getId());
             //不等于0表示已经有这条签到记录，需要找到这条记录添加
             if(isAttendance==1){
                 //查询当天该用户的考勤记录

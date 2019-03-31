@@ -1,6 +1,9 @@
 package com.demo.dao;
 
 import com.demo.domain.Image;
+import com.demo.domain.employee.Employee;
+import com.demo.domain.employee.EmployeeVo;
+import com.demo.domain.employee.UpdatePassword;
 import com.sun.javafx.collections.MappingChange;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -35,4 +38,31 @@ public interface myMapper {
 
     //修改我的任务状态
     int updateTaskStatus(int id);
+
+    //修改密码
+    int updatePassword(UpdatePassword updatePassword);
+
+    //获取用户密码手机号
+    Map<String,String> getPassword(int id);
+
+    //修改手机号
+    int updatePhone(EmployeeVo employeeVo);
+    int updateUserPhone(EmployeeVo employeeVo);
+    //修改我的地址
+    int updateAddress(EmployeeVo employeeVo);
+    //修改我的毕业学校
+    int updateSchool(EmployeeVo employeeVo);
+    //修改所学专业
+    int updateProfessional(EmployeeVo employeeVo);
+    //修改我的性别
+    int updateSex(EmployeeVo employeeVo);
+    //修改我的生日
+    int updateBirthday(EmployeeVo employeeVo);
+
+    //查看手机号码是否已存在
+    int getPhone(String phone);
+
+    //通过手机号和邮箱查找用户id
+    Employee getEmployeeIDByPE(Employee employee);
+
 }

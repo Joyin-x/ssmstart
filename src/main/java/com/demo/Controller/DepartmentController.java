@@ -1,6 +1,7 @@
 package com.demo.Controller;
 
 import com.demo.domain.department.Department;
+import com.demo.domain.employee.EmployeeVo;
 import com.demo.domain.mobilize.Mobilize;
 import com.demo.domain.department.DepartmentAndEmployee;
 import com.demo.domain.department.DepartmentAndId;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wwx
@@ -36,11 +38,34 @@ public class DepartmentController {
     @RequestMapping(value = "/addDepartment",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<Department> addDepartment(@RequestBody Department department){
+        System.out.println(department);
+        ServerResponse response=new ServerResponse();
+        /**
+         * 1.部门表新增一条新纪录
+         * 2.获取到新增的部门id
+         * 3.更新员工表的员工部门和职务
+         * 4.更新用户表的权限状态*/
         int result=departmentService.addDepartment(department);
         if(result==1){
-            return ServerResponse.createBySuccess("新增部门成功");
+            int departmentID=departmentService.getDepartmentID(department.getEmployeeId());
+            Mobilize mobilize=new Mobilize();
+            mobilize.setEmployeeId(department.getEmployeeId());
+            mobilize.setNowDepartmentId(departmentID);
+            mobilize.setNowPosition(department.getPosition());
+            int result1= departmentService.updateEmployee(mobilize);
+            if(result1==1){
+                //更新用户表
+                EmployeeVo employeeVo=new EmployeeVo();
+                employeeVo.setId(department.getEmployeeId());
+                employeeVo.setFlag(1);
+                int result2=service.updateUserFlag(employeeVo);
+                if(result2==1){
+                    response.setStatus(ResponseCode.SUCCESS);
+                }
+            }
+
         }
-        return ServerResponse.createByError("失败");
+        return response;
     }
 
     /**
@@ -49,6 +74,7 @@ public class DepartmentController {
     @RequestMapping(value = "/modifyDepartment",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<Department> modifyDepartment(@RequestBody Department department){
+
         int result=departmentService.modifyDepartment(department);
         if(result==1){
             return ServerResponse.createBySuccess("成功修改");
@@ -62,11 +88,32 @@ public class DepartmentController {
     @RequestMapping(value = "/deleteDepartment",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<Department> deleteDepartment(int id){
+        ServerResponse response=new ServerResponse();
+        //查找要删除部门的所有员工id
+        List<Integer> employeeID=departmentService.getDeleteDepartmentEmployee(id);
+        /**
+         * 1.考勤表记录删除（需查找到员工id删除)
+         * 2.讨论表员工评论删除（需查找到员工id删除）
+         * 3.员工表删除所有该部门的员工
+         * 4.工作调动表删除所有的记录（需查找到员工id删除）
+         * 5.公告表删除所有该部门员工发布的记录（需查找到员工id删除）
+         * 6.加班申请表删除记录（需查找到员工id删除）
+         * 7.任务表删除记录（需查找到员工id删除）
+         * 8.删除用户表中该部门员工记录(需查找到员工id删除)
+         * */
+        System.out.println(employeeID.toString());
         int result=departmentService.deleteDepartment(id);
-        if(result==1){
-            return ServerResponse.createBySuccess("删除成功");
+        System.out.println(result);
+        if(result>0){
+            int result1=departmentService.deleteDepartmentAllEmployee(employeeID);
+            if(result1>0){
+                System.out.println("其他表的也删除了");
+                response.setMsg("其他表的也删除了");
+            }
+            response.setStatus(ResponseCode.SUCCESS);
+            return response;
         }
-        return ServerResponse.createByError("失败");
+        return response;
     }
 
     /**
@@ -172,4 +219,20 @@ public class DepartmentController {
         }
         return response;
     }
+
+    /**
+     * 返回查询到的普通员工的姓名和id
+     * */
+    @RequestMapping(value="/getSimpleEmployee")
+    @ResponseBody
+    public ServerResponse getSimpleEmployee(){
+        ServerResponse response=new ServerResponse();
+        List<Map<String,Object>> list=departmentService.getSimpleEmployee();
+        if(list.size()>0){
+            response.setData(list);
+            response.setStatus(ResponseCode.SUCCESS);
+        }
+        return response;
+    }
+
 }

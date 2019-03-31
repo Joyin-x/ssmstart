@@ -6,6 +6,7 @@ package com.demo.domain.mobilize;
  **/
 public class MobilizeRecord {
     private String name;
+    private int id;
     private int employeeId;
     private String originalPosition;
     private int originalDepartmentId;
@@ -15,6 +16,14 @@ public class MobilizeRecord {
     private String transferReason;
     private String approver;
     private String mobilizeRemark;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

@@ -52,12 +52,12 @@ public interface overTimeMapper {
     /**
      * 查询当天早上是否已签到
      * */
-    int isAttendance();
+    int isAttendance(int employeeID);
 
     /**
      * 查询当天下午是否已签到
      * */
-    int isAttendancePM();
+    int isAttendancePM(int id);
 
     /**
      * 根据部门查询当前打卡记录

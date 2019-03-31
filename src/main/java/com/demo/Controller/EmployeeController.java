@@ -113,58 +113,52 @@ public class EmployeeController {
         return response;
     }
 
-    @RequestMapping(value = "/md5")
-    public ServerResponse sendMail() {
-        ServerResponse response = new ServerResponse();
-        String context = MD5Util.getStrMD5("15017814621");
-        String a=MD5Util.getStrMD5("123456"+context);
-        System.out.println(a);
-        response.setData(a);
-        return response;
-    }
 
     /**
      * 增加员工信息
      */
     @RequestMapping(value = "/addEmployee", method = RequestMethod.POST)
     public ServerResponse addEmployee(@RequestBody EmployeeVo employee) {
-        System.out.println("前台传的员工信息:"+employee);
         ServerResponse response = new ServerResponse();
         if (StringUtils.isEmpty(employee.getName())) {
-            return ServerResponse.createByError("员工姓名不能为空！");
+            return response.createByError("员工姓名不能为空！");
         }
         if (StringUtils.isEmpty(employee.getAddress())) {
-            return ServerResponse.createByError("居住地址不能为空!");
+            return response.createByError("居住地址不能为空!");
         }
         if (StringUtils.isEmpty(employee.getPhone())) {
-            return ServerResponse.createByError("电话号码不能为空！");
+            return response.createByError("电话号码不能为空！");
         }
         if (StringUtils.isEmpty(employee.getDepartment_id())) {
-            return ServerResponse.createByError("部门id不能为空！");
+            return response.createByError("部门不能为空！");
         }
         if (StringUtils.isEmpty(employee.getProfessional())) {
-            return ServerResponse.createByError("所学专业不能为空!");
+            return response.createByError("所学专业不能为空!");
+        }
+        if (StringUtils.isEmpty(employee.getSex())) {
+            return response.createByError("员工性别不能为空!");
+        }
+        if (StringUtils.isEmpty(employee.getBirthday())) {
+            return response.createByError("员工生日不能为空!");
+        }
+        if (StringUtils.isEmpty(employee.getPosition())) {
+            return response.createByError("员工职务不能为空!");
         }
         int result = service.insertEmployee(employee);
         if (result == 1) {
-            System.out.println("插入成功");
             SendQQMailUtil sendMail = new SendQQMailUtil();
             //生成默认密码
             String password = UUIDTool.generatePassword();
-            System.out.println(password);
             try {
-                sendMail.sendMail(employee.getEmail(), "恭喜你，你在我公司的入职信息已添加", "你的用户信息已被添加，默认登录密码为" + password + "，请尽快登录修改密码！");
+                sendMail.sendMail(employee.getEmail(), "你在我公司的入职信息已添加，职务为"+employee.getPosition()+"", "你的用户信息已被添加，默认登录密码为" + password + "，请尽快登录修改密码！");
             } catch (Exception e) {
                 System.out.println(e);
             } finally {
                 //查询到了刚才新增的用户id
                 int id = service.getUserID(employee.getPhone());
-                System.out.println("用户默认分配的id为："+id);
                 password = MD5Util.getStrMD5(password + MD5Util.getStrMD5(employee.getPhone()));
                 UserLogin user = new UserLogin(id, employee.getPhone(), password, employee.getFlag(), "https://weixiong.info/image/work.jpg");
-                System.out.println(user);
                 int insertResult = service.addUser(user);
-                System.out.println("新增结果："+insertResult);
                 if (insertResult == 1) {
                     response.setStatus(ResponseCode.SUCCESS);
                 }
@@ -233,4 +227,38 @@ public class EmployeeController {
             return response;
         }
     }
+
+
+    /**
+     * 更新用户职务和权限
+     */
+    @RequestMapping(value = "/updateEmployee", method = RequestMethod.POST)
+    public ServerResponse updateEmployee(@RequestBody EmployeeVo employeeVo) {
+        ServerResponse response = new ServerResponse();
+        System.out.println(employeeVo);
+        int result=service.updateEmployee(employeeVo);
+        if(result==1){
+            //更新employee表成功
+            int result1=service.updateUserFlag(employeeVo);
+            if(result1==1){
+                System.out.println(result1);
+                response.setStatus(ResponseCode.SUCCESS);
+            }
+        }
+        return response;
+    }
+
+    /**
+     * 删除用户*/
+    @RequestMapping(value = "/deleteEmployee")
+    public ServerResponse deleteEmployee(int id) {
+        System.out.println(id);
+        ServerResponse response = new ServerResponse();
+        int result=service.deleteEmployee(id);
+        if(result>0){
+            response.setStatus(ResponseCode.SUCCESS);
+        }
+        return response;
+    }
+
 }

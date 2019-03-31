@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wwx
@@ -30,6 +31,14 @@ public class departmentService {
     /**
      * 修改部门信息*/
     public int modifyDepartment(Department department){return mapper.modifyDepartment(department);}
+
+    /**
+     * 查找要删除部门的所有员工信息*/
+    public List<Integer> getDeleteDepartmentEmployee(int id){return mapper.getDeleteDepartmentEmployee(id);}
+
+    /**
+     * 删除部门时删除其他表中的员工信息*/
+    public int deleteDepartmentAllEmployee(List<Integer> list){return mapper.deleteDepartmentAllEmployee(list);}
 
     /**
      * 删除部门信息*/
@@ -54,4 +63,13 @@ public class departmentService {
      * 新增工作调动记录
      * */
     public int addMobilze(Mobilize mobilize){return mapper.addMobilze(mobilize);}
+
+    /**
+     * 返回查询到的普通员工姓名和id*/
+    public List<Map<String,Object>> getSimpleEmployee(){return mapper.getSimpleEmployee();}
+
+    /**
+     * 根据负责人id查找部门id
+     * */
+    public int getDepartmentID(int id){return mapper.getDepartmentID(id);}
 }

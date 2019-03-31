@@ -58,13 +58,13 @@ public class overTimeService {
     /**
      * 查询当天早上是否已签到
      * */
-    public int isAttendance(){return mapper.isAttendance();}
+    public int isAttendance(int employeeID){return mapper.isAttendance(employeeID);}
 
 
     /**
      * 查询当天下午是否已签到
      * */
-    public int isAttendancePM(){return mapper.isAttendancePM();}
+    public int isAttendancePM(int id){return mapper.isAttendancePM(id);}
 
     /**
      * 根据部门查询当前打卡记录

@@ -41,4 +41,52 @@
     <update id="updateTaskStatus" parameterType="int">
         update task set status=1 where id=#{id}
     </update>
+
+    <!--验证用户登录-->
+    <select id="getPassword" resultType="java.util.Map" parameterType="int">
+        select password,phone from user where userId=#{id}
+    </select>
+
+    <!--修改密码-->
+    <update id="updatePassword" parameterType="com.demo.domain.employee.UpdatePassword">
+        update user set password=#{newPassword} where userId=#{id}
+    </update>
+
+    <!--查找要修改的手机号是否已存在-->
+    <select id="getPhone" parameterType="String" resultType="int">
+        select count(*) as count from user where phone=#{phone}
+    </select>
+    <!--修改员工表的手机号-->
+    <update id="updatePhone" parameterType="com.demo.domain.employee.EmployeeVo">
+        update employee set phone=#{phone} where id=#{id};
+        update user set phone=#{phone} where userId=#{id}
+    </update>
+    <!--修改用户表的手机号-->
+    <update id="updateUserPhone" parameterType="com.demo.domain.employee.EmployeeVo">
+       update user set phone=#{phone} where userId=#{id}
+    </update>
+    <!--修改用户的地址-->
+    <update id="updateAddress" parameterType="com.demo.domain.employee.EmployeeVo">
+       update employee set address=#{address} where id=#{id}
+    </update>
+    <!--修改用户学校-->
+    <update id="updateSchool" parameterType="com.demo.domain.employee.EmployeeVo">
+       update employee set school=#{school} where id=#{id}
+    </update>
+    <!--修改用户的专业-->
+    <update id="updateProfessional" parameterType="com.demo.domain.employee.EmployeeVo">
+       update employee set professional=#{professional} where id=#{id}
+    </update>
+    <!--修改用户的生日-->
+    <update id="updateBirthday" parameterType="com.demo.domain.employee.EmployeeVo">
+       update employee set birthday=#{birthday} where id=#{id}
+    </update>
+    <!--修改用户的性别-->
+    <update id="updateSex" parameterType="com.demo.domain.employee.EmployeeVo">
+       update employee set sex=#{sex} where id=#{id}
+    </update>
+    <!--根据手机号和邮箱查找用户id-->
+    <select id="getEmployeeIDByPE" parameterType="com.demo.domain.employee.Employee" resultType="Employee">
+      select id,count(*) as sex from employee where phone=#{phone} and email=#{email}
+    </select>
 </mapper>

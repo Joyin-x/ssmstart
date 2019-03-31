@@ -80,7 +80,8 @@ public class NoticeController {
 
     @RequestMapping(value = "/addImage",method = RequestMethod.POST)
     @Transactional
-    public String upload(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file)throws IOException{
+    public ServerResponse upload(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file)throws IOException{
+        ServerResponse response=new ServerResponse();
         request.setCharacterEncoding("UTF-8");
         int userId = Integer.parseInt(request.getParameter("user"));
         if(!file.isEmpty()) {
@@ -125,17 +126,19 @@ public class NoticeController {
                     int result=myService.addImage(image);
                     System.out.println("result:"+result);
                     if(result==1){
-                        return path;
+                        response.setData(path);
+                        response.setStatus(ResponseCode.SUCCESS);
                     }else{
-                        return "图片存储失败";
+                        response.setMsg("图片存储失败");
                     }
                 }else {
-                    System.out.println("不是我们想要的文件类型,请按要求重新上传");
-                    return "error";
+                    response.setMsg("图片不是想要的上传类型");
                 }
             }
+        }else {
+        response.setMsg("图片为空");
         }
-        return "图片是空的啊，大兄弟";
+        return response;
     }
 
     /**

@@ -37,4 +37,21 @@
     <select id="getDiscuss" resultType="java.util.Map" parameterType="int">
         select d.*,u.picture from discuss d,user u where id=#{id} and u.userId=d.employeeID
     </select>
+
+    <!--查询该用户是否点赞-->
+    <select id="checkLike" parameterType="Like" resultType="int">
+        select count(*) from praise where employee_id=#{employeeId} and article_id=#{articleId}
+    </select>
+    <!--用户点赞添加到数据库-->
+    <insert id="addLike" parameterType="Like">
+        insert into praise(employee_id,article_id) values(#{employeeId},#{articleId})
+    </insert>
+    <!--删除用户点赞-->
+    <delete id="deleteLike">
+        delete from praise where employee_id=#{employeeId} and article_id=#{articleId}
+    </delete>
+    <!--为文章点赞-->
+    <update id="likeArticle" parameterType="Like">
+        update notice n set n.like=n.like+#{id} where id=#{articleId}
+    </update>
 </mapper>

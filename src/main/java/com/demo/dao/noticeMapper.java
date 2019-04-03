@@ -2,6 +2,7 @@ package com.demo.dao;
 
 import com.demo.domain.Image;
 import com.demo.domain.notice.Discuss;
+import com.demo.domain.notice.Like;
 import com.demo.domain.notice.Notice;
 import com.demo.domain.notice.noticeVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -43,4 +44,22 @@ public interface noticeMapper {
     /**
      * 获取评论*/
     List<Map<String,Object>> getDiscuss(int id);
+
+    /**
+     * 查询员工是否点赞该文章
+     * */
+    int checkLike(Like like);
+    /**
+     * 添加用户点赞到数据库
+     * */
+     int addLike(Like like);
+     /**
+      * 删除用户点赞
+      * */
+     int deleteLike(Like like);
+    /**
+     * 评论点赞
+     * */
+    int likeArticle(Like like);
+
 }

@@ -3,6 +3,7 @@ package com.demo.service.notice;
 import com.demo.dao.noticeMapper;
 import com.demo.domain.Image;
 import com.demo.domain.notice.Discuss;
+import com.demo.domain.notice.Like;
 import com.demo.domain.notice.Notice;
 import com.demo.domain.notice.noticeVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,4 +51,24 @@ public class noticeService {
     /**
      * 获取评论*/
     public List<Map<String,Object>> getDiscuss(int id){return mapper.getDiscuss(id);}
+
+    /**
+     * 查询员工是否点赞该文章
+     * */
+    public int checkLike(Like like){return mapper.checkLike(like);}
+
+    /**
+     * 添加用户点赞到数据库
+     * */
+    public int addLike(Like like){return mapper.addLike(like);}
+
+    /**
+     * 删除用户点赞
+     * */
+    public int deleteLike(Like like){return mapper.deleteLike(like);}
+
+    /**
+     * 为文章评论点赞
+     * */
+    public int likeArticle(Like like){return mapper.likeArticle(like);}
 }

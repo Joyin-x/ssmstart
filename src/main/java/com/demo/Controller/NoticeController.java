@@ -2,6 +2,7 @@ package com.demo.Controller;
 
 import com.demo.domain.Image;
 import com.demo.domain.notice.Discuss;
+import com.demo.domain.notice.Like;
 import com.demo.domain.notice.Notice;
 import com.demo.domain.notice.noticeVo;
 import com.demo.service.notice.noticeService;
@@ -156,12 +157,66 @@ public class NoticeController {
 
     @RequestMapping(value = "/getDiscuss")
     public ServerResponse getDiscuss(int id){
-        System.out.println(id);
         ServerResponse response=new ServerResponse();
         List<Map<String,Object>> list=service.getDiscuss(id);
         if(list.size()>0){
             response.setData(list);
             response.setStatus(ResponseCode.SUCCESS);
+        }
+        return response;
+    }
+
+    //检查用户是否点赞
+    @RequestMapping(value = "/checkLike",method = RequestMethod.POST)
+    public ServerResponse checkLike(@RequestBody Like like){
+        System.out.println(like);
+        ServerResponse response=new ServerResponse();
+        int result=service.checkLike(like);
+        if(result==1){
+            response.setStatus(ResponseCode.SUCCESS);
+        }
+        return response;
+    }
+
+    /**
+     * 对文章点赞
+     * */
+    @RequestMapping(value = "/like",method = RequestMethod.POST)
+    @Transactional
+    public ServerResponse like(@RequestBody Like like){
+        ServerResponse response=new ServerResponse();
+        int result=service.checkLike(like);
+        Like a=new Like();
+        a.setArticleId(like.getArticleId());
+        int result1;
+        //表示已经点赞
+        if(result==1){
+            //更新该文章的点赞数（减1）
+            a.setId(-1);
+            result1=service.likeArticle(a);
+            if(result1==1){
+                int deleteResult=service.deleteLike(like);
+                if(deleteResult==1){
+                    response.setStatus(ResponseCode.SUCCESS);
+                    response.setMsg("已取消点赞");
+                }
+            }
+        }
+        //表示未点赞
+        else{
+            //更新该文章的点赞数（加1）
+            a.setId(1);
+            result1=service.likeArticle(a);
+            if(result1==1){
+                //增加用户点赞记录
+                int addResult=service.addLike(like);
+                if(addResult==1){
+                    response.setStatus(ResponseCode.SUCCESS);
+                    response.setMsg("已点赞");
+                }
+            }
+
+
         }
         return response;
     }

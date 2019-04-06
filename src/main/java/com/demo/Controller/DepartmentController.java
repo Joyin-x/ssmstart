@@ -100,6 +100,8 @@ public class DepartmentController {
          * 6.加班申请表删除记录（需查找到员工id删除）
          * 7.任务表删除记录（需查找到员工id删除）
          * 8.删除用户表中该部门员工记录(需查找到员工id删除)
+         * 9.删除工资表中该部门员工工资记录（未完成）
+         * 10.删除奖惩表中该部门员工奖惩记录（未完成）
          * */
         System.out.println(employeeID.toString());
         int result=departmentService.deleteDepartment(id);

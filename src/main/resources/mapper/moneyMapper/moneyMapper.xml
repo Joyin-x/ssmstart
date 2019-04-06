@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.demo.dao.moneyMapper">
+
+    <!--根据id返回部门信息-->
+    <select id="selectDepartment" parameterType="int" resultType="Map">
+      select * from department where id=#{id}
+    </select>
+    <!--更新部门底薪-->
+    <update id="updateBasicSalary" parameterType="Department">
+        update department set basic_salary=#{basicSalary} where id=#{id}
+    </update>
+
+    <!--插入奖惩信息-->
+    <insert id="addReward" parameterType="Reward">
+        insert into rewards(employee_id,rewards_date,money,rewards_reason) values(#{employeeId},#{rewardsDate},#{money},#{rewardsReason})
+    </insert>
+
+    <!--统计出勤天数信息-->
+    <select id="countAttendance" parameterType="int" resultType="int">
+        select count(*) from attendance where employee_id=#{id} and DATE_FORMAT(office_time,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
+    </select>
+
+    <!--查询部门下的员工id-->
+    <select id="selectEmployeeID" parameterType="int" resultType="Map">
+        select e.id as employeeId from department d,employee e where d.id=e.department_id and d.id=#{id}
+    </select>
+
+    <!--查找部门底薪-->
+    <select id="selectBasicSalary" parameterType="int" resultType="int">
+        select basic_salary as basicSalary from department where id=#{id}
+    </select>
+
+    <!--查找员工奖惩记录-->
+    <select id="selectRewards" parameterType="int" resultType="Map">
+        select money from rewards where employee_id=#{id}
+    </select>
+
+    <!--查找员工本月加班天数-->
+    <select id="selectOverTime" parameterType="int" resultType="int">
+        select count(*) as days from overtime where id=#{id} and DATE_FORMAT(startTime,"%Y%m")=DATE_FORMAT(CURRENT_DATE,"%Y%m") and (approve!=""||approve!=null)
+    </select>
+
+    <!--工资表插入发放记录-->
+    <insert id="addWage" parameterType="java.util.List">
+        insert into wage(employee_id,basic_salary,bonus,overtime_pay,net_payroll,start_time,end_time,pay_date)
+        values
+        <foreach collection="list" item="wage" separator=",">
+            (#{wage.employeeId},#{wage.basicSalary},#{wage.bonus},#{wage.overtimePay},#{wage.netPayroll},#{wage.startTime},#{wage.endTime},#{wage.payDate})
+        </foreach>
+    </insert>
+
+    <!--判断当前月是否已发工资-->
+    <select id="checkWage" parameterType="int" resultType="int">
+        select count(*) from wage w,employee e where DATE_FORMAT(pay_date,"%Y%m")=DATE_FORMAT(CURRENT_DATE,"%Y%m") and w.employee_id=e.id and w.employee_id=#{id}
+    </select>
+
+    <!--查询工资列表-->
+    <select id="getWageList" parameterType="int" resultType="Map">
+        select e.name,e.position,w.* from wage w,employee e where e.id=w.employee_id and DATE_FORMAT(w.pay_date,"%Y%m")=DATE_FORMAT(CURRENT_DATE,"%Y%m") and e.department_id=#{id}
+    </select>
+</mapper>

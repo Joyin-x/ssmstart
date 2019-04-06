@@ -14,6 +14,8 @@ import java.util.List;
  * @date 2018/12/29 10:16
  **/
 
+/**
+ * 培训相关*/
 @Controller
 @RequestMapping("/evaluation")
 public class EvaluationController {

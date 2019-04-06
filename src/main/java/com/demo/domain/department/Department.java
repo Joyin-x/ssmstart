@@ -17,14 +17,7 @@ public class Department {
     private String description;
     private String position;
     private String establishedTime;
-
-    public String getEstablishedTime() {
-        return establishedTime;
-    }
-
-    public void setEstablishedTime(String establishedTime) {
-        this.establishedTime = establishedTime;
-    }
+        private int basicSalary;
 
     public int getId() {
         return id;
@@ -74,6 +67,22 @@ public class Department {
         this.position = position;
     }
 
+    public String getEstablishedTime() {
+        return establishedTime;
+    }
+
+    public void setEstablishedTime(String establishedTime) {
+        this.establishedTime = establishedTime;
+    }
+
+    public int getBasicSalary() {
+        return basicSalary;
+    }
+
+    public void setBasicSalary(int basicSalary) {
+        this.basicSalary = basicSalary;
+    }
+
     @Override
     public String toString() {
         return "Department{" +
@@ -83,6 +92,8 @@ public class Department {
                 ", principal='" + principal + '\'' +
                 ", description='" + description + '\'' +
                 ", position='" + position + '\'' +
+                ", establishedTime='" + establishedTime + '\'' +
+                ", basicSalary='" + basicSalary + '\'' +
                 '}';
     }
 }

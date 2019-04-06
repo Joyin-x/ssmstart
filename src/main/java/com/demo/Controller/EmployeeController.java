@@ -213,7 +213,7 @@ public class EmployeeController {
         Integer checkRegister = service.checkRegister(userLogin.getPhone());
         //为空则表示该号码还未注册,不能登录
         if (checkRegister == null) {
-            response.setMsg("该号码未注册，请先注册！");
+            response.setMsg("该号码未注册！");
             return response;
         } else {
             String password = service.getPassword(userLogin.getPhone());

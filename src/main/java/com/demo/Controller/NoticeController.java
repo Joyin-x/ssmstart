@@ -179,7 +179,7 @@ public class NoticeController {
     }
 
     /**
-     * 对文章点赞
+     * 对文章点赞ui
      * */
     @RequestMapping(value = "/like",method = RequestMethod.POST)
     @Transactional

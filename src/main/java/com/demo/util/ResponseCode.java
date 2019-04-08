@@ -11,13 +11,10 @@ package com.demo.util;
 public enum ResponseCode {
     SUCCESS(200, "成功"),
     ERROR(420, "失败"),
-    NOT_FOUND(404, "请求不存在"),
     NEED_LOG(410,"请先登录"),
     SERVER_ERROR(500,"请求出错"),
-    notAttendance(411,"请勿重复打卡");
-
-
-
+    notAttendance(411,"请勿重复打卡"),
+    PAY_MONEY(412,"发放失败，该部门工资已经发放");
     private int code;
     private String msg;
 

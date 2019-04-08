@@ -11,7 +11,7 @@
  Target Server Version : 50560
  File Encoding         : 65001
 
- Date: 06/04/2019 18:35:02
+ Date: 08/04/2019 18:10:57
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,7 @@ CREATE TABLE `attendance`  (
   `location` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '打卡地点',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `foreign_attendance-employee`(`employee_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 506 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 507 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of attendance
@@ -38,7 +38,6 @@ INSERT INTO `attendance` VALUES (1, 9, '2019-04-06 08:19:26', '2019-04-06 20:19:
 INSERT INTO `attendance` VALUES (2, 4, '2019-04-19 07:54:10', '2019-04-19 11:54:12', '广东省广州市天河区天府路1号');
 INSERT INTO `attendance` VALUES (3, 6, '2019-04-19 08:54:07', '2019-04-19 11:54:12', '广东省广州市天河区天府路1号');
 INSERT INTO `attendance` VALUES (4, 9, '2019-04-07 08:19:26', '2019-04-07 22:19:29', '广东省广州市天河区天府路1号');
-INSERT INTO `attendance` VALUES (5, 9, '2019-04-08 08:19:26', '2019-04-08 22:19:29', '广东省广州市天河区天府路1号');
 INSERT INTO `attendance` VALUES (6, 9, '2019-04-09 08:19:26', '2019-04-09 22:19:29', '广东省广州市天河区天府路1号');
 INSERT INTO `attendance` VALUES (7, 9, '2019-04-10 08:19:26', '2019-04-10 22:19:29', '广东省广州市天河区天府路1号');
 INSERT INTO `attendance` VALUES (8, 9, '2019-04-11 08:19:26', '2019-04-11 22:19:29', '广东省广州市天河区天府路1号');
@@ -506,6 +505,7 @@ INSERT INTO `attendance` VALUES (502, 38, '2019-04-08 08:19:26', '2019-04-08 22:
 INSERT INTO `attendance` VALUES (503, 38, '2019-04-09 08:19:26', '2019-04-09 22:19:29', '广东省广州市天河区天府路1号');
 INSERT INTO `attendance` VALUES (504, 38, '2019-04-10 08:19:26', '2019-04-10 22:19:29', '广东省广州市天河区天府路1号');
 INSERT INTO `attendance` VALUES (505, 38, '2019-04-13 08:19:26', '2019-04-13 22:19:29', '广东省广州市天河区天府路1号');
+INSERT INTO `attendance` VALUES (506, 9, '2019-04-08 18:06:04', '2019-04-08 18:06:30', '广东省广州市天河区天河北路898号');
 
 -- ----------------------------
 -- Table structure for department
@@ -566,6 +566,7 @@ INSERT INTO `discuss` VALUES (5, '陈晓', 9, '测试数据', '2019-03-26', 0);
 INSERT INTO `discuss` VALUES (10, '陈晓', 9, '测试测试', '2019-03-26', 0);
 INSERT INTO `discuss` VALUES (2, '萧炎', 15, '上岛咖啡国家的时刻', '2019-04-03', 0);
 INSERT INTO `discuss` VALUES (7, '陈晓', 9, '123', '2019-04-05', 0);
+INSERT INTO `discuss` VALUES (2, '郭雅', 22, '直播真这么好吗？', '2019-04-07', 0);
 
 -- ----------------------------
 -- Table structure for employee
@@ -584,7 +585,7 @@ CREATE TABLE `employee`  (
   `education` varchar(4) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '学历',
   `school` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '毕业学校',
   `email` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮箱',
-  `professional` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '职称',
+  `professional` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所学妆业',
   `remark` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注信息',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `foreign_department_id`(`department_id`) USING BTREE
@@ -599,7 +600,7 @@ INSERT INTO `employee` VALUES (3, '李希', 1, '1990-02-28', '广东省珠海市
 INSERT INTO `employee` VALUES (4, '王涛', 0, '1994-06-16', '北京市朝阳区', '广州市南沙区横沥镇兆丰路3号', '46212989', 2, '销售主任', '本科', '广州海洋大学', '46212989@qq.com', '市场营销', '应届生');
 INSERT INTO `employee` VALUES (5, '韩绍华', 1, '1994-02-22', '山西省侯马市', '广东省广州市五华县平远镇富贵村', '84961133', 6, '软件工程师', '本科', '广州大学', '84961133@qq.com', '外贸', '入职七年');
 INSERT INTO `employee` VALUES (6, '李航', 1, '1991-07-19', '上海市静安区', '广东省广州市南沙区黄阁镇吉祥路1号', '84978811', 6, '系统分析员', '本科', '广州培正大学', '84978811@163.com', '大数据人工智能', '实习生');
-INSERT INTO `employee` VALUES (7, '李剑', 0, '2000-07-05', '北京市通州区', '广州市越秀区连新路11号', '2129891', 16, '测试', '本科', '华南农业大学', '2129891@qq.com', '计算机科学与技术', '入职五年');
+INSERT INTO `employee` VALUES (7, '李剑', 0, '2000-07-05', '北京市通州区', '广州市越秀区连新路11号', '2129891', 6, '程序员', '本科', '华南农业大学', '2129891@qq.com', '计算机科学与技术', '入职五年');
 INSERT INTO `employee` VALUES (8, '石磊', 0, '1994-06-16', '河南省宜州市', '北京市东城区和平里6区8号楼8-3号', '564300', 2, '销售经理', '本科', '华南师范大学', '564300@qq.com', '网络工程', '应届生');
 INSERT INTO `employee` VALUES (9, '陈晓', 0, '1979-08-04', '天津市津南区', '广东省广州市五华县平远镇富贵村', '15017814621', 2, '销售代表', '本科', '山西交通学院', '1461483915@qq.com', '市场营销', '入职两年了');
 INSERT INTO `employee` VALUES (10, '林阳', 0, '1989-06-03', '福建省沙县', '北京市崇文区夕照寺街16号华城小区4号', '87824', 1, '人事主管', '本科', '武汉大学', '87824@qq.com', '管理学', '入职两年');
@@ -621,7 +622,7 @@ INSERT INTO `employee` VALUES (26, '曾景辉', 1, '1984-03-16', '重庆市长�
 INSERT INTO `employee` VALUES (27, '吴荣达', 0, '1992-04-06', '四川省中江县', '广东省广州市五华县平远镇富贵村', '15798145', 3, '助理会计', '本科', '郑州大学', '15798145@qq.com', '会计学', '应届生');
 INSERT INTO `employee` VALUES (28, '余静霞', 1, '1995-07-11', '广东省潮州市', '广东省广州市五华县平远镇富贵村', '231597', 3, '会计', '本科', '广州大学', '231597@qq.com', '会计学', '入职两年');
 INSERT INTO `employee` VALUES (35, '凌天宇', 0, '2002-05-01', '山西省晋城市陵川县', '龙门大道', '54612311', 3, '财务总监', '本科', '山东海道口大学', '54612311@qq.com', '财务管理', '入职半年');
-INSERT INTO `employee` VALUES (36, '沙建辉', 1, '2019-08-01', '广东省广州市天河区', '龙门街', '13462652322', 1, '行政经理', '小学', '社会大学', '825514316@qq.com', '管理学', '入职两年');
+INSERT INTO `employee` VALUES (36, '沙建辉', 1, '2019-08-01', '广东省广州市天河区', '龙门街', '13462652322', 1, '行政经理', '小学', '野鸡大学', '825514316@qq.com', '管理学', '入职两年');
 INSERT INTO `employee` VALUES (37, '李剑开', 1, '1988-07-05', '北京市通州区', '广州市越秀区连新路11号', '2129891256', 5, '研发总监', '本科', '华南农业大学', '2129891256@qq.com', '计算机科学与技术', '入职六年');
 INSERT INTO `employee` VALUES (38, '大舅子', 0, '1996-10-01', '广东省广州市天河区', '天河区珠江新城华夏路富力盈凯广场东门', '135641421', 1, '人事助理', '小学', '广东大学', '1461483915@qq.com', '网络工程', '');
 
@@ -674,8 +675,6 @@ CREATE TABLE `mobilize`  (
 -- ----------------------------
 INSERT INTO `mobilize` VALUES (3, 2, '招聘专员', 1, '市场调研主管', 4, '2019-02-14', '员工本人申请', '未设置', '工作能力待审核');
 INSERT INTO `mobilize` VALUES (5, 9, '人事主管', 1, '销售代表', 2, '2019-03-01', '工作态度不端正', '未设置', '无');
-INSERT INTO `mobilize` VALUES (7, 11, '行政助理', 1, '行政助理', 1, '2019-03-25', '测试', '未设置', '无');
-INSERT INTO `mobilize` VALUES (9, 10, '人事主管', 1, '人事主管', 2, '2019-04-06', '测试', '未设置', '测试');
 INSERT INTO `mobilize` VALUES (10, 10, '人事主管', 2, '人事主管', 1, '2019-04-06', '测试', '未设置', '测试');
 
 -- ----------------------------
@@ -729,6 +728,7 @@ CREATE TABLE `overtime`  (
 -- ----------------------------
 -- Records of overtime
 -- ----------------------------
+INSERT INTO `overtime` VALUES (37, 1, 5, '测试', '2019-04-04 16:06:02', '2019-04-25 16:06:06', NULL, 0);
 INSERT INTO `overtime` VALUES (9, 2, 2, '把客户的订单转交给企业的生产部门。', '2018-12-25 00:00:00', '2018-12-25 00:00:00', '陈明明', 0);
 INSERT INTO `overtime` VALUES (9, 3, 2, '寻找产品的潜在客户，并把他们转变为企业的实际客户', '2018-12-25 00:00:00', '2018-12-25 00:00:00', '陈明明', 1);
 INSERT INTO `overtime` VALUES (9, 4, 2, '把客户已购买的产品发送给客户', '2017-12-25 00:00:00', '2019-12-25 00:00:00', '', 1);
@@ -738,10 +738,10 @@ INSERT INTO `overtime` VALUES (9, 7, 2, '根据公司产品、价格及市场策
 INSERT INTO `overtime` VALUES (9, 8, 2, '根据公司产品、价格及市场策略，独立处置询盘、报价、合同条款的协商及合同签订事宜。', '2019-04-06 05:03:00', '2019-04-06 18:07:00', '', 0);
 INSERT INTO `overtime` VALUES (9, 9, 2, '与客户签订销售合同，督促合同正常如期履行，并催讨所欠应收销售款项。', '2018-12-25 05:03:00', '2018-12-25 05:03:00', '', 0);
 INSERT INTO `overtime` VALUES (9, 10, 2, '完成销售经理临时交办的其他任务。', '2018-12-25 03:00:00', '2018-12-25 23:04:00', '', 0);
-INSERT INTO `overtime` VALUES (3, 11, 4, '确定公司产品和服务的需求、竞争者和潜在客户，制定价格策略，确保公司利润最大化和客户满意度最大化。', '2019-03-25 06:30:00', '2018-12-25 22:00:00', '', 1);
-INSERT INTO `overtime` VALUES (1, 12, 1, '制定具体的工作方案和计划，以保证企业目标的顺利实现', '2019-03-25 06:06:00', '2018-12-25 21:26:00', NULL, NULL);
-INSERT INTO `overtime` VALUES (1, 13, 3, '需求分析、预算制定、招聘方案的制定', '2019-03-24 12:00:00', '2019-03-25 22:00:00', NULL, NULL);
-INSERT INTO `overtime` VALUES (17, 14, 2, '', '2019-03-26 16:00:00', '2019-03-27 21:00:00', NULL, NULL);
+INSERT INTO `overtime` VALUES (3, 11, 4, '确定公司产品和服务的需求、竞争者和潜在客户，制定价格策略，确保公司利润最大化和客户满意度最大化。', '2019-03-25 06:30:00', '2018-12-25 22:00:00', '陈晓', 0);
+INSERT INTO `overtime` VALUES (1, 12, 3, '制定具体的工作方案和计划，以保证企业目标的顺利实现', '2019-03-25 06:06:00', '2018-12-25 21:26:00', '', 0);
+INSERT INTO `overtime` VALUES (1, 13, 3, '需求分析、预算制定、招聘方案的制定', '2019-03-24 12:00:00', '2019-03-25 22:00:00', '陈明明', 1);
+INSERT INTO `overtime` VALUES (17, 14, 2, '测试', '2019-03-26 16:00:00', '2019-03-27 21:00:00', NULL, NULL);
 INSERT INTO `overtime` VALUES (9, 16, 2, '测试', '2019-04-06 16:00:00', '2019-04-06 22:00:00', NULL, NULL);
 
 -- ----------------------------
@@ -753,7 +753,7 @@ CREATE TABLE `praise`  (
   `employee_id` int(3) NULL DEFAULT NULL COMMENT '点赞员工id',
   `article_id` int(3) NULL DEFAULT NULL COMMENT '点赞文章id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 82 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 86 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of praise
@@ -778,7 +778,7 @@ CREATE TABLE `rewards`  (
   `rewards_reason` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '奖惩原因',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `foreign_rewards_employee`(`employee_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of rewards
@@ -806,6 +806,7 @@ INSERT INTO `rewards` VALUES (20, 23, '2019-04-06', 1254, '补贴家用');
 INSERT INTO `rewards` VALUES (21, 12, '2019-04-06', 4576, '产品研发分红');
 INSERT INTO `rewards` VALUES (22, 3, '2019-04-06', 5464, '销售产品提成');
 INSERT INTO `rewards` VALUES (23, 2, '2019-04-06', 5461, '市场开拓补贴');
+INSERT INTO `rewards` VALUES (24, 36, '2019-04-08', 1233, '测试');
 
 -- ----------------------------
 -- Table structure for task
@@ -885,11 +886,11 @@ INSERT INTO `user` VALUES (26, '369845', '25e332f489d548bb549b568b2e2607c8', 0, 
 INSERT INTO `user` VALUES (27, '15798145', '12be9f086ca2f833c6c8a0ef83986a0d', 0, 'https://weixiong.info/image/work.jpg');
 INSERT INTO `user` VALUES (28, '231597', '58760131bcd74d0871d89fe463dd1f1d', 0, 'https://weixiong.info/image/work.jpg');
 INSERT INTO `user` VALUES (35, '546123', '155a8583e1fea64acb9e9dc484b6a16a', 1, 'https://weixiong.info/image/work.jpg');
-INSERT INTO `user` VALUES (36, '13462652322', '34d61934c859ceb2bc6e075e34c4275d', 1, 'https://weixiong.info/image/work.jpg');
+INSERT INTO `user` VALUES (36, '13462652322', '43425ad2242514001ab9b1aa8db9aca5', 1, 'https://weixiong.info/image/work.jpg');
 INSERT INTO `user` VALUES (37, '2129891256', 'ea8c1386608324e1df16d28aa300495f', 0, 'https://weixiong.info/image/f21a267c-b928-443b-ae08-38c12b2be901.jpg');
 INSERT INTO `user` VALUES (38, '135641421', 'cac3999ea3019d32e85f1d2451b11e71', 0, 'https://weixiong.info/image/f21a267c-b928-443b-ae08-38c12b2be901.jpg');
 INSERT INTO `user` VALUES (5, '84961133', '4197127d517a3cb15a97d852fc6ddf1e', 0, 'https://weixiong.info/image/f21a267c-b928-443b-ae08-38c12b2be901.jpg');
-INSERT INTO `user` VALUES (7, '2129891', NULL, 0, '');
+INSERT INTO `user` VALUES (7, '2129891', 'df818c724f121d57868cd09f9c3cfbb4', 0, 'https://weixiong.info/image/work.jpg');
 
 -- ----------------------------
 -- Table structure for wage
@@ -907,42 +908,40 @@ CREATE TABLE `wage`  (
   `pay_date` date NULL DEFAULT NULL COMMENT '发薪水日期',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `foreign_employeeId`(`employee_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 63 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of wage
 -- ----------------------------
-INSERT INTO `wage` VALUES (1, 10, 2166.00, 1100.00, 0.00, 3266, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (2, 11, 2166.00, 467.00, 0.00, 2633, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (3, 16, 2166.00, 634.00, 0.00, 2800, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (4, 36, 1500.00, 850.00, 0.00, 2350, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (5, 38, 1500.00, 1000.00, 0.00, 2500, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (6, 4, 733.00, 254.00, 0.00, 987, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (7, 8, 866.00, 0.00, 0.00, 866, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (8, 9, 1000.00, 4345.00, 0.00, 5345, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (9, 15, 866.00, 0.00, 0.00, 866, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (10, 17, 866.00, 0.00, 0.00, 866, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (11, 25, 933.00, 0.00, 0.00, 933, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (12, 26, 866.00, 564.00, 0.00, 1430, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (13, 1, 1333.00, 0.00, 0.00, 1333, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (14, 13, 1733.00, 0.00, 0.00, 1733, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (15, 19, 1733.00, 0.00, 0.00, 1733, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (16, 22, 1733.00, 0.00, 0.00, 1733, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (17, 24, 1733.00, 0.00, 0.00, 1733, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (18, 27, 1733.00, 0.00, 0.00, 1733, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (19, 28, 1866.00, 0.00, 0.00, 1866, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (20, 35, 1733.00, 0.00, 0.00, 1733, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (21, 2, 3466.00, 15461.00, 0.00, 18927, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (22, 3, 3466.00, 5689.00, 0.00, 9155, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (23, 12, 3466.00, 4576.00, 0.00, 8042, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (24, 20, 3466.00, 0.00, 0.00, 3466, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (25, 23, 3466.00, 1599.00, 0.00, 5065, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (26, 37, 1200.00, 1574.00, 0.00, 2774, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (27, 5, 1866.00, 5467.00, 0.00, 7333, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (28, 6, 1866.00, 2891.00, 0.00, 4757, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (29, 18, 1733.00, 1234.00, 0.00, 2967, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (30, 21, 1866.00, 567.00, 0.00, 2433, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (31, 7, 1733.00, 0.00, 0.00, 1733, '2019-04-01', '2019-04-30', '2019-04-06');
-INSERT INTO `wage` VALUES (32, 41, 0.00, 0.00, 0.00, 0, '2019-04-01', '2019-04-30', '2019-04-06');
+INSERT INTO `wage` VALUES (33, 10, 2166.00, 1100.00, 0.00, 3266, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (34, 11, 2166.00, 467.00, 0.00, 2633, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (35, 16, 2166.00, 634.00, 0.00, 2800, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (36, 36, 1500.00, 850.00, 0.00, 2350, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (37, 38, 1500.00, 1000.00, 0.00, 2500, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (38, 4, 733.00, 254.00, 0.00, 987, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (39, 8, 866.00, 0.00, 0.00, 866, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (40, 9, 1000.00, 4345.00, 0.00, 5345, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (41, 15, 866.00, 0.00, 0.00, 866, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (42, 17, 866.00, 0.00, 0.00, 866, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (43, 25, 933.00, 0.00, 0.00, 933, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (44, 26, 866.00, 564.00, 0.00, 1430, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (45, 1, 1333.00, 0.00, 0.00, 1333, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (46, 13, 1733.00, 0.00, 0.00, 1733, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (47, 19, 1733.00, 0.00, 0.00, 1733, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (48, 22, 1733.00, 0.00, 0.00, 1733, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (49, 24, 1733.00, 0.00, 0.00, 1733, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (50, 27, 1733.00, 0.00, 0.00, 1733, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (51, 28, 1866.00, 0.00, 0.00, 1866, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (52, 35, 1733.00, 0.00, 0.00, 1733, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (53, 2, 3466.00, 15461.00, 0.00, 18927, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (54, 3, 3466.00, 5689.00, 0.00, 9155, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (55, 12, 3466.00, 4576.00, 0.00, 8042, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (56, 20, 3466.00, 0.00, 0.00, 3466, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (57, 23, 3466.00, 1599.00, 0.00, 5065, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (58, 5, 1866.00, 5467.00, 0.00, 7333, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (59, 6, 1866.00, 2891.00, 0.00, 4757, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (60, 7, 0.00, 0.00, 0.00, 0, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (61, 18, 1733.00, 1234.00, 0.00, 2967, '2019-04-01', '2019-04-30', '2019-04-08');
+INSERT INTO `wage` VALUES (62, 21, 1866.00, 567.00, 0.00, 2433, '2019-04-01', '2019-04-30', '2019-04-08');
 
 SET FOREIGN_KEY_CHECKS = 1;

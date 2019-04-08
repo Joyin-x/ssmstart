@@ -139,6 +139,7 @@ public class DepartmentController {
     @RequestMapping(value="/getDepartmentEmployee",method=RequestMethod.POST)
     @ResponseBody
     public ServerResponse<List<DepartmentAndEmployee>> getDepartmentEmployee(int id){
+        System.out.println(id);
         List<DepartmentAndEmployee> DepartmentAndEmployeeList;
         if(id==0){
             DepartmentAndEmployeeList=service.getDepartmentEmployeeAll();

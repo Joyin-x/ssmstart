@@ -14,7 +14,7 @@
 
     </select>
     <!--增加新员工信息-->
-    <insert id="insertEmployee"  parameterType="EmployeeVo">
+    <insert id="insertEmployee" parameterType="EmployeeVo">
         insert into employee(name,sex,birthday,native_place,address,phone,department_id,position,education,school,email,professional,remark)
         values(#{name},#{sex},#{birthday},#{native_place},#{address},#{phone},#{department_id},#{position},#{education},#{school},#{email},#{professional},#{remark})
     </insert>
@@ -37,10 +37,11 @@
 
     <!--根据部门id查询该部门员工信息-->
     <resultMap id="resultDepartmentEmployee" type="DepartmentAndEmployee">
-        <result property="departmentName" column="department_name"></result>
+        <id column="id" property="id"></id>
+        <result property="departmentName" column="departmentName"></result>
         <result property="principal" column="principal"></result>
-        <collection property="employeeList" ofType="com.demo.domain.employee.Employee" column="department_id">
-            <id property="id" column="id"/>
+        <collection property="employeeList" ofType="com.demo.domain.employee.EmployeeVo" column="id">
+            <id property="id" column="eid"/>
             <result property="name" column="name"/>
             <result property="sex" column="sex"/>
             <result property="phone" column="phone"/>
@@ -48,11 +49,10 @@
         </collection>
     </resultMap>
     <select id="getDepartmentEmployee" resultMap="resultDepartmentEmployee" parameterType="int">
-        select d.department_name,d.principal,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id and d.id=#{id}
-
+        select d.id,d.department_name as departmentName,d.principal,e.id as eid,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id and d.id=#{id}
     </select>
     <select id="getDepartmentEmployeeAll" resultMap="resultDepartmentEmployee">
-        select d.department_name,e.id,e.name,e.sex,e.phone,e.position from employee e,department d where d.id=e.department_id
+        select d.id,d.department_name as departmentName,d.principal,e.id as eid,e.name,e.sex,e.phone,e.position from employee e LEFT JOIN department d ON d.id=e.department_id
     </select>
 
 
@@ -65,7 +65,6 @@
             <result property="evaluationTime" column="evaluation_time"></result>
             <result property="evaluationLevel" column="evaluation_level"></result>
             <result property="certificate" column="certificate"></result>
-            <result property="remark" column="remark"></result>
         </collection>
     </resultMap>
     <select id="getEmployeeEvaluation" resultMap="resultEmployeeEvaluation" parameterType="int">
@@ -98,7 +97,7 @@
         select id from employee where phone=#{phone}
     </select>
     <!--查找该用户是否已注册-->
-    <select id="checkRegister" resultType="Integer" >
+    <select id="checkRegister" resultType="Integer">
         select userId from user where phone=#{phone}
     </select>
 
@@ -125,43 +124,43 @@
     <!--修改员工信息-->
     <update id="updateEmployee" parameterType="com.demo.domain.employee.EmployeeVo">
         update employee set
-        <if test="name!='' and name!=null" >
+        <if test="name!='' and name!=null">
             name=#{name},
         </if>
-        <if test="sex!='' and sex!=null" >
+        <if test="sex!='' and sex!=null">
             sex=#{sex},
         </if>
-        <if test="birthday!='' and birthday!=null" >
+        <if test="birthday!='' and birthday!=null">
             birthday=#{birthday},
         </if>
-        <if test="native_place!='' and native_place!=null" >
+        <if test="native_place!='' and native_place!=null">
             native_place=#{native_place},
         </if>
-        <if test="address!='' and address!=null" >
+        <if test="address!='' and address!=null">
             address=#{address},
         </if>
-        <if test="phone!='' and phone!=null" >
+        <if test="phone!='' and phone!=null">
             phone=#{phone},
         </if>
-        <if test="department_id!='' and department_id!=null" >
+        <if test="department_id!='' and department_id!=null">
             department_id=#{department_id},
         </if>
-        <if test="position!='' and position!=null" >
+        <if test="position!='' and position!=null">
             position=#{position},
         </if>
-        <if test="education!='' and education!=null" >
+        <if test="education!='' and education!=null">
             education=#{education},
         </if>
-        <if test="school!='' and school!=null" >
+        <if test="school!='' and school!=null">
             school=#{school},
         </if>
-        <if test="email!='' and email!=null" >
+        <if test="email!='' and email!=null">
             email=#{email},
         </if>
-        <if test="professional!='' and professional!=null" >
+        <if test="professional!='' and professional!=null">
             professional=#{professional},
         </if>
-        <if test="remark!='' and remark!=null" >
+        <if test="remark!='' and remark!=null">
             remark=#{remark}
         </if>
         where id=#{id}

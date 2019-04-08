@@ -84,6 +84,7 @@ public class MoneyController {
             response.setStatus(ResponseCode.SUCCESS);
             response.setData(result);
         } else {
+            response.setStatus(ResponseCode.SUCCESS);
             response.setData(0);
         }
         return response;
@@ -112,7 +113,7 @@ public class MoneyController {
          * 3.循环执行这个数组，添加到数据库中*/
         List<Map<String, Integer>> employeeList = service.selectEmployeeID(id);
         int checkWage = service.checkWage(employeeList.get(0).get("employeeId"));
-        System.out.println(checkWage);
+        //工资未发放
         if(checkWage<1){
             List<Wage> wages = new ArrayList<>();
             for (int i = 0; i < employeeList.size(); i++) {
@@ -144,14 +145,20 @@ public class MoneyController {
             int result = service.addWage(wages);
             if (result > 0) {
                 response.setStatus(ResponseCode.SUCCESS);
-                response.setData(wages);
+                List<Map<String, Object>> wageList = service.getWageList(id);
+                response.setData(wageList);
             }
+        }
+        else{
+            response.setStatus(ResponseCode.PAY_MONEY);
+            List<Map<String, Object>> wageList = service.getWageList(id);
+            response.setData(wageList);
         }
         return response;
     }
 
     /**
-     * 按部门发送员工工资
+     * 按部门查找员工工资列表
      */
     @RequestMapping(value = "/getWageList")
     @Transactional

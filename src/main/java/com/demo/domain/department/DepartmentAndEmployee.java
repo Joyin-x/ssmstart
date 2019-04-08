@@ -10,9 +10,19 @@ import java.util.List;
  **/
 public class DepartmentAndEmployee {
 
+    private int id;
     private String departmentName;
     private String principal;
+
     private List<Employee> employeeList;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getDepartmentName() {
         return departmentName;

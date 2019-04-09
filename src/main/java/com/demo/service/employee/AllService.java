@@ -120,6 +120,9 @@ public class AllService {
     public int updateEmployee(EmployeeVo employeeVo){return allMapper.updateEmployee(employeeVo);}
 
     /**
+     * 验证该手机号码是否已存在*/
+    public int checkPhone(String phone){return allMapper.checkPhone(phone);}
+    /**
      * 修改员工等级权限*/
     public int updateUserFlag(EmployeeVo employeeVo){return allMapper.updateUserFlag(employeeVo);}
 

@@ -9,6 +9,7 @@ import com.demo.util.*;
 import com.demo.service.employee.AllService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -117,6 +118,7 @@ public class EmployeeController {
     /**
      * 增加员工信息
      */
+    @Transactional
     @RequestMapping(value = "/addEmployee", method = RequestMethod.POST)
     public ServerResponse addEmployee(@RequestBody EmployeeVo employee) {
         ServerResponse response = new ServerResponse();
@@ -144,16 +146,19 @@ public class EmployeeController {
         if (StringUtils.isEmpty(employee.getPosition())) {
             return response.createByError("员工职务不能为空!");
         }
-        int result = service.insertEmployee(employee);
-        if (result == 1) {
+        int count =service.checkPhone(employee.getPhone());
+        if(count>0){
+            response.setMsg("手机号码已存在，无法添加");
+            return response;
+        }
+        //发送邮件和添加用户
+        if (!StringUtils.isEmpty(employee.getEmail())) {
             SendQQMailUtil sendMail = new SendQQMailUtil();
             //生成默认密码
             String password = UUIDTool.generatePassword();
             try {
                 sendMail.sendMail(employee.getEmail(), "你在我公司的入职信息已添加，职务为"+employee.getPosition()+"", "你的用户信息已被添加，默认登录密码为" + password + "，请尽快登录修改密码！");
-            } catch (Exception e) {
-                System.out.println(e);
-            } finally {
+                int result = service.insertEmployee(employee);
                 //查询到了刚才新增的用户id
                 int id = service.getUserID(employee.getPhone());
                 password = MD5Util.getStrMD5(password + MD5Util.getStrMD5(employee.getPhone()));
@@ -162,10 +167,15 @@ public class EmployeeController {
                 if (insertResult == 1) {
                     response.setStatus(ResponseCode.SUCCESS);
                 }
+            } catch (Exception e) {
+                response.setMsg("邮箱地址不存在，发送邮件失败，员工信息未添加");
+                System.out.println(e);
+
+            } finally {
+                return response;
             }
         }
         return response;
-
     }
 
     /**

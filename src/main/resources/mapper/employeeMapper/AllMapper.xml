@@ -115,11 +115,15 @@
     <select id="getLoginInfo" resultType="java.util.Map" parameterType="int">
         select e.*,u.userId,d.department_name,d.principal,u.flag,u.picture from employee e,user u,department d where u.userId=e.id and d.id=e.department_id and e.id=#{id}
     </select>
-
+    <!--查询该手机号码是否已存在-->
+    <select id="checkPhone" parameterType="String" resultType="int">
+        select count(*) from employee where phone=#{phone}
+    </select>
     <!--添加入职信息后查找默认分配的用户id-->
     <select id="getUserID" parameterType="String" resultType="int">
         select id from employee where phone=#{phone}
     </select>
+
 
     <!--修改员工信息-->
     <update id="updateEmployee" parameterType="com.demo.domain.employee.EmployeeVo">

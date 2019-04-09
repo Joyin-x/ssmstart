@@ -76,7 +76,9 @@ public interface AllMapper {
      * 验证用户登录
      * */
     String getPassword(String phone);
-
+    /**
+     * 验证该手机号码是否已存在*/
+    int checkPhone(String phone);
     /**
      * 登录成功后返回员工个人信息（id,姓名,电话号码)
      * */

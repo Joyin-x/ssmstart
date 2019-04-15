@@ -1,5 +1,6 @@
 package com.demo.Controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.demo.domain.department.Department;
 import com.demo.domain.employee.EmployeeVo;
 import com.demo.domain.mobilize.Mobilize;
@@ -8,6 +9,7 @@ import com.demo.domain.department.DepartmentAndId;
 import com.demo.service.employee.AllService;
 import com.demo.service.department.departmentService;
 import com.demo.util.ResponseCode;
+import com.demo.util.SendMsgUtil;
 import com.demo.util.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @author wwx
@@ -32,6 +39,56 @@ public class DepartmentController {
     private AllService service;
     @Autowired
     private departmentService departmentService;
+
+    @RequestMapping("/sendMsg")
+    @ResponseBody
+    public ServerResponse sendMsg(HttpServletResponse response, HttpServletRequest request) {
+        ServerResponse baseResponse = new ServerResponse();
+
+        //短信接口URL提交地址
+        String url = "https://api.miaodiyun.com/20150822/industrySMS/sendSMS";
+        String sid = "030b3e1702c948fc931c7f3c8f5667cf";
+        String token = "7397a1efddcd4c3bb6b7d11c7f30c823";
+        String num = SendMsgUtil.getRandNum();
+        //与新增的模版内容一致
+        String smsContent = "【昊天科技】您的验证码为" + num + "，请于" + 2 + "分钟内正确输入，如非本人操作，请忽略此短信。";
+        //群发也可以，单发也可以
+        String result = SendMsgUtil.sendMsg(url, sid, token, smsContent, "post", "15017814621");
+        System.out.println("String:"+result);
+        System.out.println("JSON:"+JSONObject.parseObject(result));
+        System.out.println(JSONObject.parseObject(result).get("respCode").toString());
+        if(JSONObject.parseObject(result).get("respCode").toString().equals("00000")){
+            baseResponse.setStatus(ResponseCode.SUCCESS);
+            final HttpSession session=request.getSession();
+            session.setAttribute("yzm",num);
+            System.out.println(session.getAttribute("yzm"));
+            final Timer timer=new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    //删除session中存的验证码
+                    session.removeAttribute("yzm");
+                    timer.cancel();
+                }
+            },1*60*1000);
+
+        }
+        baseResponse.setData(JSONObject.parseObject(result));
+        return baseResponse;
+    }
+
+    @RequestMapping("/checkMsg")
+    @ResponseBody
+    public ServerResponse check(HttpServletResponse response, HttpServletRequest request) {
+        ServerResponse response1=new ServerResponse();
+        HttpSession session=request.getSession();
+        if(session.getAttribute("yzm")!=null){
+            response1.setData(session.getAttribute("yzm"));
+        }
+
+        return response1;
+
+    }
 
     /**
      * 增加部门信息*/

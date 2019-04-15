@@ -184,6 +184,17 @@
       <artifactId>mail</artifactId>
       <version>1.4.7</version>
     </dependency>
+    <!-- common开源项目中的httpclient，发起http请求 -->
+    <dependency>
+      <groupId>commons-httpclient</groupId>
+      <artifactId>commons-httpclient</artifactId>
+      <version>3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
   </dependencies>
 
   <build>

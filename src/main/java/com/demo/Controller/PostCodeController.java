@@ -1,10 +1,9 @@
 package com.demo.Controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.demo.domain.Cache;
 import com.demo.domain.redis.RedisCacheStorage;
-import com.demo.util.ResponseCode;
-import com.demo.util.ServerResponse;
+import com.demo.util.Base.ResponseCode;
+import com.demo.util.Base.ServerResponse;
 import com.demo.util.UUIDTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

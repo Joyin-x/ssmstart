@@ -1,4 +1,4 @@
-package com.demo.util;
+package com.demo.util.Base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;

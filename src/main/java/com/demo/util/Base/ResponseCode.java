@@ -1,4 +1,4 @@
-package com.demo.util;
+package com.demo.util.Base;
 
 /**
  * @author wwx

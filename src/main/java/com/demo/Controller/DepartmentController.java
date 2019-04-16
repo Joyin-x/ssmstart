@@ -1,6 +1,7 @@
 package com.demo.Controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.demo.config.MiaoDiConfig;
 import com.demo.domain.department.Department;
 import com.demo.domain.employee.EmployeeVo;
 import com.demo.domain.mobilize.Mobilize;
@@ -8,19 +9,20 @@ import com.demo.domain.department.DepartmentAndEmployee;
 import com.demo.domain.department.DepartmentAndId;
 import com.demo.service.employee.AllService;
 import com.demo.service.department.departmentService;
-import com.demo.util.ResponseCode;
+import com.demo.util.Base.ResponseCode;
+import com.demo.util.Verification.ImageUtil;
 import com.demo.util.SendMsgUtil;
-import com.demo.util.ServerResponse;
+import com.demo.util.Base.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
@@ -39,38 +41,45 @@ public class DepartmentController {
     private AllService service;
     @Autowired
     private departmentService departmentService;
+    @RequestMapping(value = "/verification")
+    @ResponseBody
+    public void verification(HttpServletResponse response,HttpSession session) throws Exception {
+        //利用图片工具生成图片
+        //第一个参数是生成的验证码，第二个参数是生成的图片
+        Object[] objs = ImageUtil.createImage();
+        //将验证码存入Session
+        session.setAttribute("imageCode",objs[0]);
+        System.out.println(session.getAttribute("imageCode"));
+        //将图片输出给浏览器
+        BufferedImage image = (BufferedImage) objs[1];
+        response.setContentType("image/png");
+        OutputStream os = response.getOutputStream();
+        ImageIO.write(image, "png", os);
+    }
 
     @RequestMapping("/sendMsg")
     @ResponseBody
-    public ServerResponse sendMsg(HttpServletResponse response, HttpServletRequest request) {
+    public ServerResponse sendMsg(HttpServletResponse response, HttpServletRequest request,String phone) {
         ServerResponse baseResponse = new ServerResponse();
-
-        //短信接口URL提交地址
-        String url = "https://api.miaodiyun.com/20150822/industrySMS/sendSMS";
-        String sid = "030b3e1702c948fc931c7f3c8f5667cf";
-        String token = "7397a1efddcd4c3bb6b7d11c7f30c823";
-        String num = SendMsgUtil.getRandNum();
-        //与新增的模版内容一致
-        String smsContent = "【昊天科技】您的验证码为" + num + "，请于" + 2 + "分钟内正确输入，如非本人操作，请忽略此短信。";
         //群发也可以，单发也可以
-        String result = SendMsgUtil.sendMsg(url, sid, token, smsContent, "post", "15017814621");
-        System.out.println("String:"+result);
-        System.out.println("JSON:"+JSONObject.parseObject(result));
-        System.out.println(JSONObject.parseObject(result).get("respCode").toString());
+        String result = SendMsgUtil.sendMsg(MiaoDiConfig.BASE_URL, MiaoDiConfig.ACCOUNT_SID,
+                MiaoDiConfig.AUTH_TOKEN, MiaoDiConfig.smsContent, "post", phone);
         if(JSONObject.parseObject(result).get("respCode").toString().equals("00000")){
             baseResponse.setStatus(ResponseCode.SUCCESS);
             final HttpSession session=request.getSession();
-            session.setAttribute("yzm",num);
-            System.out.println(session.getAttribute("yzm"));
+            session.setAttribute(phone,MiaoDiConfig.num);
+            /**
+             * 五分钟后删除该验证码*/
             final Timer timer=new Timer();
+            final String yzm=phone;
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     //删除session中存的验证码
-                    session.removeAttribute("yzm");
+                    session.removeAttribute(yzm);
                     timer.cancel();
                 }
-            },1*60*1000);
+            },5*60*1000);
 
         }
         baseResponse.setData(JSONObject.parseObject(result));
@@ -79,15 +88,20 @@ public class DepartmentController {
 
     @RequestMapping("/checkMsg")
     @ResponseBody
-    public ServerResponse check(HttpServletResponse response, HttpServletRequest request) {
+    public ServerResponse check(HttpServletResponse response, HttpServletRequest request,String phone,String yzm) {
         ServerResponse response1=new ServerResponse();
         HttpSession session=request.getSession();
-        if(session.getAttribute("yzm")!=null){
-            response1.setData(session.getAttribute("yzm"));
+        System.out.println(session.getAttribute(phone));
+        if(session.getAttribute(phone)==null){
+            response1.setMsg("验证码已过期");
         }
-
+        else if(session.getAttribute(phone).toString().equals(yzm)){
+            response1.setStatus(ResponseCode.SUCCESS);
+            response1.setMsg("验证成功");
+        }else{
+            response1.setMsg("验证码输入错误");
+        }
         return response1;
-
     }
 
     /**

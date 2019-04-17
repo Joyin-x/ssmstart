@@ -46,6 +46,10 @@ public class DepartmentController {
     public void verification(HttpServletResponse response,HttpSession session) throws Exception {
         //利用图片工具生成图片
         //第一个参数是生成的验证码，第二个参数是生成的图片
+        response.setContentType("image/png");
+        response.setHeader("Pragma","No-cache");
+        response.setHeader("Cache-Control","no-cache");
+        response.setDateHeader("Expire",0);
         Object[] objs = ImageUtil.createImage();
         //将验证码存入Session
         session.setAttribute("imageCode",objs[0]);

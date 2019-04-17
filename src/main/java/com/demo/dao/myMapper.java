@@ -23,6 +23,8 @@ public interface myMapper {
 
     //存储用户头像
     int addImage(Image image);
+    //获取用户头像
+    String getImageById(int userId);
 
     //返回我的工作调动记录
     List<Map<String,Object>> getMyMobilizeList(int id);

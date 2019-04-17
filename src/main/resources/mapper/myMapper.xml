@@ -16,7 +16,10 @@
     <update id="addImage" parameterType="com.demo.domain.Image">
         update user SET picture=#{picture} where userId=#{userId}
     </update>
-
+    <!--获取用户的图片地址-->
+    <select id="getImageById" parameterType="int" resultType="String">
+        select picture from user where userId=#{userId}
+    </select>
     <!--返回我的工作调动记录-->
     <select id="getMyMobilizeList" resultType="java.util.Map" parameterType="int">
          select * from mobilize where employee_id=#{id} ORDER BY transfer_date DESC

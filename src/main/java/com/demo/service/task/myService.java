@@ -34,6 +34,8 @@ public class myService {
         return mapper.addImage(image);
     }
 
+    //获取用户头像
+    public String getImageById(int userId){return mapper.getImageById(userId);}
 
     //返回我的工作调动记录
     public List<Map<String,Object>> getMyMobilizeList(int id){return mapper.getMyMobilizeList(id);}

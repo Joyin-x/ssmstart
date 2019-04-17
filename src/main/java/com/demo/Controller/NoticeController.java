@@ -120,6 +120,8 @@ public class NoticeController {
                    path = realPath + str + trueFileName;
                     System.out.println("存放图片文件的路径:" + path);
                     file.transferTo(new File(path));
+                    File f=new File(path);
+                    f.delete();
                     Image image=new Image();
                     image.setUserId(userId);
                     image.setPicture("https://weixiong.info/image/"+trueFileName);

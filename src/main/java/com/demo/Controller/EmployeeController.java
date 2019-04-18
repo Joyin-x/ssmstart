@@ -105,10 +105,8 @@ public class EmployeeController {
      */
     @RequestMapping(value = "/getEmployeeInfo", method = RequestMethod.GET)
     public ServerResponse<Map<String, Object>> getEmployeeInfo(int id) {
-        System.out.println(id);
         ServerResponse response = new ServerResponse();
         Map<String, Object> employeeInfo = service.getLoginInfo(id);
-        System.out.println(employeeInfo);
         if (employeeInfo != null) {
             response.setData(employeeInfo);
             response.setStatus(ResponseCode.SUCCESS);
@@ -171,8 +169,6 @@ public class EmployeeController {
                 }
             } catch (Exception e) {
                 response.setMsg("邮箱地址不存在，发送邮件失败，员工信息未添加");
-                System.out.println(e);
-
             } finally {
                 return response;
             }
@@ -203,7 +199,6 @@ public class EmployeeController {
             } else {
                 userLogin.setUserId(checkUser);
                 int result = service.addUser(userLogin);
-                System.out.println(result);
                 if (result > 0) {
                     response.setStatus(ResponseCode.SUCCESS);
                     response.setMsg("注册成功");
@@ -247,13 +242,11 @@ public class EmployeeController {
     @RequestMapping(value = "/updateEmployee", method = RequestMethod.POST)
     public ServerResponse updateEmployee(@RequestBody EmployeeVo employeeVo) {
         ServerResponse response = new ServerResponse();
-        System.out.println(employeeVo);
         int result=service.updateEmployee(employeeVo);
         if(result==1){
             //更新employee表成功
             int result1=service.updateUserFlag(employeeVo);
             if(result1==1){
-                System.out.println(result1);
                 response.setStatus(ResponseCode.SUCCESS);
             }
         }
@@ -264,7 +257,6 @@ public class EmployeeController {
      * 删除用户*/
     @RequestMapping(value = "/deleteEmployee")
     public ServerResponse deleteEmployee(int id) {
-        System.out.println(id);
         ServerResponse response = new ServerResponse();
         int result=service.deleteEmployee(id);
         if(result>0){

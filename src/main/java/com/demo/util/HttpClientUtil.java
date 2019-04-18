@@ -82,10 +82,8 @@ public class HttpClientUtil {
         //参数不为空添加参数
         if (params != null) {
             NameValuePair[] data = new NameValuePair[params.size()];
-            System.out.println(data.length);
             int i = 0;
             for (Map.Entry<String, String> entry : params.entrySet()) {
-                System.out.println(entry.getKey() + "：" + entry.getValue());
                 data[i] = new NameValuePair(entry.getKey(), entry.getValue());
                 i++;
             }

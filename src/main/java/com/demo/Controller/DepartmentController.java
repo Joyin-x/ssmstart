@@ -53,7 +53,6 @@ public class DepartmentController {
         Object[] objs = ImageUtil.createImage();
         //将验证码存入Session
         session.setAttribute("imageCode",objs[0]);
-        System.out.println(session.getAttribute("imageCode"));
         //将图片输出给浏览器
         BufferedImage image = (BufferedImage) objs[1];
         response.setContentType("image/png");
@@ -95,7 +94,6 @@ public class DepartmentController {
     public ServerResponse check(HttpServletResponse response, HttpServletRequest request,String phone,String yzm) {
         ServerResponse response1=new ServerResponse();
         HttpSession session=request.getSession();
-        System.out.println(session.getAttribute(phone));
         if(session.getAttribute(phone)==null){
             response1.setMsg("验证码已过期");
         }
@@ -113,7 +111,6 @@ public class DepartmentController {
     @RequestMapping(value = "/addDepartment",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<Department> addDepartment(@RequestBody Department department){
-        System.out.println(department);
         ServerResponse response=new ServerResponse();
         /**
          * 1.部门表新增一条新纪录
@@ -149,7 +146,6 @@ public class DepartmentController {
     @RequestMapping(value = "/modifyDepartment",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<Department> modifyDepartment(@RequestBody Department department){
-
         int result=departmentService.modifyDepartment(department);
         if(result==1){
             return ServerResponse.createBySuccess("成功修改");
@@ -178,13 +174,10 @@ public class DepartmentController {
          * 9.删除工资表中该部门员工工资记录（未完成）
          * 10.删除奖惩表中该部门员工奖惩记录（未完成）
          * */
-        System.out.println(employeeID.toString());
         int result=departmentService.deleteDepartment(id);
-        System.out.println(result);
         if(result>0){
             int result1=departmentService.deleteDepartmentAllEmployee(employeeID);
             if(result1>0){
-                System.out.println("其他表的也删除了");
                 response.setMsg("其他表的也删除了");
             }
             response.setStatus(ResponseCode.SUCCESS);
@@ -214,7 +207,6 @@ public class DepartmentController {
     @RequestMapping(value="/getDepartmentEmployee",method=RequestMethod.POST)
     @ResponseBody
     public ServerResponse<List<DepartmentAndEmployee>> getDepartmentEmployee(int id){
-        System.out.println(id);
         List<DepartmentAndEmployee> DepartmentAndEmployeeList;
         if(id==0){
             DepartmentAndEmployeeList=service.getDepartmentEmployeeAll();

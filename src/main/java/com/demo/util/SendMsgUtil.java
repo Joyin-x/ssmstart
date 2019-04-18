@@ -71,7 +71,6 @@ public class SendMsgUtil {
      */
     public static String getTimestamp() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        System.out.println(sdf.format(new Date()));
         return sdf.format(new Date());
     }
     /**
@@ -104,7 +103,6 @@ public class SendMsgUtil {
             for (String string : args) {
                 str.append(string);
             }
-            System.out.println("加密前：\t" + str.toString());
             try {
                 MessageDigest digest = MessageDigest.getInstance("MD5");
                 byte[] bytes = digest.digest(str.toString().getBytes());
@@ -122,7 +120,6 @@ public class SendMsgUtil {
                 e.printStackTrace();
             }
         }
-        System.out.println("加密后：\t" + result.toString());
         return result.toString();
     }
 }

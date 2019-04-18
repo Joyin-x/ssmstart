@@ -32,7 +32,6 @@ public class overTimeController {
     @RequestMapping(value = "/addOverTimeRecord",method = RequestMethod.POST)
     public ServerResponse addOverTimeRecord(@RequestBody overTime overtime){
         ServerResponse response=new ServerResponse();
-        System.out.println(overtime);
         int result=overTimeService.addOverTimeRecord(overtime);
         if(result==1){
             response.setData("新增成功");

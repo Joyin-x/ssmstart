@@ -106,7 +106,6 @@ public class MoneyController {
         String end = format.format(cal.getTime());
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
         String now = df.format(new Date());
-        System.out.println(first + end + now);
         /**
          * 1.根据id查找到所有的员工列表
          * 2.循环这个员工列表，查找部门底薪，奖惩，加班费，加到数组中

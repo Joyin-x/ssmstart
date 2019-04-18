@@ -88,14 +88,12 @@ public class NoticeController {
         request.setCharacterEncoding("UTF-8");
         int userId = Integer.parseInt(request.getParameter("user"));
         if (!file.isEmpty()) {
-            System.out.println("成功获取图片");
             //获取文件上传的原名
             String fileName = file.getOriginalFilename();
             fileName = fileName.substring(fileName.lastIndexOf("."));
             //存放图片目录，上传图片类型
             String path = null;
             String type = null;
-
             type = fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()) : null;
             if (type != null) {
                 if ("JPEG".equals(type.toUpperCase()) || "PNG".equals(type.toUpperCase()) || "JPG".equals(type.toUpperCase())) {
@@ -115,24 +113,22 @@ public class NoticeController {
                         realPath = realPath.substring(0, index);
                         str = "/image/";
                     }
-                    System.out.println(realPath);
+
                     // 自定义保存的图片名称
                     String trueFileName = UUID.randomUUID() + fileName;
                     // 设置存放图片文件的路径
                     path = realPath + str + trueFileName;
-                    System.out.println("存放图片文件的路径:" + path);
                     file.transferTo(new File(path));
+                    //获取原先的图片地址
                     String before=myService.getImageById(userId);
                     Image image = new Image();
                     image.setUserId(userId);
                     image.setPicture("https://weixiong.info/image/" + trueFileName);
-                    System.out.println(image);
+                    //更新图片
                     int result = myService.addImage(image);
-                    System.out.println("ll:" + before.lastIndexOf("/"));
+                    //删除原来的图片
                     before = before.substring(before.lastIndexOf("/"));
-                    System.out.println(before);
                     File beforeImage = new File(realPath + str + before);
-                    System.out.println(realPath + str + before);
                     beforeImage.delete();
                     if (result == 1) {
                         response.setData(path);
@@ -177,7 +173,6 @@ public class NoticeController {
     //检查用户是否点赞
     @RequestMapping(value = "/checkLike", method = RequestMethod.POST)
     public ServerResponse checkLike(@RequestBody Like like) {
-        System.out.println(like);
         ServerResponse response = new ServerResponse();
         int result = service.checkLike(like);
         if (result == 1) {
@@ -223,8 +218,6 @@ public class NoticeController {
                     response.setMsg("已点赞");
                 }
             }
-
-
         }
         return response;
     }

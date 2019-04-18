@@ -34,7 +34,6 @@ public class myController {
     public ServerResponse getTaskById(int id){
         ServerResponse response=new ServerResponse();
         List<Map<String,Object>> list=my.getTaskById(id);
-
         if(list.size()>0){
             response.setData(list);
             response.setStatus(ResponseCode.SUCCESS);
@@ -67,7 +66,6 @@ public class myController {
                 String name=my.getDepartmentName(Integer.parseInt(m.get("department_id").toString()));
                 m.put("department_id",name);
             }
-            System.out.println(myMobilizeList);
         }
         //我的工资
         else if(flag==3){
@@ -135,7 +133,6 @@ public class myController {
      * */
     @RequestMapping("/updateInfo")
     public ServerResponse updateMyInfo(String info,int flag,int id){
-        System.out.println(info+flag+id);
         ServerResponse response=new ServerResponse();
         EmployeeVo employeeVo=new EmployeeVo();
         employeeVo.setId(id);
@@ -209,12 +206,9 @@ public class myController {
      * */
     @RequestMapping("/forgetPassword")
     public ServerResponse forgetPassword(Employee employee){
-        System.out.println(employee);
         ServerResponse response=new ServerResponse();
         Employee list=my.getEmployeeIDByPE(employee);
-        System.out.println(list);
         int count=list.getSex();
-        System.out.println(count);
         if(count==1){
             //生成随机密码
             //String password = UUIDTool.generatePassword();
@@ -224,7 +218,6 @@ public class myController {
             try {
                 sendMail.sendMail(employee.getEmail(), "密码已重置", "你的用户登录密码已重置为123456，请尽快登录修改密码！");
             } catch (Exception e) {
-                System.out.println(e);
             } finally {
                 UpdatePassword updatePassword=new UpdatePassword();
                 updatePassword.setId(id);

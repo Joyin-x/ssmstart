@@ -95,17 +95,11 @@ public class PostCodeController {
            //发送 GET 请求
            //System.out.println(authURL);
            JSONObject backJSON = PostCodeController.sendPost(URLParam);
-           System.out.println("backJson:"+backJSON);
            if(backJSON!=null){
                //生成随机的32位uuid
                String uuid=UUIDTool.getUUID();
                response.setStatus(ResponseCode.SUCCESS);
                jedis.set(uuid,backJSON.get("openid").toString()+"."+backJSON.get("session_key").toString());
-//               Cache cache=new Cache();
-//               cache.setUUID(uuid);
-//               cache.setValue(backJSON.get("openid").toString()+"."+backJSON.get("session_key").toString());
-//               System.out.println(cache);
-//               redisCacheStorage.set("1",cache);
                System.out.println("存储uuid:"+uuid);
                response.setData(uuid);
            }
@@ -113,12 +107,4 @@ public class PostCodeController {
 
         return response;
     }
-
-    //接受前台发过来的code
-    @RequestMapping("/checkCUUID")
-    public void getSessionKey(String uuid){
-        System.out.println("上传uuid："+uuid);
-        System.out.println("获取uuid里的值："+jedis.get(uuid));
-    }
-
 }

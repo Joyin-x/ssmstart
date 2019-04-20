@@ -1,5 +1,6 @@
 package com.demo.Controller;
 
+import com.demo.config.countWorkDay;
 import com.demo.domain.Image;
 import com.demo.domain.notice.Discuss;
 import com.demo.domain.notice.Like;
@@ -139,6 +140,7 @@ public class NoticeController {
                 } else {
                     response.setMsg("图片不是想要的上传类型");
                 }
+
             }
         } else {
             response.setMsg("图片为空");

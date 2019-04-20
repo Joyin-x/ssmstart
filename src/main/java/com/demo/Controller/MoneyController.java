@@ -1,5 +1,6 @@
 package com.demo.Controller;
 
+import com.demo.config.countWorkDay;
 import com.demo.domain.department.Department;
 import com.demo.domain.wage.Reward;
 import com.demo.domain.wage.Wage;
@@ -131,11 +132,12 @@ public class MoneyController {
                 }
                 //查找加班费
                 int days = service.selectOverTime(employeeId) * 60;
+                int workDay= countWorkDay.countDay();
                 example.setBasicSalsry((baseSalary * attendances) / 30);
                 example.setEmployeeId(employeeId);
                 example.setBonus(reward);
                 example.setOvertimePay(days);
-                example.setNetPayroll((baseSalary * attendances) / 30 + reward + days);
+                example.setNetPayroll((baseSalary * attendances) / workDay + reward + days);
                 example.setStartTime(first);
                 example.setEndTime(end);
                 example.setPayDate(now);

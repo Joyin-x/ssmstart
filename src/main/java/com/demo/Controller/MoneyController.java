@@ -127,13 +127,15 @@ public class MoneyController {
                 //查找奖惩
                 int reward = 0;
                 List<Map<String, Integer>> rewards = service.selectRewards(employeeId);
+                //计算奖惩
                 for (int j = 0; j < rewards.size(); j++) {
                     reward = rewards.get(j).get("money") + reward;
                 }
                 //查找加班费
                 int days = service.selectOverTime(employeeId) * 60;
+                //查找本月工作日
                 int workDay= countWorkDay.countDay();
-                example.setBasicSalsry((baseSalary * attendances) / 30);
+                example.setBasicSalsry((baseSalary * attendances) / workDay);
                 example.setEmployeeId(employeeId);
                 example.setBonus(reward);
                 example.setOvertimePay(days);

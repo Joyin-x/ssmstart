@@ -13,7 +13,7 @@ public enum ResponseCode {
     ERROR(420, "失败"),
     NEED_LOG(410,"请先登录"),
     SERVER_ERROR(500,"请求出错"),
-    notAttendance(411,"请勿重复打卡"),
+    notAttendance(411,"请勿重复签到 "),
     PAY_MONEY(412,"发放失败，该部门工资已经发放");
     private int code;
     private String msg;

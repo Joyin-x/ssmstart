@@ -15,6 +15,7 @@ import com.demo.util.SendMsgUtil;
 import com.demo.util.Base.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
@@ -110,6 +111,7 @@ public class DepartmentController {
      * 增加部门信息*/
     @RequestMapping(value = "/addDepartment",method = RequestMethod.POST)
     @ResponseBody
+    @Transactional
     public ServerResponse<Department> addDepartment(@RequestBody Department department){
         ServerResponse response=new ServerResponse();
         /**

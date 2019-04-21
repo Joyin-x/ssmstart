@@ -12,7 +12,7 @@ import com.sun.mail.util.MailSSLSocketFactory;
 
 public class SendQQMailUtil {
 
-    public void sendMail(String mailAddress,String header,String password) throws Exception{
+    public void sendMail(String mailAddress,String header,String content) throws Exception{
 
         Properties properties = new Properties();
         properties.put("mail.transport.protocol", "smtp");// 连接协议
@@ -32,7 +32,7 @@ public class SendQQMailUtil {
         // 设置邮件标题
         message.setSubject(header);
         // 设置邮件内容
-        message.setText(password);
+        message.setText(content);
         // 得到邮差对象
         Transport transport = session.getTransport();
         // 连接自己的邮箱账户

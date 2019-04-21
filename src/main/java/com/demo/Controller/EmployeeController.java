@@ -123,31 +123,24 @@ public class EmployeeController {
     public ServerResponse addEmployee(@RequestBody EmployeeVo employee) {
         ServerResponse response = new ServerResponse();
         if (StringUtils.isEmpty(employee.getName())) {
-            return response.createByError("员工姓名不能为空！");
+           response.setMsg("员工姓名不能为空！");
+        }else if (StringUtils.isEmpty(employee.getAddress())) {
+            response.setMsg("居住地址不能为空!");
+        }else if (StringUtils.isEmpty(employee.getPhone())) {
+            response.setMsg("电话号码不能为空！");
+        }else if (StringUtils.isEmpty(employee.getDepartment_id())) {
+            response.setMsg("部门不能为空！");
+        }else if (StringUtils.isEmpty(employee.getProfessional())) {
+            response.setMsg("所学专业不能为空!");
+        }else if (StringUtils.isEmpty(employee.getSex())) {
+            response.setMsg("员工性别不能为空!");
+        }else if (StringUtils.isEmpty(employee.getBirthday())) {
+            response.setMsg("员工生日不能为空!");
+        }else if (StringUtils.isEmpty(employee.getPosition())) {
+            response.setMsg("员工职务不能为空!");
         }
-        if (StringUtils.isEmpty(employee.getAddress())) {
-            return response.createByError("居住地址不能为空!");
-        }
-        if (StringUtils.isEmpty(employee.getPhone())) {
-            return response.createByError("电话号码不能为空！");
-        }
-        if (StringUtils.isEmpty(employee.getDepartment_id())) {
-            return response.createByError("部门不能为空！");
-        }
-        if (StringUtils.isEmpty(employee.getProfessional())) {
-            return response.createByError("所学专业不能为空!");
-        }
-        if (StringUtils.isEmpty(employee.getSex())) {
-            return response.createByError("员工性别不能为空!");
-        }
-        if (StringUtils.isEmpty(employee.getBirthday())) {
-            return response.createByError("员工生日不能为空!");
-        }
-        if (StringUtils.isEmpty(employee.getPosition())) {
-            return response.createByError("员工职务不能为空!");
-        }
-        int count =service.checkPhone(employee.getPhone());
-        if(count>0){
+        int count = service.checkPhone(employee.getPhone());
+        if (count > 0) {
             response.setMsg("手机号码已存在，无法添加");
             return response;
         }
@@ -157,7 +150,8 @@ public class EmployeeController {
             //生成默认密码
             String password = UUIDTool.generatePassword();
             try {
-                sendMail.sendMail(employee.getEmail(), "你在我公司的入职信息已添加，职务为"+employee.getPosition()+"", "你的用户信息已被添加，默认登录密码为" + password + "，请尽快登录修改密码！");
+                sendMail.sendMail(employee.getEmail(), "你在我公司的入职信息已添加，职务为" + employee.getPosition() + "",
+                        "你的用户信息已被添加，默认登录密码为" + password + "，请尽快登录修改密码！");
                 int result = service.insertEmployee(employee);
                 //查询到了刚才新增的用户id
                 int id = service.getUserID(employee.getPhone());
@@ -218,7 +212,7 @@ public class EmployeeController {
     public ServerResponse userLogin(@RequestBody UserLogin userLogin) {
         ServerResponse response = new ServerResponse();
         Integer checkRegister = service.checkRegister(userLogin.getPhone());
-        //为空则表示该号码还未注册,不能登录
+        //为空则表示该手机号码不是公司员工拥有,不能登录
         if (checkRegister == null) {
             response.setMsg("该号码未注册！");
             return response;
@@ -242,11 +236,11 @@ public class EmployeeController {
     @RequestMapping(value = "/updateEmployee", method = RequestMethod.POST)
     public ServerResponse updateEmployee(@RequestBody EmployeeVo employeeVo) {
         ServerResponse response = new ServerResponse();
-        int result=service.updateEmployee(employeeVo);
-        if(result==1){
+        int result = service.updateEmployee(employeeVo);
+        if (result == 1) {
             //更新employee表成功
-            int result1=service.updateUserFlag(employeeVo);
-            if(result1==1){
+            int result1 = service.updateUserFlag(employeeVo);
+            if (result1 == 1) {
                 response.setStatus(ResponseCode.SUCCESS);
             }
         }
@@ -254,12 +248,13 @@ public class EmployeeController {
     }
 
     /**
-     * 删除用户*/
+     * 删除用户
+     */
     @RequestMapping(value = "/deleteEmployee")
     public ServerResponse deleteEmployee(int id) {
         ServerResponse response = new ServerResponse();
-        int result=service.deleteEmployee(id);
-        if(result>0){
+        int result = service.deleteEmployee(id);
+        if (result > 0) {
             response.setStatus(ResponseCode.SUCCESS);
         }
         return response;

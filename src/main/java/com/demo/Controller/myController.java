@@ -216,8 +216,10 @@ public class myController {
             String newPassword=MD5Util.getStrMD5("123456"+ MD5Util.getStrMD5(employee.getPhone()));
             SendQQMailUtil sendMail = new SendQQMailUtil();
             try {
-                sendMail.sendMail(employee.getEmail(), "密码已重置", "你的用户登录密码已重置为123456，请尽快登录修改密码！");
+                sendMail.sendMail(employee.getEmail(), "密码已重置",
+                        "你的用户登录密码已重置为123456，请尽快登录修改密码！");
             } catch (Exception e) {
+                response.setMsg("邮箱地址不存在");
             } finally {
                 UpdatePassword updatePassword=new UpdatePassword();
                 updatePassword.setId(id);
@@ -227,6 +229,7 @@ public class myController {
                    response.setStatus(ResponseCode.SUCCESS);
                    response.setMsg("密码已重置");
                }
+                return response;
             }
         }else{
             response.setMsg("输入的手机号或邮箱有误");

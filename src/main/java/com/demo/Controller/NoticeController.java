@@ -172,7 +172,9 @@ public class NoticeController {
         return response;
     }
 
-    //检查用户是否点赞
+    /**
+     * 检查用户是否点赞
+     * */
     @RequestMapping(value = "/checkLike", method = RequestMethod.POST)
     public ServerResponse checkLike(@RequestBody Like like) {
         ServerResponse response = new ServerResponse();
@@ -184,7 +186,7 @@ public class NoticeController {
     }
 
     /**
-     * 对文章点赞ui
+     * 对文章点赞，取消点赞
      */
     @RequestMapping(value = "/like", method = RequestMethod.POST)
     @Transactional

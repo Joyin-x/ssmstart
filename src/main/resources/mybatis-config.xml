@@ -13,6 +13,5 @@
         <!-- 开启驼峰命名转换:从经典数据库列名A_COLUMN到经典Java属性名aColumn的类似映射-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
-
 </configuration>
 

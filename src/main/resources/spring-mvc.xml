@@ -17,13 +17,7 @@
 
     <!--包扫描-->
     <!--DispatcherServlet上下文,只管理@Controller的bean,忽略其他类型的bean,例如@Service-->
-    <context:component-scan base-package="com.demo.Controller">
-
-        <context:include-filter type="annotation"
-                                expression="org.springframework.stereotype.Controller"></context:include-filter>
-
-    </context:component-scan>
-
+    <context:component-scan base-package="com.demo.Controller"/>
 
     <!-- 扩充了注解驱动，可以将请求参数绑定到控制器参数 -->
     <!-- 简化配置：
@@ -45,6 +39,9 @@
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    <!--静态资源映射-->
+    <mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/js"/>
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- 默认编码 -->

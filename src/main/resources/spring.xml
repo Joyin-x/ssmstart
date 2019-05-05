@@ -12,7 +12,7 @@
     <!--启动自动注入管理-->
     <context:annotation-config/>
 
-    <context:property-placeholder location="classpath:redis.properties" file-encoding="utf-8" ignore-unresolvable="true"></context:property-placeholder>
+    <context:property-placeholder location="classpath:redis.properties" file-encoding="utf-8" ignore-unresolvable="true"/>
 
 
     <!-- 在主容器中不扫描@Controller注解，在SpringMvc中只扫描@Controller注解 -->
@@ -36,7 +36,7 @@
 
     <!--装配JDBC事务管理-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>  
+        <property name="dataSource" ref="dataSource"/>
     </bean>
     <import resource="spring-mybatis.xml"/>
 

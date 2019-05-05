@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -150,8 +152,15 @@ public class EmployeeController {
             //生成默认密码
             String password = UUIDTool.generatePassword();
             try {
-                sendMail.sendMail(employee.getEmail(), "你在我公司的入职信息已添加，职务为" + employee.getPosition() + "",
-                        "你的用户信息已被添加，默认登录密码为" + password + "，请尽快登录修改密码！");
+
+                String qqReg = "^^[a-zA-Z0-9_-]+(@qq.com)$";
+                Pattern p = Pattern.compile(qqReg);
+                Matcher m = p.matcher(employee.getEmail());
+                if(m.matches()){
+                    sendMail.sendMail(employee.getEmail(), "你在我公司的入职信息已添加，职务为"+employee.getPosition()+"", "你的用户信息已被添加，默认登录密码为" + password + "，请尽快登录修改密码！");
+                }else{
+                    sendMail.send163Mail(employee.getEmail(), "你在我公司的入职信息已添加，职务为"+employee.getPosition()+"", "你的用户信息已被添加，默认登录密码为" + password + "，请尽快登录修改密码！");
+                }
                 int result = service.insertEmployee(employee);
                 //查询到了刚才新增的用户id
                 int id = service.getUserID(employee.getPhone());

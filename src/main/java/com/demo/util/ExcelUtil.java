@@ -42,7 +42,7 @@ public class ExcelUtil {
             Cell cell = row2.createCell(i);
             cell.setCellValue(array[i]);
             cell.setCellStyle(cellStyle);
-            sheet.setColumnWidth(i, 256 * 10);
+            sheet.setColumnWidth(i, 256 * 15);
         }
         CellStyle cellStyle1 = cellStyle;
         Font font = font1;
@@ -60,7 +60,7 @@ public class ExcelUtil {
                         Cell cell=row.createCell(j);
                         cell.setCellValue(value);
                         cell.setCellStyle(cellStyle1);
-                        sheet.setColumnWidth(j,256*13);
+                        sheet.setColumnWidth(j,256*15);
                         break;
                     }
                 }

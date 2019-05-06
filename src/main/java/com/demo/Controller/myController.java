@@ -45,12 +45,12 @@ public class myController {
     //导出我的信息
     @RequestMapping(value="/outputInformation")
     public void outputInformation(HttpServletResponse response){
-        String header="销售部工资表";
+        String header="公司部门工资表";
         String sheetName="我的信息表";
         String[] array={"姓名","职务","底薪","奖惩","加班费","实发工资","开始时间","结束时间","发薪日期"};
         String[] arrayName={"name","position","basic_salary","bonus","overtime_pay",
                 "net_payroll","start_time","end_time","pay_date"};
-        List<Map<String,Object>> list=service.getWageList(2);
+        List<Map<String,Object>> list=service.getAllWageList();
         System.out.println("查询到的list:"+list);
         ExcelUtil.outputExcel(header,sheetName,array,arrayName,list,response);
     }

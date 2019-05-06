@@ -69,4 +69,9 @@ public interface moneyMapper {
      * 查询当月工资列表
      * */
     List<Map<String,Object>> getWageList(int id);
+
+    /**
+     * 获取所有的工资列表
+     * */
+    List<Map<String,Object>> getAllWageList();
 }

@@ -74,4 +74,8 @@ public class moneyService {
      * 查询当月工资列表
      * */
     public List<Map<String,Object>> getWageList(int id){return mapper.getWageList(id);}
+    /**
+     * 获取所有的工资列表
+     * */
+    public List<Map<String,Object>> getAllWageList(){return mapper.getAllWageList();}
 }

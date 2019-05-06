@@ -4,16 +4,26 @@ import com.alibaba.druid.util.StringUtils;
 import com.demo.domain.employee.Employee;
 import com.demo.domain.employee.EmployeeVo;
 import com.demo.domain.employee.UpdatePassword;
+import com.demo.service.employee.AllService;
+import com.demo.service.money.moneyService;
 import com.demo.service.task.myService;
 import com.demo.util.*;
 import com.demo.util.Base.ResponseCode;
 import com.demo.util.Base.ServerResponse;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +38,22 @@ public class myController {
 
     @Autowired
     private myService my;
+
+    @Autowired
+    private moneyService service;
+
+    //导出我的信息
+    @RequestMapping(value="/outputInformation")
+    public void outputInformation(HttpServletResponse response){
+        String header="销售部工资表";
+        String sheetName="我的信息表";
+        String[] array={"姓名","职务","底薪","奖惩","加班费","实发工资","开始时间","结束时间","发薪日期"};
+        String[] arrayName={"name","position","basic_salary","bonus","overtime_pay",
+                "net_payroll","start_time","end_time","pay_date"};
+        List<Map<String,Object>> list=service.getWageList(2);
+        System.out.println("查询到的list:"+list);
+        ExcelUtil.outputExcel(header,sheetName,array,arrayName,list,response);
+    }
 
     //根据id获取我的任务清单
     @RequestMapping(value="/getTaskById")

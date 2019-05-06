@@ -57,6 +57,6 @@
 
     <!--查询工资列表-->
     <select id="getWageList" parameterType="int" resultType="Map">
-        select e.name,e.position,w.* from wage w,employee e where e.id=w.employee_id and DATE_FORMAT(w.pay_date,"%Y%m")=DATE_FORMAT(CURRENT_DATE,"%Y%m") and e.department_id=#{id}
+        select e.name,e.position,w.* from wage w,employee e where e.id=w.employee_id and DATE_FORMAT(w.pay_date,"%Y%m")=DATE_FORMAT(CURRENT_DATE,"%Y%m")-1 and e.department_id=#{id}
     </select>
 </mapper>

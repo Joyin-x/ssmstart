@@ -36,10 +36,14 @@ public class moneyService {
     public int addReward(Reward reward){return mapper.addReward(reward);}
 
     /**
-     * 查看出勤天数
+     * 查看本月出勤天数
      * */
-    public int countAttendance(int id){return mapper.countAttendance(id);}
+    public int countAttendanceBY(int id){return mapper.countAttendanceBY(id);}
 
+    /**
+     * 查看上月出勤天数
+     * */
+    public int countAttendanceSY(int id){return mapper.countAttendanceSY(id);}
     /**
      * 查询某部门的所有员工id
      * */

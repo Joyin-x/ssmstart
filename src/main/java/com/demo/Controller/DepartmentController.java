@@ -33,7 +33,15 @@ import java.util.TimerTask;
  * @author wwx
  * @date 2018/12/29 8:50
  **/
+/*
+*
+*
+* 美国 Red Ballon 安全研究公司近日发布了一份报告，公布了思科产品的两个漏洞。
+第一个漏洞被称为（Thrangrycat），允许攻击者通过现场可编程门阵列（FPGA）比特流操作完全绕过思科的信任锚模块（TAm）。
+第二个是针对 Cisco IOS XE 版本 16 的远程命令注入漏洞，该漏洞允许以 root 身份执行远程代码，通过链接和远程命令注入漏洞，攻击者可以远程持续绕过思科的安全启动机制，并锁定 TAm 的所有未来软件更新。
 
+*
+* */
 @Controller
 @RequestMapping("/department")
 public class DepartmentController {

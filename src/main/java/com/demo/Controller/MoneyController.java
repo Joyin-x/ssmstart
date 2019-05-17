@@ -80,7 +80,7 @@ public class MoneyController {
     @RequestMapping(value = "/countAttendance")
     public ServerResponse countAttendance(int id) {
         ServerResponse response = new ServerResponse();
-        int result = service.countAttendance(id);
+        int result = service.countAttendanceBY(id);
         if (result > 0) {
             response.setStatus(ResponseCode.SUCCESS);
             response.setData(result);
@@ -96,17 +96,21 @@ public class MoneyController {
      */
     @RequestMapping(value = "/payMoney")
     @Transactional
-    public ServerResponse payMoney(int id) {
+    public ServerResponse payMoney(int id,int month) {
         ServerResponse response = new ServerResponse();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MONTH, 0);
+        cal.add(Calendar.MONTH, -1);//
         cal.set(Calendar.DAY_OF_MONTH, 1);
         String first = format.format(cal.getTime());
-        cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+
+        cal.add(Calendar.MONTH, 1);
+        cal.set(Calendar.DAY_OF_MONTH,0);
         String end = format.format(cal.getTime());
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
-        String now = df.format(new Date());
+
+        String now=format.format(Calendar.getInstance().getTime());
+        System.out.println(first+end+now);
         /**
          * 1.根据id查找到所有的员工列表
          * 2.循环这个员工列表，查找部门底薪，奖惩，加班费，加到数组中
@@ -122,8 +126,8 @@ public class MoneyController {
                 int employeeId = employeeList.get(i).get("employeeId");
                 //查找部门底薪
                 int baseSalary = service.selectBasicSalary(id);
-                //查询本月员工出勤天数
-                int attendances = service.countAttendance(employeeId);
+                //查询上月员工出勤天数
+                int attendances = service.countAttendanceSY(employeeId);
                 //查找奖惩
                 int reward = 0;
                 List<Map<String, Integer>> rewards = service.selectRewards(employeeId);
@@ -133,8 +137,8 @@ public class MoneyController {
                 }
                 //查找加班费
                 int days = service.selectOverTime(employeeId) * 60;
-                //查找本月工作日
-                int workDay= countWorkDay.countDay();
+                //查找上月工作日
+                int workDay= countWorkDay.countDay(month);
                 example.setBasicSalsry((baseSalary * attendances) / workDay);
                 example.setEmployeeId(employeeId);
                 example.setBonus(reward);

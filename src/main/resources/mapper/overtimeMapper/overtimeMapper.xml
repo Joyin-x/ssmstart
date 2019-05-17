@@ -58,7 +58,7 @@
 
     <!--根据部门查询当前打卡记录-->
     <select id="getAttendanceById" resultType="java.util.Map" parameterType="int">
-      select e.name,e.position,d.department_name,a.* from department d,employee e,attendance a where a.employee_id=e.id and e.department_id=d.id and d.id=#{id} ORDER BY a.office_time DESC
+      select e.name,e.position,d.department_name,a.* from department d,employee e,attendance a where DATE(a.office_time)=DATE(now()) and a.employee_id=e.id and e.department_id=d.id and d.id=#{id} ORDER BY a.office_time DESC
     </select>
 
     <!--查询当前打卡排行-->

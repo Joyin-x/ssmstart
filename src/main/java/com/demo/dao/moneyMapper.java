@@ -32,10 +32,14 @@ public interface moneyMapper {
     int addReward(Reward reward);
 
     /**
-     * 查看出勤天数
+     * 查看本月出勤天数
      * */
-    int countAttendance(int id);
+    int countAttendanceBY(int id);
 
+    /**
+     * 查看上月月出勤天数
+     * */
+    int countAttendanceSY(int id);
     /**
      * 查询某部门的所有员工id*/
     List<Map<String,Integer>> selectEmployeeID(int id);

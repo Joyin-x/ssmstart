@@ -16,9 +16,15 @@
         insert into rewards(employee_id,rewards_date,money,rewards_reason) values(#{employeeId},#{rewardsDate},#{money},#{rewardsReason})
     </insert>
 
-    <!--统计出勤天数信息-->
-    <select id="countAttendance" parameterType="int" resultType="int">
+
+    <!--统计本月出勤天数信息-->
+    <select id="countAttendanceBY" parameterType="int" resultType="int">
         select count(*) from attendance where employee_id=#{id} and DATE_FORMAT(office_time,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
+    </select>
+
+    <!--统计上月出勤天数信息-->
+    <select id="countAttendanceSY" parameterType="int" resultType="int">
+        select count(*) from attendance where employee_id=#{id} and DATE_FORMAT(office_time,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')-1
     </select>
 
     <!--查询部门下的员工id-->
@@ -36,9 +42,9 @@
         select money from rewards where employee_id=#{id}
     </select>
 
-    <!--查找员工本月加班天数-->
+    <!--查找员工上月加班天数-->
     <select id="selectOverTime" parameterType="int" resultType="int">
-        select count(*) as days from overtime where id=#{id} and DATE_FORMAT(startTime,"%Y%m")=DATE_FORMAT(CURRENT_DATE,"%Y%m") and (approve!=""||approve!=null)
+        select count(*) as days from overtime where id=#{id} and DATE_FORMAT(startTime,"%Y%m")=DATE_FORMAT(CURRENT_DATE,"%Y%m")-1 and (approve!=""||approve!=null)
     </select>
 
     <!--工资表插入发放记录-->
@@ -50,16 +56,16 @@
         </foreach>
     </insert>
 
-    <!--判断当前月是否已发工资-->
+    <!--判断上月月是否已发工资-->
     <select id="checkWage" parameterType="int" resultType="int">
-        select count(*) from wage w,employee e where DATE_FORMAT(pay_date,"%Y%m")=DATE_FORMAT(CURRENT_DATE,"%Y%m") and w.employee_id=e.id and w.employee_id=#{id}
+        select count(*) from wage w,employee e where DATE_FORMAT(start_time,"%Y%m")=DATE_FORMAT(CURRENT_DATE,"%Y%m")-1 and w.employee_id=e.id and w.employee_id=#{id}
     </select>
 
     <!--查询工资列表-->
     <select id="getWageList" parameterType="int" resultType="Map">
         select e.name,e.position,w.* from wage w,employee e
         where
-        e.id=w.employee_id and DATE_FORMAT(w.pay_date,"%Y%m")=DATE_FORMAT(CURRENT_DATE,"%Y%m")-1 and e.department_id=#{id}
+        e.id=w.employee_id and DATE_FORMAT(w.start_time,"%Y%m")=DATE_FORMAT(CURRENT_DATE,"%Y%m")-1 and e.department_id=#{id}
 
     </select>
 
@@ -67,7 +73,7 @@
     <select id="getAllWageList"  resultType="Map">
         select e.name,e.position,w.* from wage w,employee e
         where
-            e.id=w.employee_id and DATE_FORMAT(w.pay_date,"%Y%m")=DATE_FORMAT(CURRENT_DATE,"%Y%m")-1 ORDER BY e.department_id
+            e.id=w.employee_id and DATE_FORMAT(w.start_time,"%Y%m")=DATE_FORMAT(CURRENT_DATE,"%Y%m")-1 ORDER BY e.department_id
     </select>
 
 </mapper>

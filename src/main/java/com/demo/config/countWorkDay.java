@@ -1,5 +1,6 @@
 package com.demo.config;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -8,10 +9,14 @@ import java.util.Calendar;
  * @Version 1.0.0
  */
 public class countWorkDay {
-    public static int countDay(){
+    public static int countDay(int month){
         Calendar c = Calendar.getInstance();
-        // 当月最后一天的日期
-        int max = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        // 上月最后一天的日期
+        c.set(Calendar.DAY_OF_MONTH,1);//设置为当前月第一天
+        c.add(Calendar.DAY_OF_MONTH, -1);//-1天得到上月最后一天
+        int max=c.getTime().getDate();
+        ;
         // 开始日期为1号
         int start = 1;
         // 计数

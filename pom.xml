@@ -17,7 +17,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
-    <spring.version>5.0.7.RELEASE</spring.version>
+    <spring.version>5.0.19.RELEASE</spring.version>
   </properties>
 
   <!--依赖管理设置,例如类库A和类库B都依赖类库C,如果A依赖的C为1.0版本,B依赖的C为1.2版本,那么在此处明确指定C的版本,这样就A和B就会依赖相同的C版本-->
